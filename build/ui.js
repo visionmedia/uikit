@@ -133,6 +133,10 @@ Dialog.prototype.close = function(){
 
 exports.Overlay = Overlay;
 
+exports.overlay = function(options){
+  return new Overlay(options);
+};
+
 function Overlay(options) {
   var self = this;
   options = options || {};

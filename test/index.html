@@ -33,7 +33,7 @@
         });
 
         $('li:nth-child(4) a').click(function(){
-          var overlay = new ui.Overlay().show();
+          var overlay = ui.overlay().show();
           setTimeout(function(){
             overlay.hide();
           }, 2000);
@@ -41,7 +41,7 @@
         });
         
         $('li:nth-child(5) a').click(function(){
-          var overlay = new ui.Overlay({ closable: true }).show();
+          var overlay = ui.overlay({ closable: true }).show();
           return false;
         });
       });
