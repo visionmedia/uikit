@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <title>UIKit</title>
+    <script src="jquery.js"></script>
+    <script src="../build/ui.js"></script>
+    <link rel="stylesheet" href="../build/ui.css">
+    <script>
+      $(function(){
+        $('li:nth-child(1) a').click(function(){
+          var dialog = new Dialog({
+              title: 'Title'
+            , message: 'This is a dialog!'
+          });
+        
+          dialog.show().hide(2000);
+          return false;
+        });
+        
+        $('li:nth-child(2) a').click(function(){
+          var confirm = new Confirmation({
+              title: 'Delete user'
+            , message: 'Are you sure?'
+          });
+        
+          confirm.show(function(ok){
+            if (ok) {
+              new Dialog({
+                  title: 'User deleted'
+                , message: 'The user was successfully removed.'
+              }).show().hide(2000);
+            }
+          });
+          return false;
+        });
+      });
+    </script>
+    <style>
+      body {
+        padding: 50px 30px;
+        font: 14px/1.6 "Helvetica Neue", Helvetica, arial, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li><a href="#">Dialog</a></li>
+      <li><a href="#">Confirmation</a></li>
+    </ul>
+  </body>
+</html>

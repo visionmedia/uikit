@@ -1,0 +1,59 @@
+#dialog {
+  position: absolute;
+  left: 50%;
+  top: 150px;
+  max-width: 600px;
+  border: 1px solid #eee;
+  border-bottom-color: #cacaca;
+  transition: opacity 300ms, top 300ms;
+  border-radius: 3px;
+  box-shadow: 0 1px 4px 0 #ddd;
+}
+
+#dialog .content {
+  padding: 10px 20px;
+  min-width: 150px;
+}
+
+#dialog h1 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+#dialog p {
+  margin: 0;
+  padding: 0;
+  font-size: .8em;
+}
+
+#dialog.hide {
+  opacity: 0;
+  top: -500px;
+}
+
+#dialog .actions button {
+  padding: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+#dialog .actions button.main {
+  padding: 5px 10px;
+  background: linear-gradient(top, #fff 20%, #eee);
+  border: 1px solid #eee;
+  border-bottom-color: #cacaca;
+  border-radius: 3px;
+  font-size: .70em;
+  outline: none;
+}
+
+#dialog .actions button.main:hover {
+  background: linear-gradient(top, #fff 50%, #eee);
+}
+
+#dialog .actions button.main:active {
+  background: linear-gradient(bottom, #fff 20%, #eee);
+}
