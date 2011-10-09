@@ -24,10 +24,9 @@
           ui.confirm('Delete user', 'Are you sure you want to remove Tobi?')
             .show(function(ok){
               if (ok) {
-                new ui.Dialog({
-                    title: 'User deleted'
-                  , message: 'The user was successfully removed.'
-                }).show().hide(2000);
+                ui.dialog('User deleted', 'The user was successfully removed')
+                  .show()
+                  .hide(2000);
               }
             });
           return false;
