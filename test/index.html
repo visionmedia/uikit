@@ -15,8 +15,17 @@
           dialog.show().hide(2000);
           return false;
         });
-        
+
         $('li:nth-child(2) a').click(function(){
+          var dialog = new Dialog({
+            message: 'This is a dialog - without a title!'
+          });
+        
+          dialog.show().hide(2000);
+          return false;
+        });
+        
+        $('li:nth-child(3) a').click(function(){
           var confirm = new Confirmation({
               title: 'Delete user'
             , message: 'Are you sure?'
@@ -44,6 +53,7 @@
   <body>
     <ul>
       <li><a href="#">Dialog</a></li>
+      <li><a href="#">Dialog without title</a></li>
       <li><a href="#">Confirmation</a></li>
     </ul>
   </body>

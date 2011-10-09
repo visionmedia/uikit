@@ -39,6 +39,7 @@
   Dialog.prototype.render = function(options){
     var el = this.el = $(this.template);
     el.find('h1').text(options.title);
+    if (!options.title) el.find('h1').remove();
     el.find('p').text(options.message);
     setTimeout(function(){
       el.removeClass('hide');
@@ -48,7 +49,7 @@
   /**
    * Show the dialog.
    *
-   * @return {Dialog} for chaining
+     * @return {Dialog} for chaining
    * @api public
    */
   
