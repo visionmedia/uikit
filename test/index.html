@@ -39,6 +39,11 @@
           }, 2000);
           return false;
         });
+        
+        $('li:nth-child(5) a').click(function(){
+          var overlay = new ui.Overlay({ closable: true }).show();
+          return false;
+        });
       });
     </script>
     <style>
@@ -54,6 +59,7 @@
       <li><a href="#">Dialog without title</a></li>
       <li><a href="#">Confirmation</a></li>
       <li><a href="#">Overlay</a></li>
+      <li><a href="#">Overlay with click-to-close</a></li>
     </ul>
   </body>
 </html>

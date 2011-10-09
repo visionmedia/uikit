@@ -133,9 +133,16 @@ Dialog.prototype.close = function(){
 
 exports.Overlay = Overlay;
 
-function Overlay() {
+function Overlay(options) {
+  var self = this;
+  options = options || {};
   this.el = $(html);
   this.el.appendTo('body');
+  if (options.closable) {
+    this.el.click(function(){
+      self.hide();
+    });
+  }
 }
 
 Overlay.prototype.show = function(){
