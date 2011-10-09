@@ -127,6 +127,28 @@ Dialog.prototype.close = function(){
 };
 
 })(ui, "<div id=\"dialog\" class=\"hide\">\n  <div class=\"content\">\n    <h1>Title</h1>\n    <p>Message</p>\n  </div>\n</div>");
+// overlay component
+
+;(function(exports, html){
+
+exports.Overlay = Overlay;
+
+function Overlay() {
+  this.el = $(html);
+  this.el.appendTo('body');
+}
+
+Overlay.prototype.show = function(){
+  this.el.removeClass('hide');
+  return this;
+};
+
+Overlay.prototype.hide = function(){
+  this.el.addClass('hide');
+  return this;
+};
+
+})(ui, "<div id=\"overlay\" class=\"hide\"></div>");
 // confirmation component
 
 ;(function(exports, html){

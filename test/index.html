@@ -31,6 +31,14 @@
             });
           return false;
         });
+
+        $('li:nth-child(4) a').click(function(){
+          var overlay = new ui.Overlay().show();
+          setTimeout(function(){
+            overlay.hide();
+          }, 2000);
+          return false;
+        });
       });
     </script>
     <style>
@@ -45,6 +53,7 @@
       <li><a href="#">Dialog</a></li>
       <li><a href="#">Dialog without title</a></li>
       <li><a href="#">Confirmation</a></li>
+      <li><a href="#">Overlay</a></li>
     </ul>
   </body>
 </html>

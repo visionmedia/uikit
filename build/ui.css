@@ -57,7 +57,23 @@
 #dialog .actions button.main:active {
   background: -webkit-linear-gradient(bottom, #fff 20%, #eee);
 }
-.confirmation .actions {
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.75);
+  -webkit-transition: opacity 300ms;
+  z-index: 500;
+  pointer-events: auto;
+}
+
+#overlay.hide {
+  pointer-events: none;
+  opacity: 0;
+}.confirmation .actions {
   border-top: 1px solid #eee;
   padding: 5px;
   text-align: right;
