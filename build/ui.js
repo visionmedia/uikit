@@ -17,6 +17,25 @@ var active;
 exports.Dialog = Dialog;
 
 /**
+ * Return a new `Dialog` with the given 
+ * (optional) `title` and `msg`.
+ *
+ * @param {String} title or msg
+ * @param {String} msg
+ * @return {Dialog}
+ * @api public
+ */
+
+exports.dialog = function(title, msg){
+  switch (arguments.length) {
+    case 2:
+      return new Dialog({ title: title, message: msg });
+    case 1:
+      return new Dialog({ message: title });
+  }
+};
+
+/**
  * Initialize a new `Dialog` dialog.
  *
  * Options:
@@ -117,6 +136,20 @@ Dialog.prototype.close = function(){
  */
 
 exports.Confirmation = Confirmation;
+
+/**
+ * Return a new `Confirmation` dialog with the given 
+ * `title` and `msg`.
+ *
+ * @param {String} title
+ * @param {String} msg
+ * @return {Dialog}
+ * @api public
+ */
+
+exports.confirm = function(title, msg){
+  return new Confirmation({ title: title, message: msg });
+};
 
 /**
  * Initialize a new `Confirmation` dialog.

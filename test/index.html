@@ -7,38 +7,29 @@
     <script>
       $(function(){
         $('li:nth-child(1) a').click(function(){
-          var dialog = new ui.Dialog({
-              title: 'Title'
-            , message: 'This is a dialog!'
-          });
-        
-          dialog.show().hide(2000);
+          ui.dialog('Title', 'This is a dialog')
+            .show()
+            .hide(2000);
           return false;
         });
 
         $('li:nth-child(2) a').click(function(){
-          var dialog = new ui.Dialog({
-            message: 'This is a dialog - without a title!'
-          });
-        
-          dialog.show().hide(2000);
+          ui.dialog('This is a dialog - without a title!')
+            .show()
+            .hide(2000);
           return false;
         });
         
         $('li:nth-child(3) a').click(function(){
-          var confirm = new ui.Confirmation({
-              title: 'Delete user'
-            , message: 'Are you sure?'
-          });
-        
-          confirm.show(function(ok){
-            if (ok) {
-              new ui.Dialog({
-                  title: 'User deleted'
-                , message: 'The user was successfully removed.'
-              }).show().hide(2000);
-            }
-          });
+          ui.confirm('Delete user', 'Are you sure you want to remove Tobi?')
+            .show(function(ok){
+              if (ok) {
+                new ui.Dialog({
+                    title: 'User deleted'
+                  , message: 'The user was successfully removed.'
+                }).show().hide(2000);
+              }
+            });
           return false;
         });
       });
