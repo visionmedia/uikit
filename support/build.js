@@ -12,6 +12,10 @@ var fs = require('fs')
 
 var lib = 'lib/components';
 
+// js
+
+var js = fs.createWriteStream('build/ui.js', { flags: 'a' });
+
 // components to build
 
 var components = process.argv.slice(2);
@@ -27,6 +31,7 @@ function next(i) {
 // build em!
 
 console.log();
+js.write('var ui = {};\n');
 next(0);
 process.on('exit', function(){
   console.log();
@@ -42,9 +47,9 @@ function build(name, fn) {
     var html = path.join(lib, name, name + '.html');
     read(html, function(html){
       js = '\n// ' + name + ' component\n\n'
-        + ';(function(html){\n'
-        + js.replace(/^/gm, '  ')
-        + '\n})(' + JSON.stringify(html) + ');';
+        + ';(function(exports, html){\n'
+        + js
+        + '\n})(ui, ' + JSON.stringify(html) + ');';
       append('build/ui.js', js, function(){
         console.log('  \033[90mbuild \033[36m%s\033[m', name);
         fn();

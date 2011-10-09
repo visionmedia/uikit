@@ -7,7 +7,7 @@
     <script>
       $(function(){
         $('li:nth-child(1) a').click(function(){
-          var dialog = new Dialog({
+          var dialog = new ui.Dialog({
               title: 'Title'
             , message: 'This is a dialog!'
           });
@@ -17,7 +17,7 @@
         });
 
         $('li:nth-child(2) a').click(function(){
-          var dialog = new Dialog({
+          var dialog = new ui.Dialog({
             message: 'This is a dialog - without a title!'
           });
         
@@ -26,14 +26,14 @@
         });
         
         $('li:nth-child(3) a').click(function(){
-          var confirm = new Confirmation({
+          var confirm = new ui.Confirmation({
               title: 'Delete user'
             , message: 'Are you sure?'
           });
         
           confirm.show(function(ok){
             if (ok) {
-              new Dialog({
+              new ui.Dialog({
                   title: 'User deleted'
                 , message: 'The user was successfully removed.'
               }).show().hide(2000);
