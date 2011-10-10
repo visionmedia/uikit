@@ -467,6 +467,7 @@ function rgba(r,g,b,a) {
 
 function ColorPicker() {
   ui.Emitter.call(this);
+  this._colorPos = {};
   this.template = html;
   this.el = $(this.template);
   this.main = this.el.find('.main').get(0);
@@ -540,7 +541,8 @@ ColorPicker.prototype.spectrumEvents = function(){
     var color = self.hueAt(e.offsetY);
     self.hue(color.toString());
     self.emit('change', color);
-    self.render({ hue: e.offsetY });
+    self._huePos = e.offsetY;
+    self.render();
   }
 
   canvas.mousedown(function(e){
@@ -572,7 +574,8 @@ ColorPicker.prototype.mainEvents = function(){
     var color = self.colorAt(e.offsetX, e.offsetY);
     self.color(color.toString());
     self.emit('change', color);
-    self.render({ color: [e.offsetX, e.offsetY]});
+    self._colorPos = e;
+    self.render();
   }
 
   canvas.mousedown(function(e){
@@ -681,7 +684,7 @@ ColorPicker.prototype.renderSpectrum = function(options){
   var el = this.el
     , canvas = this.spectrum
     , ctx = canvas.getContext('2d')
-    , pos = options.hue
+    , pos = this._huePos
     , w = this.w * .12
     , h = this.h;
 
@@ -720,9 +723,8 @@ ColorPicker.prototype.renderMain = function(options){
     , ctx = canvas.getContext('2d')
     , w = this.w
     , h = this.h
-    , pos = options.color || [w, 0]
-    , x = pos[0] + .5
-    , y = pos[1] + .5;
+    , x = (this._colorPos.offsetX || w) + .5
+    , y = (this._colorPos.offsetY || 0) + .5;
 
   canvas.width = w;
   canvas.height = h;
