@@ -3,7 +3,8 @@ COMPONENTS = emitter \
   dialog \
   overlay \
   confirmation \
-  color-picker
+  color-picker \
+  card
 
 ui:
 	@rm -fr build

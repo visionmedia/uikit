@@ -75,10 +75,12 @@ function build(name, fn) {
   if (path.existsSync(css)) {
     read(css, function(css){
       css = css
+        .replace(/perspective/g, '-webkit-perspective')
         .replace(/transform/g, '-webkit-transform')
         .replace(/transition/g, '-webkit-transition')
         .replace(/box-shadow/g, '-webkit-box-shadow')
         .replace(/border-radius/g, '-webkit-border-radius')
+        .replace(/backface-visibility/g, '-webkit-backface-visibility')
         .replace(/linear-gradient/g, '-webkit-linear-gradient');
       append('build/ui.css', css);
     });

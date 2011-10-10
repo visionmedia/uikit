@@ -134,12 +134,37 @@
             .hide(2000);
           return false;
         });
+
+        $('li:nth-child(14) a').click(function(){
+          ui.dialog('Card example', new ui.Card)
+            .effect('slide')
+            .show();
+          return false;
+        });
+        
+        $('li:nth-child(15) a').click(function(){
+          var card = ui.card()
+            .front('<p>Front content</p>')
+            .back('<p>Back content</p>')
+            .effect('sideflip');
+
+          ui.dialog('Card "sideflip" effect', card)
+            .effect('slide')
+            .show();
+          return false;
+        });
       });
     </script>
     <style>
       body {
         padding: 50px 30px;
         font: 14px/1.6 "Helvetica Neue", Helvetica, arial, sans-serif;
+      }
+      #dialog .card p {
+        text-align: center;
+        line-height: 100px;
+        font-weight: bold;
+        font-size: 22px;
       }
     </style>
   </head>
@@ -158,6 +183,8 @@
       <li><a href="#">Dialog effect "fade"</a></li>
       <li><a href="#">Dialog effect "scale"</a></li>
       <li><a href="#">Dialog global effect</a></li>
+      <li><a href="#">Card</a></li>
+      <li><a href="#">Card effect "sideflip"</a></li>
     </ul>
   </body>
 </html>

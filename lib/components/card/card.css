@@ -1,0 +1,47 @@
+
+/* from: http://desandro.github.com/3dtransforms */
+
+.card {
+  width: 200px;
+  height: 260px;
+  position: relative;
+  perspective: 800;
+}
+
+.card .wrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 500ms ease-in-out;
+  border: 1px solid #eee;
+  border-bottom-color: #cacaca;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 0 white, 0 1px 4px 0 #ddd;
+}
+
+.card .face {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.card .back {
+  transform: rotateY(180deg);
+}
+
+.card.flipped .wrapper {
+  transform: rotateY(180deg);
+}
+
+/* sideflip effect */
+
+.card.sideflip .wrapper {
+  transform-origin: right center;
+}
+
+.card.sideflip.flipped .wrapper {
+  transform: translateX(-100%) rotateY(180deg);
+}
