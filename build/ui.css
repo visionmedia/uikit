@@ -6,7 +6,6 @@
   min-width: 250px;
   border: 1px solid #eee;
   border-bottom-color: #cacaca;
-  -webkit-transition: opacity 300ms, top 300ms;
   -webkit-border-radius: 3px;
   -webkit-box-shadow: 0 1px 4px 0 #ddd;
   background: white;
@@ -27,11 +26,6 @@
   margin: 0;
   padding: 0;
   font-size: .9em;
-}
-
-#dialog.hide {
-  opacity: 0;
-  top: -500px;
 }
 
 #dialog .actions button {
@@ -68,7 +62,17 @@
 #dialog.modal {
   -webkit-box-shadow: 0 1px 8px 0 black;
 }
-#overlay {
+
+/* slide */
+
+#dialog.slide {
+  -webkit-transition: opacity 300ms, top 300ms;
+}
+
+#dialog.slide.hide {
+  opacity: 0;
+  top: -500px;
+}#overlay {
   position: fixed;
   top: 0;
   left: 0;
