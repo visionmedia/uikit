@@ -44,6 +44,20 @@
           var overlay = ui.overlay({ closable: true }).show();
           return false;
         });
+
+        $('li:nth-child(6) a').click(function(){
+          ui.confirm('Remove item', 'Are you sure?')
+            .modal()
+            .show(function(ok){
+              if (ok) {
+                ui.dialog('Removed', 'The item was removed')
+                  .show()
+                  .hide(1000);
+              }
+            });
+
+          return false;
+        });
       });
     </script>
     <style>
@@ -60,6 +74,7 @@
       <li><a href="#">Confirmation</a></li>
       <li><a href="#">Overlay</a></li>
       <li><a href="#">Overlay with click-to-close</a></li>
+      <li><a href="#">Confirmation with overlay</a></li>
     </ul>
   </body>
 </html>

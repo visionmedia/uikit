@@ -73,6 +73,18 @@ Dialog.prototype.render = function(options){
 };
 
 /**
+ * Make it modal!
+ *
+ * @return {Dialog} for chaining
+ * @api public
+ */
+
+Dialog.prototype.modal = function(){
+  this._modal = true;
+  return this;
+};
+
+/**
  * Show the dialog.
  *
  * @return {Dialog} for chaining
@@ -80,6 +92,10 @@ Dialog.prototype.render = function(options){
  */
 
 Dialog.prototype.show = function(){
+  if (this._modal) {
+    this.overlay = ui.overlay().show();
+    this.el.addClass('modal');
+  }
   this.el.appendTo('body');
   this.el.css({ marginLeft: -(this.el.width() / 2) + 'px' });
   return this;
@@ -111,6 +127,9 @@ Dialog.prototype.hide = function(ms){
     self.close();
   }, 2000, this);
 
+  // modal
+  if (this.overlay) this.overlay.hide();
+
   return this;
 };
 
@@ -131,11 +150,30 @@ Dialog.prototype.close = function(){
 
 ;(function(exports, html){
 
+/**
+ * Expose `Overlay`.
+ */
+
 exports.Overlay = Overlay;
+
+/**
+ * Return a new `Overlay` with the given `options`.
+ *
+ * @param {Object} options
+ * @return {Overlay}
+ * @api public
+ */
 
 exports.overlay = function(options){
   return new Overlay(options);
 };
+
+/**
+ * Initialize a new `Overlay`.
+ *
+ * @param {Object} options
+ * @api public
+ */
 
 function Overlay(options) {
   var self = this;
@@ -149,10 +187,24 @@ function Overlay(options) {
   }
 }
 
+/**
+ * Show the overlay.
+ *
+ * @return {Overlay} for chaining
+ * @api public
+ */
+
 Overlay.prototype.show = function(){
   this.el.removeClass('hide');
   return this;
 };
+
+/**
+ * Hide the overlay.
+ *
+ * @return {Overlay} for chaining
+ * @api public
+ */
 
 Overlay.prototype.hide = function(){
   this.el.addClass('hide');

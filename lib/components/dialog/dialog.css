@@ -8,6 +8,8 @@
   transition: opacity 300ms, top 300ms;
   border-radius: 3px;
   box-shadow: 0 1px 4px 0 #ddd;
+  background: white;
+  z-index: 1000;
 }
 
 #dialog .content {

@@ -8,6 +8,8 @@
   -webkit-transition: opacity 300ms, top 300ms;
   -webkit-border-radius: 3px;
   -webkit-box-shadow: 0 1px 4px 0 #ddd;
+  background: white;
+  z-index: 1000;
 }
 
 #dialog .content {
