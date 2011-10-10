@@ -332,6 +332,16 @@ function Confirmation(options) {
 
 Confirmation.prototype = new ui.Dialog;
 
+Confirmation.prototype.cancel = function(text){
+  this.el.find('.cancel').text(text);
+  return this;
+};
+
+Confirmation.prototype.ok = function(text){
+  this.el.find('.ok').text(text);
+  return this;
+};
+
 /**
  * Show the confirmation dialog and invoke `fn(ok)`.
  *

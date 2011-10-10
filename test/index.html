@@ -61,6 +61,8 @@
 
         $('li:nth-child(7) a').click(function(){
           ui.confirm('How are you?', 'Tell me how you are!!!')
+            .cancel('bad')
+            .ok('good')
             .show()
             .on('cancel', function(){
               ui.dialog('Lame!')

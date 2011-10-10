@@ -35,7 +35,7 @@
 }
 
 #dialog .actions button {
-  padding: 0;
+  padding: 5px;
   background: transparent;
   border: none;
   outline: none;
