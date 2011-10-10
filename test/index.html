@@ -58,6 +58,22 @@
 
           return false;
         });
+
+        $('li:nth-child(7) a').click(function(){
+          ui.confirm('How are you?', 'Tell me how you are!!!')
+            .show()
+            .on('cancel', function(){
+              ui.dialog('Lame!')
+                .show()
+                .hide(1500);
+            }).on('ok', function(){
+              ui.dialog('Great!')
+                .show()
+                .hide(1500);
+            });
+          return false;
+        });
+        
       });
     </script>
     <style>
@@ -75,6 +91,7 @@
       <li><a href="#">Overlay</a></li>
       <li><a href="#">Overlay with click-to-close</a></li>
       <li><a href="#">Confirmation with overlay</a></li>
+      <li><a href="#">Confirmation with events</a></li>
     </ul>
   </body>
 </html>

@@ -342,12 +342,15 @@ Confirmation.prototype = new ui.Dialog;
 
 Confirmation.prototype.show = function(fn){
   ui.Dialog.prototype.show.call(this);
-  this.callback = fn;
+  this.callback = fn || function(){};
   return this;
 };
 
 /**
  * Render with the given `options`.
+ *
+ * Emits "cancel" event.
+ * Emits "ok" event.
  *
  * @param {Object} options
  * @api public
@@ -362,11 +365,13 @@ Confirmation.prototype.render = function(options){
   this.el.append(actions);
 
   actions.find('.cancel').click(function(){
+    self.emit('cancel');
     self.callback(false);
     self.hide();
   });
 
   actions.find('.ok').click(function(){
+    self.emit('ok');
     self.callback(true);
     self.hide();
   });
