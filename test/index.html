@@ -90,19 +90,9 @@
           return false;
         });
 
-        var picker = new ui.ColorPicker;
-        picker.render();
-        picker.el.appendTo('body');
-        picker.on('change', function(color){
-          $('#color').css({
-              background: color
-            , width: 50
-            , height: 50
-          });
-        });
-
         $('li:nth-child(9) a').click(function(){
-          new ui.ColorPicker().show();
+          ui.dialog('Color Picker', new ui.ColorPicker().el)
+            .show();
           return false;
         });
       });
@@ -126,6 +116,5 @@
       <li><a href="#">Confirmation with events</a></li>
       <li><a href="#">Color picker</a></li>
     </ul>
-    <div id="color">s</div>
   </body>
 </html>
