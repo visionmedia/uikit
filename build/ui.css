@@ -43,7 +43,7 @@
 }
 
 #dialog .actions button.main {
-  padding: 5px 10px;
+  padding: 5px 15px;
   background: -webkit-linear-gradient(top, #fff 20%, #eee);
   border: 1px solid #eee;
   border-bottom-color: #cacaca;
