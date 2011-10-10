@@ -102,6 +102,30 @@
           });
           return false;
         });
+
+        $('li:nth-child(10) a').click(function(){
+          ui.dialog('Slide', 'This is the slide effect')
+            .effect('slide')
+            .show()
+            .hide(2000);
+          return false;
+        });
+
+        $('li:nth-child(11) a').click(function(){
+          ui.dialog('Fade', 'This is the fade effect')
+            .effect('fade')
+            .show()
+            .hide(2000);
+          return false;
+        });
+
+        $('li:nth-child(12) a').click(function(){
+          ui.dialog('Scale', 'This is the scale effect')
+            .effect('scale')
+            .show()
+            .hide(2000);
+          return false;
+        });
       });
     </script>
     <style>
@@ -122,6 +146,9 @@
       <li><a href="#">Confirmation with modal overlay</a></li>
       <li><a href="#">Confirmation with events</a></li>
       <li><a href="#">Color picker</a></li>
+      <li><a href="#">Dialog effect "slide"</a></li>
+      <li><a href="#">Dialog effect "fade"</a></li>
+      <li><a href="#">Dialog effect "scale"</a></li>
     </ul>
   </body>
 </html>

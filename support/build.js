@@ -75,6 +75,7 @@ function build(name, fn) {
   if (path.existsSync(css)) {
     read(css, function(css){
       css = css
+        .replace(/transform/g, '-webkit-transform')
         .replace(/transition/g, '-webkit-transition')
         .replace(/box-shadow/g, '-webkit-box-shadow')
         .replace(/border-radius/g, '-webkit-border-radius')

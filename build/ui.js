@@ -142,6 +142,20 @@ Dialog.prototype.render = function(options){
 };
 
 /**
+ * Set the effect to `type`.
+ *
+ * @param {String} type
+ * @return {Dialog} for chaining
+ * @api public
+ */
+
+Dialog.prototype.effect = function(type){
+  this._effect = type;
+  this.el.addClass(type);
+  return this;
+};
+
+/**
  * Make it modal!
  *
  * @return {Dialog} for chaining
@@ -216,9 +230,13 @@ Dialog.prototype.hide = function(ms){
 
   // hide / remove
   this.el.addClass('hide');
-  setTimeout(function(self){
+  if (this._effect) {
+    setTimeout(function(self){
+      self.close();
+    }, 500, this);
+  } else {
     self.close();
-  }, 2000, this);
+  }
 
   // modal
   if (this._overlay && !self.closedOverlay) this._overlay.hide();
