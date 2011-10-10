@@ -42,30 +42,45 @@ process.on('exit', function(){
  */
 
 function build(name, fn) {
+  // javascript
   var js = path.join(lib, name, name + '.js');
   read(js, function(js){
+
+    // with template
     var html = path.join(lib, name, name + '.html');
-    read(html, function(html){
-      js = '\n// ' + name + ' component\n\n'
-        + ';(function(exports, html){\n'
+    if (path.existsSync(html)) {
+      read(html, function(html){
+        js = '\n;(function(exports, html){\n'
+          + js
+          + '\n})(ui, ' + JSON.stringify(html) + ');';
+        append('build/ui.js', js, function(){
+          console.log('  \033[90mbuild \033[36m%s\033[m', name);
+          fn();
+        });
+      });
+    // without template
+    } else {
+      js = '\n;(function(exports){\n'
         + js
-        + '\n})(ui, ' + JSON.stringify(html) + ');';
+        + '\n})(ui);';
       append('build/ui.js', js, function(){
         console.log('  \033[90mbuild \033[36m%s\033[m', name);
         fn();
       });
-    });
+    }
   });
 
   var css = path.join(lib, name, name + '.css');
-  read(css, function(css){
-    css = css
-      .replace(/transition/g, '-webkit-transition')
-      .replace(/box-shadow/g, '-webkit-box-shadow')
-      .replace(/border-radius/g, '-webkit-border-radius')
-      .replace(/linear-gradient/g, '-webkit-linear-gradient');
-    append('build/ui.css', css);
-  });
+  if (path.existsSync(css)) {
+    read(css, function(css){
+      css = css
+        .replace(/transition/g, '-webkit-transition')
+        .replace(/box-shadow/g, '-webkit-box-shadow')
+        .replace(/border-radius/g, '-webkit-border-radius')
+        .replace(/linear-gradient/g, '-webkit-linear-gradient');
+      append('build/ui.css', css);
+    });
+  }
 }
 
 /**

@@ -1,7 +1,59 @@
 var ui = {};
 
-// dialog component
+;(function(exports){
 
+/**
+ * Expose `Emitter`.
+ */
+
+exports.Emitter = Emitter;
+
+/**
+ * Initialize a new `Emitter`.
+ * 
+ * @api public
+ */
+
+function Emitter() {
+  this.callbacks = {};
+};
+
+/**
+ * Listen on the given `event` with `fn`.
+ *
+ * @param {String} event
+ * @param {Function} fn
+ * @return {Emitter} for chaining
+ */
+
+Emitter.prototype.on = function(event, fn){
+  (this.callbacks[event] = this.callbacks[event] || [])
+    .push(fn);
+  return this;
+};
+
+/**
+ * Emit `event` with the given args.
+ *
+ * @param {String} event
+ * @param {Mixed} ...
+ * @return {Emitter} for chaining
+ */
+
+Emitter.prototype.emit = function(event){
+  var args = [].slice.call(arguments, 1)
+    , callbacks = this.callbacks[event];
+
+  if (callbacks) {
+    for (var i = 0, len = callbacks.length; i < len; ++i) {
+      callbacks[i].apply(this, args)
+    }
+  }
+
+  return this;
+};
+
+})(ui);
 ;(function(exports, html){
 
 /**
@@ -146,8 +198,6 @@ Dialog.prototype.close = function(){
 };
 
 })(ui, "<div id=\"dialog\" class=\"hide\">\n  <div class=\"content\">\n    <h1>Title</h1>\n    <p>Message</p>\n  </div>\n</div>");
-// overlay component
-
 ;(function(exports, html){
 
 /**
@@ -212,8 +262,6 @@ Overlay.prototype.hide = function(){
 };
 
 })(ui, "<div id=\"overlay\" class=\"hide\"></div>");
-// confirmation component
-
 ;(function(exports, html){
 
 /**
