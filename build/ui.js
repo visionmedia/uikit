@@ -151,6 +151,7 @@ Dialog.prototype.render = function(options){
 
 Dialog.prototype.effect = function(type){
   this._effect = type;
+  this.el.addClass(type);
   return this;
 };
 
