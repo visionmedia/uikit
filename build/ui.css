@@ -3,6 +3,7 @@
   left: 50%;
   top: 150px;
   max-width: 600px;
+  min-width: 250px;
   border: 1px solid #eee;
   border-bottom-color: #cacaca;
   -webkit-transition: opacity 300ms, top 300ms;
@@ -14,11 +15,10 @@
 
 #dialog .content {
   padding: 15px 20px;
-  min-width: 150px;
 }
 
 #dialog h1 {
-  margin: 0;
+  margin: 0 0 5px 0;
   font-size: 16px;
   font-weight: normal;
 }
