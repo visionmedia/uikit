@@ -122,10 +122,20 @@ Dialog.prototype = new ui.Emitter;
  */
 
 Dialog.prototype.render = function(options){
-  var el = this.el = $(this.template);
-  el.find('h1').text(options.title);
-  if (!options.title) el.find('h1').remove();
-  el.find('p').text(options.message);
+  var el = this.el = $(this.template)
+    , title = options.title
+    , msg = options.message;
+
+  el.find('h1').text(title);
+  if (!title) el.find('h1').remove();
+
+  // message
+  if ('string' == typeof msg) {
+    el.find('p').text(msg);
+  } else if (msg) {
+    el.find('p').replaceWith(msg);
+  }
+
   setTimeout(function(){
     el.removeClass('hide');
   }, 0);
@@ -466,6 +476,7 @@ function ColorPicker() {
   this.hue(rgb(255, 0, 0));
   this.spectrumEvents();
   this.mainEvents();
+  this.render();
 }
 
 /**
