@@ -1,7 +1,13 @@
 
+COMPONENTS = emitter \
+  dialog \
+  overlay \
+  confirmation \
+  color-picker
+
 ui:
 	@rm -fr build
 	@mkdir build
-	@./support/build.js emitter dialog overlay confirmation
+	@./support/build.js $(COMPONENTS)
 
 .PHONY: ui

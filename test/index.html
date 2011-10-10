@@ -89,7 +89,22 @@
             });
           return false;
         });
-        
+
+        var picker = new ui.ColorPicker;
+        picker.render();
+        picker.el.appendTo('body');
+        picker.on('change', function(color){
+          $('#color').css({
+              background: color
+            , width: 50
+            , height: 50
+          });
+        });
+
+        $('li:nth-child(9) a').click(function(){
+          new ui.ColorPicker().show();
+          return false;
+        });
       });
     </script>
     <style>
@@ -109,6 +124,8 @@
       <li><a href="#">Confirmation with overlay</a></li>
       <li><a href="#">Confirmation with modal overlay</a></li>
       <li><a href="#">Confirmation with events</a></li>
+      <li><a href="#">Color picker</a></li>
     </ul>
+    <div id="color">s</div>
   </body>
 </html>
