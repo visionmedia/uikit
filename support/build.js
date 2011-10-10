@@ -70,6 +70,7 @@ function build(name, fn) {
     }
   });
 
+  // style
   var css = path.join(lib, name, name + '.css');
   if (path.existsSync(css)) {
     read(css, function(css){

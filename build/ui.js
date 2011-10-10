@@ -100,12 +100,19 @@ exports.dialog = function(title, msg){
  */
 
 function Dialog(options) {
+  ui.Emitter.call(this);
   options = options || {};
   this.template = html;
   this.render(options);
   if (active) active.hide();
   active = this;
 };
+
+/**
+ * Inherit from `Emitter.prototype`.
+ */
+
+Dialog.prototype = new ui.Emitter;
 
 /**
  * Render with the given `options`.
@@ -139,11 +146,14 @@ Dialog.prototype.modal = function(){
 /**
  * Show the dialog.
  *
+ * Emits "show" event.
+ *
  * @return {Dialog} for chaining
  * @api public
  */
 
 Dialog.prototype.show = function(){
+  this.emit('show');
   if (this._modal) {
     this.overlay = ui.overlay().show();
     this.el.addClass('modal');
@@ -157,6 +167,8 @@ Dialog.prototype.show = function(){
  * Hide the dialog with optional delay of `ms`,
  * otherwise the dialog is removed immediately.
  *
+ * Emits "hide" event.
+ *
  * @return {Number} ms
  * @return {Dialog} for chaining
  * @api public
@@ -164,6 +176,7 @@ Dialog.prototype.show = function(){
 
 Dialog.prototype.hide = function(ms){
   var self = this;
+  this.emit('hide');
 
   // duration
   if (ms) {
@@ -226,6 +239,7 @@ exports.overlay = function(options){
  */
 
 function Overlay(options) {
+  ui.Emitter.call(this);
   var self = this;
   options = options || {};
   this.el = $(html);
@@ -238,13 +252,22 @@ function Overlay(options) {
 }
 
 /**
+ * Inherit from `Emitter.prototype`.
+ */
+
+Overlay.prototype = new ui.Emitter;
+
+/**
  * Show the overlay.
+ *
+ * Emits "show" event.
  *
  * @return {Overlay} for chaining
  * @api public
  */
 
 Overlay.prototype.show = function(){
+  this.emit('show');
   this.el.removeClass('hide');
   return this;
 };
@@ -252,11 +275,14 @@ Overlay.prototype.show = function(){
 /**
  * Hide the overlay.
  *
+ * Emits "hide" event.
+ *
  * @return {Overlay} for chaining
  * @api public
  */
 
 Overlay.prototype.hide = function(){
+  this.emit('hide');
   this.el.addClass('hide');
   return this;
 };
