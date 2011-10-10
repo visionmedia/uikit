@@ -57,6 +57,7 @@
 }
 
 #dialog .actions button.main:hover {
+  text-decoration: none;
   background: -webkit-linear-gradient(top, #fff 50%, #eee);
 }
 
