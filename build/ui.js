@@ -139,7 +139,25 @@ Dialog.prototype.render = function(options){
  */
 
 Dialog.prototype.modal = function(){
-  this._modal = true;
+  this._overlay = ui.overlay();
+  return this;
+};
+
+/**
+ * Add an overlay.
+ *
+ * @return {Dialog} for chaining
+ * @api public
+ */
+
+Dialog.prototype.overlay = function(){
+  var self = this;
+  this._overlay = ui
+    .overlay({ closable: true })
+    .on('hide', function(){
+      self.closedOverlay = true;
+      self.hide();
+    });
   return this;
 };
 
@@ -154,8 +172,8 @@ Dialog.prototype.modal = function(){
 
 Dialog.prototype.show = function(){
   this.emit('show');
-  if (this._modal) {
-    this.overlay = ui.overlay().show();
+  if (this._overlay) {
+    this._overlay.show();
     this.el.addClass('modal');
   }
   this.el.appendTo('body');
@@ -193,7 +211,7 @@ Dialog.prototype.hide = function(ms){
   }, 2000, this);
 
   // modal
-  if (this.overlay) this.overlay.hide();
+  if (this._overlay && !self.closedOverlay) this._overlay.hide();
 
   return this;
 };
@@ -242,9 +260,10 @@ function Overlay(options) {
   ui.Emitter.call(this);
   var self = this;
   options = options || {};
+  this.closable = options.closable;
   this.el = $(html);
   this.el.appendTo('body');
-  if (options.closable) {
+  if (this.closable) {
     this.el.click(function(){
       self.hide();
     });
@@ -332,10 +351,26 @@ function Confirmation(options) {
 
 Confirmation.prototype = new ui.Dialog;
 
+/**
+ * Change "cancel" button `text`.
+ *
+ * @param {String} text
+ * @return {Confirmation}
+ * @api public
+ */
+
 Confirmation.prototype.cancel = function(text){
   this.el.find('.cancel').text(text);
   return this;
 };
+
+/**
+ * Change "ok" button `text`.
+ *
+ * @param {String} text
+ * @return {Confirmation}
+ * @api public
+ */
 
 Confirmation.prototype.ok = function(text){
   this.el.find('.ok').text(text);

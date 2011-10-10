@@ -47,7 +47,7 @@
 
         $('li:nth-child(6) a').click(function(){
           ui.confirm('Remove item', 'Are you sure?')
-            .modal()
+            .overlay()
             .show(function(ok){
               if (ok) {
                 ui.dialog('Removed', 'The item was removed')
@@ -60,6 +60,20 @@
         });
 
         $('li:nth-child(7) a').click(function(){
+          ui.confirm('Remove item', 'Are you sure?')
+            .modal()
+            .show(function(ok){
+              if (ok) {
+                ui.dialog('Removed', 'The item was removed')
+                  .show()
+                  .hide(2000);
+              }
+            });
+
+          return false;
+        });
+
+        $('li:nth-child(8) a').click(function(){
           ui.confirm('How are you?', 'Tell me how you are!!!')
             .cancel('bad')
             .ok('good')
@@ -93,6 +107,7 @@
       <li><a href="#">Overlay</a></li>
       <li><a href="#">Overlay with click-to-close</a></li>
       <li><a href="#">Confirmation with overlay</a></li>
+      <li><a href="#">Confirmation with modal overlay</a></li>
       <li><a href="#">Confirmation with events</a></li>
     </ul>
   </body>
