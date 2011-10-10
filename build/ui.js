@@ -133,7 +133,7 @@ Dialog.prototype.render = function(options){
   if ('string' == typeof msg) {
     el.find('p').text(msg);
   } else if (msg) {
-    el.find('p').replaceWith(msg);
+    el.find('p').replaceWith(msg.el || msg);
   }
 
   setTimeout(function(){
