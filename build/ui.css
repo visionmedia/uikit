@@ -72,6 +72,16 @@
 #dialog.slide.hide {
   opacity: 0;
   top: -500px;
+}
+
+/* fade */
+
+#dialog.fade {
+  -webkit-transition: opacity 300ms;
+}
+
+#dialog.fade.hide {
+  opacity: 0;
 }#overlay {
   position: fixed;
   top: 0;

@@ -73,3 +73,13 @@
   opacity: 0;
   top: -500px;
 }
+
+/* fade */
+
+#dialog.fade {
+  transition: opacity 300ms;
+}
+
+#dialog.fade.hide {
+  opacity: 0;
+}
