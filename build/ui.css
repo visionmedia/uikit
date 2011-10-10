@@ -59,6 +59,10 @@
 #dialog .actions button.main:active {
   background: -webkit-linear-gradient(bottom, #fff 20%, #eee);
 }
+
+#dialog.modal {
+  -webkit-box-shadow: 0 1px 8px 0 black;
+}
 #overlay {
   position: fixed;
   top: 0;
