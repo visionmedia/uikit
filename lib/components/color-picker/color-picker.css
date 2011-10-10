@@ -1,3 +1,4 @@
 .color-picker canvas {
+  border: 1px solid #888;
   cursor: crosshair;
 }

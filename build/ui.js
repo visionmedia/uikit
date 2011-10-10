@@ -670,7 +670,7 @@ ColorPicker.prototype.renderSpectrum = function(options){
   var el = this.el
     , canvas = this.spectrum
     , ctx = canvas.getContext('2d')
-    , pos = options.hue || 0
+    , pos = options.hue
     , w = this.w * .12
     , h = this.h;
 
@@ -690,6 +690,7 @@ ColorPicker.prototype.renderSpectrum = function(options){
   ctx.fillRect(0, 0, w, h);
 
   // pos
+  if (!pos) return;
   ctx.fillStyle = rgba(0,0,0, .3);
   ctx.fillRect(0, pos, w, 1);
   ctx.fillStyle = rgba(255,255,255, .3);
