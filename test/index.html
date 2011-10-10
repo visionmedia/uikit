@@ -126,6 +126,14 @@
             .hide(2000);
           return false;
         });
+
+        $('li:nth-child(13) a').click(function(){
+          ui.effect = 'slide';
+          ui.dialog("I'm a dialog")
+            .show()
+            .hide(2000);
+          return false;
+        });
       });
     </script>
     <style>
@@ -149,6 +157,7 @@
       <li><a href="#">Dialog effect "slide"</a></li>
       <li><a href="#">Dialog effect "fade"</a></li>
       <li><a href="#">Dialog effect "scale"</a></li>
+      <li><a href="#">Dialog global effect</a></li>
     </ul>
   </body>
 </html>

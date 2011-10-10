@@ -105,6 +105,7 @@ function Dialog(options) {
   this.template = html;
   this.render(options);
   if (active) active.hide();
+  if (ui.effect) this.effect(ui.effect);
   active = this;
 };
 
