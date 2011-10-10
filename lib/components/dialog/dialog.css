@@ -83,3 +83,14 @@
 #dialog.fade.hide {
   opacity: 0;
 }
+
+/* scale */
+
+#dialog.scale {
+  transition: transform 300ms;
+  transform: scale(1);
+}
+
+#dialog.scale.hide {
+  transform: scale(0);
+}

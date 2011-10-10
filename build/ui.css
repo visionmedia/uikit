@@ -82,6 +82,17 @@
 
 #dialog.fade.hide {
   opacity: 0;
+}
+
+/* scale */
+
+#dialog.scale {
+  -webkit-transition: -webkit-transform 300ms;
+  -webkit-transform: scale(1);
+}
+
+#dialog.scale.hide {
+  -webkit-transform: scale(0);
 }#overlay {
   position: fixed;
   top: 0;
