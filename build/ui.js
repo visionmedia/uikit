@@ -125,7 +125,13 @@ Dialog.prototype = new ui.Emitter;
 Dialog.prototype.render = function(options){
   var el = this.el = $(this.template)
     , title = options.title
-    , msg = options.message;
+    , msg = options.message
+    , self = this;
+
+  el.find('.close').click(function(){
+    self.hide();
+    return false;
+  });
 
   el.find('h1').text(title);
   if (!title) el.find('h1').remove();
@@ -141,6 +147,7 @@ Dialog.prototype.render = function(options){
     el.removeClass('hide');
   }, 0);
 };
+
 
 /**
  * Set the effect to `type`.
@@ -257,7 +264,7 @@ Dialog.prototype.close = function(){
   return this;
 };
 
-})(ui, "<div id=\"dialog\" class=\"hide\">\n  <div class=\"content\">\n    <h1>Title</h1>\n    <p>Message</p>\n  </div>\n</div>");
+})(ui, "<div id=\"dialog\" class=\"hide\">\n  <div class=\"content\">\n    <h1>Title</h1>\n    <a href=\"#\" class=\"close\">✖</a>\n    <p>Message</p>\n  </div>\n</div>");
 ;(function(exports, html){
 
 /**
