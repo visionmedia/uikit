@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>UIKit - Modern UI components for a modern web</title>
@@ -155,6 +156,21 @@
             .show();
           return false;
         });
+
+        $('#dialog-component a:nth-child(1)').click(function(){
+          new ui.Dialog({ title: 'Title', message: "I'm a simple dialog" })
+            .show()
+            .hide(2000);
+          return false;
+        });
+
+        $('#dialog-component a:nth-child(2)').click(function(){
+          new ui.Dialog({ title: 'Title', message: "I'm a simple dialog" })
+            .show()
+            .closable()
+            .hide(2000);
+          return false;
+        });
       });
     </script>
     <style>
@@ -168,8 +184,36 @@
         font-weight: bold;
         font-size: 22px;
       }
+      body > section {
+        margin: 40px;
+      }
       h1 {
         margin: 0;
+      }
+      h2 {
+        font-size: 16px;
+      }
+      h2 span {
+        display: inline-block;
+        color: #888;
+        font-weight: normal;
+        font-size: 14px;
+        border-left: 1px solid #eee;
+        padding: 0 5px;
+        margin: 0 5px;
+      }
+      section > p {
+        width: 400px;
+      }
+      a {
+        color: #1E91D4;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      pre code {
+        font: 12px monaco, monospace;
       }
     </style>
   </head>
@@ -178,9 +222,33 @@
       <h1>UIKit</h1>
       <span>Modern UI components for a modern web</span>
     </div>
+
+    <section id="dialog-component">
+      <h2>Dialog <span>simple & flexible dialog component</span></h2>
+      <p>The Dialog component is the basis of more specific components
+      such the Confirmation Dialog. Click <a href="#">here</a> to
+      open a simple dialog that closes after 2 seconds.</p>
+      <pre>
+        <code>
+new ui.Dialog({ title: 'Title', message: "I'm a simple dialog" })
+.show()
+.hide(2000);
+        </code>
+      </pre>
+
+      <p>By default dialogs do not have a close button, but it's
+        easy to add one! Click <a href="#">here</a> to try it.</p>
+      <pre>
+        <code>
+new ui.Dialog({ title: 'Title', message: "I'm a simple dialog" })
+.closable()
+.show()
+.hide(2000);
+        </code>
+      </pre>
+    </section>
+
     <ul>
-      <li><a href="#">Dialog</a></li>
-      <li><a href="#">Dialog without title</a></li>
       <li><a href="#">Confirmation</a></li>
       <li><a href="#">Overlay</a></li>
       <li><a href="#">Overlay with click-to-close</a></li>
