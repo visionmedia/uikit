@@ -94,6 +94,7 @@
         $('li:nth-child(9) a').click(function(){
           var picker = new ui.ColorPicker;
           var dialog = ui.dialog('Color Picker', picker)
+            .closable()
             .show();
 
           picker.on('change', function(color){
@@ -179,7 +180,7 @@
       <li><a href="#">Confirmation with overlay</a></li>
       <li><a href="#">Confirmation with modal overlay</a></li>
       <li><a href="#">Confirmation with events</a></li>
-      <li><a href="#">Color picker in a dialog</a></li>
+      <li><a href="#">Color picker in a closable dialog</a></li>
       <li><a href="#">Dialog effect "slide"</a></li>
       <li><a href="#">Dialog effect "fade"</a></li>
       <li><a href="#">Dialog effect "scale"</a></li>

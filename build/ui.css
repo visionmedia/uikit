@@ -71,6 +71,11 @@
   right: 10px;
   text-decoration: none;
   color: #888;
+  display: none;
+}
+
+#dialog.closable .close {
+  display: block;
 }
 
 #dialog .close:hover {

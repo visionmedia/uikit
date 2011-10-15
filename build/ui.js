@@ -103,6 +103,7 @@ function Dialog(options) {
   ui.Emitter.call(this);
   options = options || {};
   this.template = html;
+  this.el = $(this.template);
   this.render(options);
   if (active) active.hide();
   if (ui.effect) this.effect(ui.effect);
@@ -123,7 +124,7 @@ Dialog.prototype = new ui.Emitter;
  */
 
 Dialog.prototype.render = function(options){
-  var el = this.el = $(this.template)
+  var el = this.el
     , title = options.title
     , msg = options.message
     , self = this;
@@ -148,6 +149,17 @@ Dialog.prototype.render = function(options){
   }, 0);
 };
 
+/**
+ * Enable the dialog close link.
+ *
+ * @return {Dialog} for chaining
+ * @api public
+ */
+
+Dialog.prototype.closable = function(){
+  this.el.addClass('closable');
+  return this;
+};
 
 /**
  * Set the effect to `type`.
