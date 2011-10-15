@@ -63,6 +63,24 @@
   box-shadow: 0 1px 8px 0 black;
 }
 
+/* close */
+
+#dialog .close {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  text-decoration: none;
+  color: #888;
+}
+
+#dialog .close:hover {
+  color: black;
+}
+
+#dialog .close:active {
+  margin-top: 1px;
+}
+
 /* slide */
 
 #dialog.slide {
