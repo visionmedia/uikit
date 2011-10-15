@@ -106,7 +106,7 @@ function Dialog(options) {
   this.el = $(this.template);
   this.render(options);
   if (active) active.hide();
-  if (ui.effect) this.effect(ui.effect);
+  if (Dialog.effect) this.effect(Dialog.effect);
   active = this;
 };
 
