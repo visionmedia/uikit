@@ -8,167 +8,166 @@
     <link rel="stylesheet" href="../build/ui.css">
     <script>
       $(function(){
-        $('li:nth-child(1) a').click(function(){
-          ui.dialog('Title', 'This is a dialog')
-            .show()
-            .hide(2000);
-          return false;
-        });
+        // $('li:nth-child(1) a').click(function(){
+        //   ui.dialog('Title', 'This is a dialog')
+        //     .show()
+        //     .hide(2000);
+        //   return false;
+        // });
+        // 
+        // $('li:nth-child(2) a').click(function(){
+        //   ui.dialog('This is a dialog - without a title!')
+        //     .show()
+        //     .hide(2000);
+        //   return false;
+        // });
+        // 
+        // $('li:nth-child(3) a').click(function(){
+        //   ui.confirm('Delete user', 'Are you sure you want to remove Tobi?')
+        //     .show(function(ok){
+        //       if (ok) {
+        //         ui.dialog('User deleted', 'The user was successfully removed')
+        //           .show()
+        //           .hide(2000);
+        //       }
+        //     });
+        //   return false;
+        // });
+        // 
+        // $('li:nth-child(4) a').click(function(){
+        //   var overlay = ui.overlay().show();
+        //   setTimeout(function(){
+        //     overlay.hide();
+        //   }, 2000);
+        //   return false;
+        // });
+        // 
+        // $('li:nth-child(5) a').click(function(){
+        //   var overlay = ui.overlay({ closable: true }).show();
+        //   return false;
+        // });
+        // 
+        // $('li:nth-child(6) a').click(function(){
+        //   ui.confirm('Remove item', 'Are you sure?')
+        //     .overlay()
+        //     .show(function(ok){
+        //       if (ok) {
+        //         ui.dialog('Removed', 'The item was removed')
+        //           .show()
+        //           .hide(2000);
+        //       }
+        //     });
+        // 
+        //   return false;
+        // });
+        // 
+        // $('li:nth-child(7) a').click(function(){
+        //   ui.confirm('Remove item', 'Are you sure?')
+        //     .modal()
+        //     .show(function(ok){
+        //       if (ok) {
+        //         ui.dialog('Removed', 'The item was removed')
+        //           .show()
+        //           .hide(2000);
+        //       }
+        //     });
+        // 
+        //   return false;
+        // });
+        // 
+        // $('li:nth-child(8) a').click(function(){
+        //   ui.confirm('How are you?', 'Tell me how you are!!!')
+        //     .cancel('bad')
+        //     .ok('good')
+        //     .show()
+        //     .on('cancel', function(){
+        //       ui.dialog('Lame!')
+        //         .show()
+        //         .hide(1500);
+        //     }).on('ok', function(){
+        //       ui.dialog('Great!')
+        //         .show()
+        //         .hide(1500);
+        //     });
+        //   return false;
+        // });
+        // 
+        // $('li:nth-child(9) a').click(function(){
+        //   var picker = new ui.ColorPicker;
+        //   var dialog = ui.dialog('Color Picker', picker)
+        //     .closable()
+        //     .show();
+        // 
+        //   picker.on('change', function(color){
+        //     dialog.el.find('h1').css({
+        //       color: color.toString() 
+        //     });
+        //   });
+        //   return false;
+        // });
+        // 
+        // $('li:nth-child(10) a').click(function(){
+        //   ui.dialog('Slide', 'This is the slide effect')
+        //     .effect('slide')
+        //     .show()
+        //     .hide(2000);
+        //   return false;
+        // });
+        // 
+        // $('li:nth-child(11) a').click(function(){
+        //   ui.dialog('Fade', 'This is the fade effect')
+        //     .effect('fade')
+        //     .show()
+        //     .hide(2000);
+        //   return false;
+        // });
+        // 
+        // $('li:nth-child(12) a').click(function(){
+        //   ui.dialog('Scale', 'This is the scale effect')
+        //     .effect('scale')
+        //     .show()
+        //     .hide(2000);
+        //   return false;
+        // });
+        // 
+        // $('li:nth-child(13) a').click(function(){
+        //   ui.Dialog.effect = 'slide';
+        //   ui.dialog("I'm a dialog")
+        //     .show()
+        //     .hide(2000);
+        //   return false;
+        // });
+        // 
+        // $('li:nth-child(14) a').click(function(){
+        //   ui.dialog('Card example', new ui.Card)
+        //     .effect('slide')
+        //     .show();
+        //   return false;
+        // });
+        // 
+        // $('li:nth-child(15) a').click(function(){
+        //   var card = ui.card()
+        //     .front('<p>Front content</p>')
+        //     .back('<p>Back content</p>')
+        //     .effect('sideflip');
+        // 
+        //   ui.dialog('Card "sideflip" effect', card)
+        //     .effect('slide')
+        //     .show();
+        //   return false;
+        // });
 
-        $('li:nth-child(2) a').click(function(){
-          ui.dialog('This is a dialog - without a title!')
-            .show()
-            .hide(2000);
-          return false;
-        });
-        
-        $('li:nth-child(3) a').click(function(){
-          ui.confirm('Delete user', 'Are you sure you want to remove Tobi?')
-            .show(function(ok){
-              if (ok) {
-                ui.dialog('User deleted', 'The user was successfully removed')
-                  .show()
-                  .hide(2000);
-              }
-            });
-          return false;
-        });
-
-        $('li:nth-child(4) a').click(function(){
-          var overlay = ui.overlay().show();
-          setTimeout(function(){
-            overlay.hide();
-          }, 2000);
-          return false;
-        });
-        
-        $('li:nth-child(5) a').click(function(){
-          var overlay = ui.overlay({ closable: true }).show();
-          return false;
-        });
-
-        $('li:nth-child(6) a').click(function(){
-          ui.confirm('Remove item', 'Are you sure?')
-            .overlay()
-            .show(function(ok){
-              if (ok) {
-                ui.dialog('Removed', 'The item was removed')
-                  .show()
-                  .hide(2000);
-              }
-            });
-
-          return false;
-        });
-
-        $('li:nth-child(7) a').click(function(){
-          ui.confirm('Remove item', 'Are you sure?')
-            .modal()
-            .show(function(ok){
-              if (ok) {
-                ui.dialog('Removed', 'The item was removed')
-                  .show()
-                  .hide(2000);
-              }
-            });
-
-          return false;
-        });
-
-        $('li:nth-child(8) a').click(function(){
-          ui.confirm('How are you?', 'Tell me how you are!!!')
-            .cancel('bad')
-            .ok('good')
-            .show()
-            .on('cancel', function(){
-              ui.dialog('Lame!')
-                .show()
-                .hide(1500);
-            }).on('ok', function(){
-              ui.dialog('Great!')
-                .show()
-                .hide(1500);
-            });
-          return false;
-        });
-
-        $('li:nth-child(9) a').click(function(){
-          var picker = new ui.ColorPicker;
-          var dialog = ui.dialog('Color Picker', picker)
-            .closable()
-            .show();
-
-          picker.on('change', function(color){
-            dialog.el.find('h1').css({
-              color: color.toString() 
-            });
-          });
-          return false;
-        });
-
-        $('li:nth-child(10) a').click(function(){
-          ui.dialog('Slide', 'This is the slide effect')
-            .effect('slide')
-            .show()
-            .hide(2000);
-          return false;
-        });
-
-        $('li:nth-child(11) a').click(function(){
-          ui.dialog('Fade', 'This is the fade effect')
-            .effect('fade')
-            .show()
-            .hide(2000);
-          return false;
-        });
-
-        $('li:nth-child(12) a').click(function(){
-          ui.dialog('Scale', 'This is the scale effect')
-            .effect('scale')
-            .show()
-            .hide(2000);
-          return false;
-        });
-
-        $('li:nth-child(13) a').click(function(){
-          ui.Dialog.effect = 'slide';
-          ui.dialog("I'm a dialog")
-            .show()
-            .hide(2000);
-          return false;
-        });
-
-        $('li:nth-child(14) a').click(function(){
-          ui.dialog('Card example', new ui.Card)
-            .effect('slide')
-            .show();
-          return false;
-        });
-        
-        $('li:nth-child(15) a').click(function(){
-          var card = ui.card()
-            .front('<p>Front content</p>')
-            .back('<p>Back content</p>')
-            .effect('sideflip');
-
-          ui.dialog('Card "sideflip" effect', card)
-            .effect('slide')
-            .show();
-          return false;
-        });
-
-        $('#dialog-component a:nth-child(1)').click(function(){
+        $('#simple-dialog').click(function(){
           new ui.Dialog({ title: 'Title', message: "I'm a simple dialog" })
             .show()
             .hide(2000);
           return false;
         });
 
-        $('#dialog-component a:nth-child(2)').click(function(){
-          new ui.Dialog({ title: 'Title', message: "I'm a simple dialog" })
+        $('#closable-dialog').click(function(){
+          new ui.Dialog({ title: 'Title', message: "I'm a dialog that wont auto-close" })
             .show()
-            .closable()
-            .hide(2000);
+            .closable();
           return false;
         });
       });
@@ -223,27 +222,26 @@
       <span>Modern UI components for a modern web</span>
     </div>
 
-    <section id="dialog-component">
+    <section>
       <h2>Dialog <span>simple & flexible dialog component</span></h2>
       <p>The Dialog component is the basis of more specific components
-      such the Confirmation Dialog. Click <a href="#">here</a> to
+      such the Confirmation Dialog. Click <a href="#" id="simple-dialog">here</a> to
       open a simple dialog that closes after 2 seconds.</p>
       <pre>
         <code>
 new ui.Dialog({ title: 'Title', message: "I'm a simple dialog" })
-.show()
-.hide(2000);
+  .show()
+  .hide(2000);
         </code>
       </pre>
 
       <p>By default dialogs do not have a close button, but it's
-        easy to add one! Click <a href="#">here</a> to try it.</p>
+        easy to add one! Click <a href="#" id="closable-dialog">here</a> to try it.</p>
       <pre>
         <code>
-new ui.Dialog({ title: 'Title', message: "I'm a simple dialog" })
-.closable()
-.show()
-.hide(2000);
+new ui.Dialog({ title: 'Title', message: "I'm a dialog that wont auto-close" })
+  .closable()
+  .show();
         </code>
       </pre>
     </section>
