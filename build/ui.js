@@ -130,6 +130,7 @@ Dialog.prototype.render = function(options){
     , self = this;
 
   el.find('.close').click(function(){
+    self.emit('close');
     self.hide();
     return false;
   });
@@ -461,6 +462,11 @@ Confirmation.prototype.render = function(options){
 
   this.el.addClass('confirmation');
   this.el.append(actions);
+
+  this.on('close', function(){
+    self.emit('cancel');
+    self.callback(false);
+  });
 
   actions.find('.cancel').click(function(){
     self.emit('cancel');

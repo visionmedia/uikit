@@ -245,8 +245,10 @@
 
         $('#ui-confirm-2').click(function(){
           ui.confirm('are you sure?')
+            .closable()
             .show(function(ok){
               if (ok) ui.dialog('done!').show().hide(1500);
+              else ui.dialog('never-mind').show().hide(1500);
             });
           return false;
         });
@@ -411,12 +413,14 @@ ui.confirm('Remove user', 'are you sure?')
       </pre>
 
       <h3>ui.confirm(msg)</h3>
-      <p>You may omit the title as well, try it <a href="#" id="ui-confirm-2">here</a>.</p>
+      <p>You may omit the title as well, try it <a href="#" id="ui-confirm-2">here</a>. Clicking cancel or close will invoke the callback with false.</p>
       <pre>
         <code>
 ui.confirm('are you sure?')
+  .closable()
   .show(function(ok){
     if (ok) ui.dialog('done!').show().hide(1500);
+    else ui.dialog('never-mind').show().hide(1500);
   });
         </code>
       </pre>
