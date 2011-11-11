@@ -144,12 +144,25 @@
         var picker = new ui.ColorPicker;
         picker.width(80);
         picker.el.appendTo('#color-picker-width');
+
+        var picker = new ui.ColorPicker;
+        var card = ui.card('<p>Click to show a color picker</p>', picker);
+        card.el.appendTo('#card');
       });
     </script>
     <style>
       body {
         padding: 50px 30px;
         font: 13px/1.6 "Helvetica Neue", Helvetica, arial, sans-serif;
+      }
+      #card {
+        text-align: center;
+      }
+      #card .wrapper {
+        padding-top: 10px;
+      }
+      #card .wrapper .front {
+        padding-top: 90px;
       }
       #dialog .card p {
         text-align: center;
@@ -401,6 +414,29 @@ ui.dialog('Select a color', new ui.ColorPicker)
         </code>
       </pre>
 
+    </section>
+
+    <section>
+      <h2 id="card-section">Card</h2>
+      <p>A simple double-sided card component.</p>
+      
+      <h3>Example</h3>
+      <p>Suppose</p>
+
+      <div id="card"></div>
+
+      <pre>
+        <code>
+var picker = new ui.ColorPicker;
+picker.el.appendTo('#default-color-picker');
+picker.on('change', function(color){
+  $('.r').text(color.r)
+  $('.g').text(color.g)
+  $('.b').text(color.b)
+  $('.rgb').text(color.toString()).css('background', color)
+});
+        </code>
+      </pre>
     </section>
 
   </body>
