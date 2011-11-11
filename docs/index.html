@@ -8,155 +8,6 @@
     <link rel="stylesheet" href="../build/ui.css">
     <script>
       $(function(){
-        // $('li:nth-child(1) a').click(function(){
-        //   ui.dialog('Title', 'This is a dialog')
-        //     .show()
-        //     .hide(2000);
-        //   return false;
-        // });
-        // 
-        // $('li:nth-child(2) a').click(function(){
-        //   ui.dialog('This is a dialog - without a title!')
-        //     .show()
-        //     .hide(2000);
-        //   return false;
-        // });
-        // 
-        // $('li:nth-child(3) a').click(function(){
-        //   ui.confirm('Delete user', 'Are you sure you want to remove Tobi?')
-        //     .show(function(ok){
-        //       if (ok) {
-        //         ui.dialog('User deleted', 'The user was successfully removed')
-        //           .show()
-        //           .hide(2000);
-        //       }
-        //     });
-        //   return false;
-        // });
-        // 
-        // $('li:nth-child(4) a').click(function(){
-        //   var overlay = ui.overlay().show();
-        //   setTimeout(function(){
-        //     overlay.hide();
-        //   }, 2000);
-        //   return false;
-        // });
-        // 
-        // $('li:nth-child(5) a').click(function(){
-        //   var overlay = ui.overlay({ closable: true }).show();
-        //   return false;
-        // });
-        // 
-        // $('li:nth-child(6) a').click(function(){
-        //   ui.confirm('Remove item', 'Are you sure?')
-        //     .overlay()
-        //     .show(function(ok){
-        //       if (ok) {
-        //         ui.dialog('Removed', 'The item was removed')
-        //           .show()
-        //           .hide(2000);
-        //       }
-        //     });
-        // 
-        //   return false;
-        // });
-        // 
-        // $('li:nth-child(7) a').click(function(){
-        //   ui.confirm('Remove item', 'Are you sure?')
-        //     .modal()
-        //     .show(function(ok){
-        //       if (ok) {
-        //         ui.dialog('Removed', 'The item was removed')
-        //           .show()
-        //           .hide(2000);
-        //       }
-        //     });
-        // 
-        //   return false;
-        // });
-        // 
-        // $('li:nth-child(8) a').click(function(){
-        //   ui.confirm('How are you?', 'Tell me how you are!!!')
-        //     .cancel('bad')
-        //     .ok('good')
-        //     .show()
-        //     .on('cancel', function(){
-        //       ui.dialog('Lame!')
-        //         .show()
-        //         .hide(1500);
-        //     }).on('ok', function(){
-        //       ui.dialog('Great!')
-        //         .show()
-        //         .hide(1500);
-        //     });
-        //   return false;
-        // });
-        // 
-        // $('li:nth-child(9) a').click(function(){
-        //   var picker = new ui.ColorPicker;
-        //   var dialog = ui.dialog('Color Picker', picker)
-        //     .closable()
-        //     .show();
-        // 
-        //   picker.on('change', function(color){
-        //     dialog.el.find('h1').css({
-        //       color: color.toString() 
-        //     });
-        //   });
-        //   return false;
-        // });
-        // 
-        // $('li:nth-child(10) a').click(function(){
-        //   ui.dialog('Slide', 'This is the slide effect')
-        //     .effect('slide')
-        //     .show()
-        //     .hide(2000);
-        //   return false;
-        // });
-        // 
-        // $('li:nth-child(11) a').click(function(){
-        //   ui.dialog('Fade', 'This is the fade effect')
-        //     .effect('fade')
-        //     .show()
-        //     .hide(2000);
-        //   return false;
-        // });
-        // 
-        // $('li:nth-child(12) a').click(function(){
-        //   ui.dialog('Scale', 'This is the scale effect')
-        //     .effect('scale')
-        //     .show()
-        //     .hide(2000);
-        //   return false;
-        // });
-        // 
-        // $('li:nth-child(13) a').click(function(){
-        //   ui.Dialog.effect = 'slide';
-        //   ui.dialog("I'm a dialog")
-        //     .show()
-        //     .hide(2000);
-        //   return false;
-        // });
-        // 
-        // $('li:nth-child(14) a').click(function(){
-        //   ui.dialog('Card example', new ui.Card)
-        //     .effect('slide')
-        //     .show();
-        //   return false;
-        // });
-        // 
-        // $('li:nth-child(15) a').click(function(){
-        //   var card = ui.card()
-        //     .front('<p>Front content</p>')
-        //     .back('<p>Back content</p>')
-        //     .effect('sideflip');
-        // 
-        //   ui.dialog('Card "sideflip" effect', card)
-        //     .effect('slide')
-        //     .show();
-        //   return false;
-        // });
-
         $('#simple-dialog').click(function(){
           new ui.Dialog({ title: 'Title', message: "I'm a simple dialog" })
             .show()
@@ -252,6 +103,22 @@
             });
           return false;
         });
+
+        $('#dialog-overlay').click(function(){
+          ui.dialog('Overlay time')
+            .closable()
+            .overlay()
+            .show();
+          return false;
+        })
+
+        $('#modal-overlay').click(function(){
+          ui.dialog('Overlay time')
+            .closable()
+            .modal()
+            .show();
+          return false;
+        })
       });
     </script>
     <style>
@@ -355,6 +222,28 @@ setTimeout(function(){
         </code>
       </pre>
 
+      <h3>.overlay()</h3>
+      <p>This method adds an overlay, which may be clicked (by default) to close the dialog. <a href="#" id="dialog-overlay">Test it out</a>.</p>
+      <pre>
+        <code>
+ui.dialog('Overlay time')
+  .closable()
+  .overlay()
+  .show();
+        </code>
+      </pre>
+
+      <h3>.modal()</h3>
+      <p>This method adds an overlay which is not clickable, the user must interact with the dialog. <a href="#" id="modal-overlay">Test it out</a>.</p>
+      <pre>
+        <code>
+ui.dialog('Overlay time')
+  .closable()
+  .modal()
+  .show();
+        </code>
+      </pre>
+
       <h3>.effect(name)</h3>
       <p>Effects are simply applied via CSS classes, no JavaScript animations, so they're nice and fast! Try out the <a href="#" id="dialog-effect-slide">slide</a> effect.</p>
       <pre>
@@ -426,22 +315,5 @@ ui.confirm('are you sure?')
       </pre>
 
     </section>
-
-
-    <ul>
-      <li><a href="#">Confirmation</a></li>
-      <li><a href="#">Overlay</a></li>
-      <li><a href="#">Overlay with click-to-close</a></li>
-      <li><a href="#">Confirmation with overlay</a></li>
-      <li><a href="#">Confirmation with modal overlay</a></li>
-      <li><a href="#">Confirmation with events</a></li>
-      <li><a href="#">Color picker in a closable dialog</a></li>
-      <li><a href="#">Dialog effect "slide"</a></li>
-      <li><a href="#">Dialog effect "fade"</a></li>
-      <li><a href="#">Dialog effect "scale"</a></li>
-      <li><a href="#">Dialog global effect</a></li>
-      <li><a href="#">Card</a></li>
-      <li><a href="#">Card effect "sideflip"</a></li>
-    </ul>
   </body>
 </html>
