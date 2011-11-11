@@ -215,106 +215,108 @@
       <p>The Dialog component is the basis of more specific components
       such the Confirmation Dialog.</p>
       
-      <h3>Example</h3>
-      <p>Click <a href="#" id="simple-dialog">here</a> to
-      open a simple dialog that closes after 2 seconds.</p>
-      <pre>
-        <code>
-new ui.Dialog({ title: 'Title', message: "I'm a simple dialog" })
-  .show()
-  .hide(2000);
-        </code>
-      </pre>
+      <section>
+         <h3>Example</h3>
+          <p>Click <a href="#" id="simple-dialog">here</a> to
+          open a simple dialog that closes after 2 seconds.</p>
+          <pre>
+            <code>
+    new ui.Dialog({ title: 'Title', message: "I'm a simple dialog" })
+      .show()
+      .hide(2000);
+            </code>
+          </pre>
 
-      <h3>.closable()</h3>
-      <p>By default dialogs do not have a close button, but it's
-        easy to add one! Click <a href="#" id="closable-dialog">here</a> to try it.</p>
-      <pre>
-        <code>
-new ui.Dialog({ title: 'Title', message: "I'm a dialog that wont auto-close" })
-  .closable()
-  .show();
-        </code>
-      </pre>
+          <h3>.closable()</h3>
+          <p>By default dialogs do not have a close button, but it's
+            easy to add one! Click <a href="#" id="closable-dialog">here</a> to try it.</p>
+          <pre>
+            <code>
+    new ui.Dialog({ title: 'Title', message: "I'm a dialog that wont auto-close" })
+      .closable()
+      .show();
+            </code>
+          </pre>
 
-      <h3>ui.dialog(msg)</h3>
-      <p><code>ui.dialog(msg)</code> is a nice shortcut, try it <a href="#" id="ui-dialog-1">here</a>.</p>
-      <pre>
-        <code>
-ui.dialog('Just another dialog')
-  .closable()
-  .show();
-        </code>
-      </pre>
+          <h3>ui.dialog(msg)</h3>
+          <p><code>ui.dialog(msg)</code> is a nice shortcut, try it <a href="#" id="ui-dialog-1">here</a>.</p>
+          <pre>
+            <code>
+    ui.dialog('Just another dialog')
+      .closable()
+      .show();
+            </code>
+          </pre>
 
-      <h3>ui.dialog(title, msg)</h3>
-      <p>How about a title this time? <a href="#" id="ui-dialog-2">try it</a>.</p>
-      <pre>
-        <code>
-ui.dialog('Title', 'Just another dialog')
-  .closable()
-  .show();
-        </code>
-      </pre>
+          <h3>ui.dialog(title, msg)</h3>
+          <p>How about a title this time? <a href="#" id="ui-dialog-2">try it</a>.</p>
+          <pre>
+            <code>
+    ui.dialog('Title', 'Just another dialog')
+      .closable()
+      .show();
+            </code>
+          </pre>
 
-      <h3>.hide([ms])</h3>
-      <p>Dialogs will remain open until you .close() them, optionally providing a delay in milliseconds. <a href="#" id="dialog-hide">Try it</a>.</p>
-      <pre>
-        <code>
-var dialog = ui.dialog("I'll close in 2 seconds").show();
-setTimeout(function(){
-  dialog.hide();
-}, 2000);
-        </code>
-      </pre>
+          <h3>.hide([ms])</h3>
+          <p>Dialogs will remain open until you .close() them, optionally providing a delay in milliseconds. <a href="#" id="dialog-hide">Try it</a>.</p>
+          <pre>
+            <code>
+    var dialog = ui.dialog("I'll close in 2 seconds").show();
+    setTimeout(function(){
+      dialog.hide();
+    }, 2000);
+            </code>
+          </pre>
 
-      <h3>.overlay()</h3>
-      <p>This method adds an overlay, which may be clicked (by default) to close the dialog. <a href="#" id="dialog-overlay">Test it out</a>.</p>
-      <pre>
-        <code>
-ui.dialog('Overlay time')
-  .closable()
-  .overlay()
-  .show();
-        </code>
-      </pre>
+          <h3>.overlay()</h3>
+          <p>This method adds an overlay, which may be clicked (by default) to close the dialog. <a href="#" id="dialog-overlay">Test it out</a>.</p>
+          <pre>
+            <code>
+    ui.dialog('Overlay time')
+      .closable()
+      .overlay()
+      .show();
+            </code>
+          </pre>
 
-      <h3>.modal()</h3>
-      <p>This method adds an overlay which is not clickable, the user must interact with the dialog. <a href="#" id="modal-overlay">Test it out</a>.</p>
-      <pre>
-        <code>
-ui.dialog('Overlay time')
-  .closable()
-  .modal()
-  .show();
-        </code>
-      </pre>
+          <h3>.modal()</h3>
+          <p>This method adds an overlay which is not clickable, the user must interact with the dialog. <a href="#" id="modal-overlay">Test it out</a>.</p>
+          <pre>
+            <code>
+    ui.dialog('Overlay time')
+      .closable()
+      .modal()
+      .show();
+            </code>
+          </pre>
 
-      <h3>.effect(name)</h3>
-      <p>Effects are simply applied via CSS classes, no JavaScript animations, so they're nice and fast! Try out the <a href="#" id="dialog-effect-slide">slide</a> effect.</p>
-      <pre>
-        <code>
-ui.dialog('Hello!')
-  .effect('slide')
-  .show()
-  .hide(1500);
-        </code>
-      </pre>
+          <h3>.effect(name)</h3>
+          <p>Effects are simply applied via CSS classes, no JavaScript animations, so they're nice and fast! Try out the <a href="#" id="dialog-effect-slide">slide</a> effect.</p>
+          <pre>
+            <code>
+    ui.dialog('Hello!')
+      .effect('slide')
+      .show()
+      .hide(1500);
+            </code>
+          </pre>
 
-      <p>Try a few more, and remember, they're just classes! create your own.</p>
-      <ul>
-        <li><a href="#" class="effect-slide">slide</a></li>
-        <li><a href="#" class="effect-fade">fade</a></li>
-        <li><a href="#" class="effect-scale">scale</a></li>
-      </ul>
+          <p>Try a few more, and remember, they're just classes! create your own.</p>
+          <ul>
+            <li><a href="#" class="effect-slide">slide</a></li>
+            <li><a href="#" class="effect-fade">fade</a></li>
+            <li><a href="#" class="effect-scale">scale</a></li>
+          </ul>
 
-      <h3>Auto-closing</h3>
-      <p>Dialog is aware of the "active" dialog, and when shown will hide the other. Test it out! click one of the links below and then quickly click another.</p>
-      <ul>
-        <li><a href="#" class="effect-slide">slide</a></li>
-        <li><a href="#" class="effect-fade">fade</a></li>
-        <li><a href="#" class="effect-scale">scale</a></li>
-      </ul>
+          <h3>Auto-closing</h3>
+          <p>Dialog is aware of the "active" dialog, and when shown will hide the other. Test it out! click one of the links below and then quickly click another.</p>
+          <ul>
+            <li><a href="#" class="effect-slide">slide</a></li>
+            <li><a href="#" class="effect-fade">fade</a></li>
+            <li><a href="#" class="effect-scale">scale</a></li>
+          </ul>
+      </section>
     </section>
 
 
@@ -322,105 +324,108 @@ ui.dialog('Hello!')
       <h2 id="confirmation-section">Confirmation</h2>
       <p>The Confirmation extends Dialog to provide a confirmation dialog.</p>
       
-      <h3>Example</h3>
-      <p>Click <a href="#" id="simple-confirmation">here</a> to
-      confirm removal of a user.</p>
-      <pre>
-        <code>
-new ui.Confirmation({ title: 'Remove user', message: 'are you sure?' })
-  .show(function(ok){
-    if (ok) ui.dialog('user removed!').show().hide(1500);
-  });
-        </code>
-      </pre>
+      <section>
+         <h3>Example</h3>
+          <p>Click <a href="#" id="simple-confirmation">here</a> to
+          confirm removal of a user.</p>
+          <pre>
+            <code>
+    new ui.Confirmation({ title: 'Remove user', message: 'are you sure?' })
+      .show(function(ok){
+        if (ok) ui.dialog('user removed!').show().hide(1500);
+      });
+            </code>
+          </pre>
 
-      <h3>ui.confirm(title, msg)</h3>
-      <p>Much like ui.dialog() there's a shortcut, try it <a href="#" id="ui-confirm">here</a>. We can tweak the button text with .ok() and .cancel().</p>
-      <pre>
-        <code>
-ui.confirm('Remove user', 'are you sure?')
-  .ok('Remove')
-  .cancel('No dont!')
-  .show(function(ok){
-    if (ok) ui.dialog('user removed!').show().hide(1500);
-  });
-        </code>
-      </pre>
+          <h3>ui.confirm(title, msg)</h3>
+          <p>Much like ui.dialog() there's a shortcut, try it <a href="#" id="ui-confirm">here</a>. We can tweak the button text with .ok() and .cancel().</p>
+          <pre>
+            <code>
+    ui.confirm('Remove user', 'are you sure?')
+      .ok('Remove')
+      .cancel('No dont!')
+      .show(function(ok){
+        if (ok) ui.dialog('user removed!').show().hide(1500);
+      });
+            </code>
+          </pre>
 
-      <h3>ui.confirm(msg)</h3>
-      <p>You may omit the title as well, try it <a href="#" id="ui-confirm-2">here</a>. Clicking cancel or close will invoke the callback with false.</p>
-      <pre>
-        <code>
-ui.confirm('are you sure?')
-  .closable()
-  .show(function(ok){
-    if (ok) ui.dialog('done!').show().hide(1500);
-    else ui.dialog('never-mind').show().hide(1500);
-  });
-        </code>
-      </pre>
-
+          <h3>ui.confirm(msg)</h3>
+          <p>You may omit the title as well, try it <a href="#" id="ui-confirm-2">here</a>. Clicking cancel or close will invoke the callback with false.</p>
+          <pre>
+            <code>
+    ui.confirm('are you sure?')
+      .closable()
+      .show(function(ok){
+        if (ok) ui.dialog('done!').show().hide(1500);
+        else ui.dialog('never-mind').show().hide(1500);
+      });
+            </code>
+          </pre>
+      </section>
     </section>
 
     <section>
       <h2 id="colorpicker-section">ColorPicker</h2>
       <p>A simple, small, elegant color picker component.</p>
       
-      <h3>Example</h3>
-      <p>With default dimensions of 180x180. On change rgb(<em class="r">0</em>,<em class="g">0</em>,<em class="b">0</em>) will update channels individually, or <em class="rgb">rgb(0,0,0)</em> with toString().</p>
+      <section>
+        <h3>Example</h3>
+        <p>With default dimensions of 180x180. On change rgb(<em class="r">0</em>,<em class="g">0</em>,<em class="b">0</em>) will update channels individually, or <em class="rgb">rgb(0,0,0)</em> with toString().</p>
 
-      <div id="default-color-picker"></div>
+        <div id="default-color-picker"></div>
 
-      <pre>
-        <code>
-var picker = new ui.ColorPicker;
-picker.el.appendTo('#default-color-picker');
-picker.on('change', function(color){
-  $('.r').text(color.r)
-  $('.g').text(color.g)
-  $('.b').text(color.b)
-  $('.rgb').text(color.toString()).css('background', color)
-});
-        </code>
-      </pre>
+        <pre>
+          <code>
+  var picker = new ui.ColorPicker;
+  picker.el.appendTo('#default-color-picker');
+  picker.on('change', function(color){
+    $('.r').text(color.r)
+    $('.g').text(color.g)
+    $('.b').text(color.b)
+    $('.rgb').text(color.toString()).css('background', color)
+  });
+          </code>
+        </pre>
 
-      <h3>.size(n)</h3>
-      <p>Adjust both width and height.</p>
+        <h3>.size(n)</h3>
+        <p>Adjust both width and height.</p>
 
-      <div id="color-picker-size"></div>
+        <div id="color-picker-size"></div>
 
-      <pre>
-        <code>
-var picker = new ui.ColorPicker;
-picker.size(100);
-picker.el.appendTo('#color-picker-size');
-        </code>
-      </pre>
+        <pre>
+          <code>
+  var picker = new ui.ColorPicker;
+  picker.size(100);
+  picker.el.appendTo('#color-picker-size');
+          </code>
+        </pre>
 
-      <h3>.width(n) / .height(n)</h3>
-      <p>Either the width or height may be adjusted individually.</p>
+        <h3>.width(n) / .height(n)</h3>
+        <p>Either the width or height may be adjusted individually.</p>
 
-      <div id="color-picker-width"></div>
+        <div id="color-picker-width"></div>
 
-      <pre>
-        <code>
-var picker = new ui.ColorPicker;
-picker.width(80);
-picker.el.appendTo('#color-picker-width');
-        </code>
-      </pre>
+        <pre>
+          <code>
+  var picker = new ui.ColorPicker;
+  picker.width(80);
+  picker.el.appendTo('#color-picker-width');
+          </code>
+        </pre>
 
-      <h3>ColorPicker in a Dialog</h3>
-      <p>Tight uikit integration means that components can interact, providing you with a simple API, simply add the picker as the message. Click to <a href="#" id="dialog-picker">try</a> it.</p>
+        <h3>ColorPicker in a Dialog</h3>
+        <p>Tight uikit integration means that components can interact, providing you with a simple API, simply add the picker as the message. Click to <a href="#" id="dialog-picker">try</a> it.</p>
 
-      <pre>
-        <code>
-ui.dialog('Select a color', new ui.ColorPicker)
-  .effect('slide')
-  .closable()
-  .show();
-        </code>
-      </pre>
+        <pre>
+          <code>
+  ui.dialog('Select a color', new ui.ColorPicker)
+    .effect('slide')
+    .closable()
+    .show();
+          </code>
+        </pre>
+      </section>
 
     </section>
 
@@ -428,23 +433,25 @@ ui.dialog('Select a color', new ui.ColorPicker)
       <h2 id="card-section">Card</h2>
       <p>A simple double-sided card component.</p>
       
-      <h3>Example</h3>
-      <p>The following example displays a ColorPicker on the back face
-        and a simple paragraph on the front. Any component or jQuery()-able value may be used. You may also programmatically <a href="#" id="flip"> flip</a> the card.</p>
+      <section>
+        <h3>Example</h3>
+        <p>The following example displays a ColorPicker on the back face
+          and a simple paragraph on the front. Any component or jQuery()-able value may be used. You may also programmatically <a href="#" id="flip"> flip</a> the card.</p>
 
-      <div id="card"></div>
+        <div id="card"></div>
 
-      <pre>
-        <code>
-var picker = new ui.ColorPicker;
-var card = ui.card('&lt;p&gt;Click to show a color picker&lt;/p&gt;', picker);
-card.el.appendTo('#card');
+        <pre>
+          <code>
+  var picker = new ui.ColorPicker;
+  var card = ui.card('&lt;p&gt;Click to show a color picker&lt;/p&gt;', picker);
+  card.el.appendTo('#card');
 
-$('#flip').click(function(){
-  card.flip();
-})
-        </code>
-      </pre>
+  $('#flip').click(function(){
+    card.flip();
+  })
+          </code>
+        </pre>
+      </section>
     </section>
 
   </body>
