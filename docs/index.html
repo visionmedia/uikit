@@ -160,9 +160,11 @@
       }
       #card .wrapper {
         padding-top: 10px;
+        width: 220px;
+        height: 190px;
       }
       #card .wrapper .front {
-        padding-top: 90px;
+        line-height: 150px;
       }
       #dialog .card p {
         text-align: center;
@@ -421,20 +423,16 @@ ui.dialog('Select a color', new ui.ColorPicker)
       <p>A simple double-sided card component.</p>
       
       <h3>Example</h3>
-      <p>Suppose</p>
+      <p>The following example displays a ColorPicker on the back face
+        and a simple paragraph on the front. Any component or jQuery()-able value may be used.</p>
 
       <div id="card"></div>
 
       <pre>
         <code>
 var picker = new ui.ColorPicker;
-picker.el.appendTo('#default-color-picker');
-picker.on('change', function(color){
-  $('.r').text(color.r)
-  $('.g').text(color.g)
-  $('.b').text(color.b)
-  $('.rgb').text(color.toString()).css('background', color)
-});
+var card = ui.card('&lt;p&gt;Click to show a color picker&lt;/p&gt;', picker);
+card.el.appendTo('#card');
         </code>
       </pre>
     </section>
