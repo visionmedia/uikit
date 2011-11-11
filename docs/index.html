@@ -132,6 +132,10 @@
         var picker = new ui.ColorPicker;
         picker.size(100);
         picker.el.appendTo('#color-picker-size');
+
+        var picker = new ui.ColorPicker;
+        picker.width(80);
+        picker.el.appendTo('#color-picker-width');
       });
     </script>
     <style>
@@ -361,6 +365,19 @@ picker.on('change', function(color){
 var picker = new ui.ColorPicker;
 picker.size(100);
 picker.el.appendTo('#color-picker-size');
+        </code>
+      </pre>
+
+      <h3>.width(n) / .height(n)</h3>
+      <p>Either the width or height may be adjusted individually.</p>
+
+      <div id="color-picker-width"></div>
+
+      <pre>
+        <code>
+var picker = new ui.ColorPicker;
+picker.width(80);
+picker.el.appendTo('#color-picker-width');
         </code>
       </pre>
 
