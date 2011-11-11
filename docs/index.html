@@ -148,6 +148,11 @@
         var picker = new ui.ColorPicker;
         var card = ui.card('<p>Click to show a color picker</p>', picker);
         card.el.appendTo('#card');
+
+        $('#flip').click(function(){
+          card.flip();
+          return false;
+        })
       });
     </script>
     <style>
@@ -425,7 +430,7 @@ ui.dialog('Select a color', new ui.ColorPicker)
       
       <h3>Example</h3>
       <p>The following example displays a ColorPicker on the back face
-        and a simple paragraph on the front. Any component or jQuery()-able value may be used.</p>
+        and a simple paragraph on the front. Any component or jQuery()-able value may be used. You may also programmatically <a href="#" id="flip"> flip</a> the card.</p>
 
       <div id="card"></div>
 
@@ -434,6 +439,10 @@ ui.dialog('Select a color', new ui.ColorPicker)
 var picker = new ui.ColorPicker;
 var card = ui.card('&lt;p&gt;Click to show a color picker&lt;/p&gt;', picker);
 card.el.appendTo('#card');
+
+$('#flip').click(function(){
+  card.flip();
+})
         </code>
       </pre>
     </section>
