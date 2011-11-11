@@ -128,6 +128,10 @@
           $('.b').text(color.b)
           $('.rgb').text(color.toString()).css('background', color)
         });
+
+        var picker = new ui.ColorPicker;
+        picker.size(100);
+        picker.el.appendTo('#color-picker-size');
       });
     </script>
     <style>
@@ -344,6 +348,19 @@ picker.on('change', function(color){
   $('.b').text(color.b)
   $('.rgb').text(color.toString()).css('background', color)
 });
+        </code>
+      </pre>
+
+      <h3>.size(n)</h3>
+      <p>Adjust both width and height.</p>
+
+      <div id="color-picker-size"></div>
+
+      <pre>
+        <code>
+var picker = new ui.ColorPicker;
+picker.size(100);
+picker.el.appendTo('#color-picker-size');
         </code>
       </pre>
 
