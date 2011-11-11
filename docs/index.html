@@ -119,6 +119,15 @@
             .show();
           return false;
         })
+
+        var picker = new ui.ColorPicker;
+        picker.el.appendTo('#default-color-picker');
+        picker.on('change', function(color){
+          $('.r').text(color.r)
+          $('.g').text(color.g)
+          $('.b').text(color.b)
+          $('.rgb').text(color.toString()).css('background', color)
+        });
       });
     </script>
     <style>
@@ -315,5 +324,30 @@ ui.confirm('are you sure?')
       </pre>
 
     </section>
+
+    <section>
+      <h2 id="colorpicker-section">ColorPicker</h2>
+      <p>A simple, small, elegant color picker component.</p>
+      
+      <h3>Example</h3>
+      <p>With default dimensions of 180x180. On change rgb(<em class="r">0</em>,<em class="g">0</em>,<em class="b">0</em>) will update channels individually, or <em class="rgb">rgb(0,0,0)</em> with toString().</p>
+
+      <div id="default-color-picker"></div>
+
+      <pre>
+        <code>
+var picker = new ui.ColorPicker;
+picker.el.appendTo('#default-color-picker');
+picker.on('change', function(color){
+  $('.r').text(color.r)
+  $('.g').text(color.g)
+  $('.b').text(color.b)
+  $('.rgb').text(color.toString()).css('background', color)
+});
+        </code>
+      </pre>
+
+    </section>
+
   </body>
 </html>
