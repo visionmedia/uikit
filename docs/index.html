@@ -170,6 +170,86 @@
             .closable();
           return false;
         });
+
+        $('#ui-dialog-1').click(function(){
+          ui.dialog('Just another dialog')
+            .closable()
+            .show();
+          return false;
+        });
+        
+        $('#ui-dialog-2').click(function(){
+          ui.dialog('Title', 'Just another dialog')
+            .closable()
+            .show();
+          return false;
+        });
+
+        $('#dialog-effect-slide').click(function(){
+          ui.dialog('Hello!')
+            .effect('slide')
+            .show()
+            .hide(1500);
+          return false;
+        })
+        
+        $('.effect-slide').click(function(){
+          ui.dialog('Hello!')
+            .effect('slide')
+            .show()
+            .hide(1500);
+          return false;
+        })
+        
+        $('.effect-scale').click(function(){
+          ui.dialog('Hello!')
+            .effect('scale')
+            .show()
+            .hide(1500);
+          return false;
+        })
+        
+        $('.effect-fade').click(function(){
+          ui.dialog('Hello!')
+            .effect('fade')
+            .show()
+            .hide(1500);
+          return false;
+        })
+        
+        $('#dialog-hide').click(function(){
+          var dialog = ui.dialog("I'll close in 2 seconds").show();
+          setTimeout(function(){
+            dialog.hide();
+          }, 2000);
+          return false;
+        })
+
+        $('#simple-confirmation').click(function(){
+          new ui.Confirmation({ title: 'Remove user', message: 'are you sure?' })
+            .show(function(ok){
+              if (ok) ui.dialog('user removed!').show().hide(1500);
+            });
+          return false;
+        })
+
+        $('#ui-confirm').click(function(){
+          ui.confirm('Remove user', 'are you sure?')
+            .ok('Remove')
+            .cancel('No dont!')
+            .show(function(ok){
+              if (ok) ui.dialog('user removed!').show().hide(1500);
+            });
+          return false;
+        });
+
+        $('#ui-confirm-2').click(function(){
+          ui.confirm('are you sure?')
+            .show(function(ok){
+              if (ok) ui.dialog('done!').show().hide(1500);
+            });
+          return false;
+        });
       });
     </script>
     <style>
@@ -191,16 +271,11 @@
         margin: 0;
       }
       h2 {
-        font-size: 16px;
+        font-size: 24px;
       }
-      h2 span {
-        display: inline-block;
-        color: #888;
-        font-weight: normal;
+      h3 {
         font-size: 14px;
-        border-left: 1px solid #eee;
-        padding: 0 5px;
-        margin: 0 5px;
+        border-bottom: 1px solid #eee;
       }
       a {
         color: #1E91D4;
@@ -221,9 +296,12 @@
     </div>
 
     <section>
-      <h2>Dialog <span>simple & flexible dialog component</span></h2>
+      <h2 id="dialog-section">Dialog</h2>
       <p>The Dialog component is the basis of more specific components
-      such the Confirmation Dialog. Click <a href="#" id="simple-dialog">here</a> to
+      such the Confirmation Dialog.</p>
+      
+      <h3>Example</h3>
+      <p>Click <a href="#" id="simple-dialog">here</a> to
       open a simple dialog that closes after 2 seconds.</p>
       <pre>
         <code>
@@ -233,6 +311,7 @@ new ui.Dialog({ title: 'Title', message: "I'm a simple dialog" })
         </code>
       </pre>
 
+      <h3>.closable()</h3>
       <p>By default dialogs do not have a close button, but it's
         easy to add one! Click <a href="#" id="closable-dialog">here</a> to try it.</p>
       <pre>
@@ -242,7 +321,108 @@ new ui.Dialog({ title: 'Title', message: "I'm a dialog that wont auto-close" })
   .show();
         </code>
       </pre>
+
+      <h3>ui.dialog(msg)</h3>
+      <p><code>ui.dialog(msg)</code> is a nice shortcut, try it <a href="#" id="ui-dialog-1">here</a>.</p>
+      <pre>
+        <code>
+ui.dialog('Just another dialog')
+  .closable()
+  .show();
+        </code>
+      </pre>
+
+      <h3>ui.dialog(title, msg)</h3>
+      <p>How about a title this time? <a href="#" id="ui-dialog-2">try it</a>.</p>
+      <pre>
+        <code>
+ui.dialog('Title', 'Just another dialog')
+  .closable()
+  .show();
+        </code>
+      </pre>
+
+      <h3>.hide([ms])</h3>
+      <p>Dialogs will remain open until you .close() them, optionally providing a delay in milliseconds. <a href="#" id="dialog-hide">Try it</a>.</p>
+      <pre>
+        <code>
+var dialog = ui.dialog("I'll close in 2 seconds").show();
+setTimeout(function(){
+  dialog.hide();
+}, 2000);
+        </code>
+      </pre>
+
+      <h3>.effect(name)</h3>
+      <p>Effects are simply applied via CSS classes, no JavaScript animations, so they're nice and fast! Try out the <a href="#" id="dialog-effect-slide">slide</a> effect.</p>
+      <pre>
+        <code>
+ui.dialog('Hello!')
+  .effect('slide')
+  .show()
+  .hide(1500);
+        </code>
+      </pre>
+
+      <p>Try a few more, and remember, they're just classes! create your own.</p>
+      <ul>
+        <li><a href="#" class="effect-slide">slide</a></li>
+        <li><a href="#" class="effect-fade">fade</a></li>
+        <li><a href="#" class="effect-scale">scale</a></li>
+      </ul>
+
+      <h3>Auto-closing</h3>
+      <p>Dialog is aware of the "active" dialog, and when shown will hide the other. Test it out! click one of the links below and then quickly click another.</p>
+      <ul>
+        <li><a href="#" class="effect-slide">slide</a></li>
+        <li><a href="#" class="effect-fade">fade</a></li>
+        <li><a href="#" class="effect-scale">scale</a></li>
+      </ul>
     </section>
+
+
+    <section>
+      <h2 id="confirmation-section">Confirmation</h2>
+      <p>The Confirmation extends Dialog to provide a confirmation dialog.</p>
+      
+      <h3>Example</h3>
+      <p>Click <a href="#" id="simple-confirmation">here</a> to
+      confirm removal of a user.</p>
+      <pre>
+        <code>
+new ui.Confirmation({ title: 'Remove user', message: 'are you sure?' })
+  .show(function(ok){
+    if (ok) ui.dialog('user removed!').show().hide(1500);
+  });
+        </code>
+      </pre>
+
+      <h3>ui.confirm(title, msg)</h3>
+      <p>Much like ui.dialog() there's a shortcut, try it <a href="#" id="ui-confirm">here</a>. We can tweak the button text with .ok() and .cancel().</p>
+      <pre>
+        <code>
+ui.confirm('Remove user', 'are you sure?')
+  .ok('Remove')
+  .cancel('No dont!')
+  .show(function(ok){
+    if (ok) ui.dialog('user removed!').show().hide(1500);
+  });
+        </code>
+      </pre>
+
+      <h3>ui.confirm(msg)</h3>
+      <p>You may omit the title as well, try it <a href="#" id="ui-confirm-2">here</a>.</p>
+      <pre>
+        <code>
+ui.confirm('are you sure?')
+  .show(function(ok){
+    if (ok) ui.dialog('done!').show().hide(1500);
+  });
+        </code>
+      </pre>
+
+    </section>
+
 
     <ul>
       <li><a href="#">Confirmation</a></li>

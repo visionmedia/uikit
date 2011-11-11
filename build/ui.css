@@ -1,5 +1,5 @@
 #dialog {
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 150px;
   max-width: 600px;
@@ -46,7 +46,6 @@
   border: 1px solid #eee;
   border-bottom-color: #cacaca;
   -webkit-border-radius: 3px;
-  font-size: .70em;
   outline: none;
 }
 

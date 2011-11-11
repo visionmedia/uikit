@@ -252,10 +252,10 @@ Dialog.prototype.hide = function(ms){
   this.el.addClass('hide');
   if (this._effect) {
     setTimeout(function(self){
-      self.close();
+      self.remove();
     }, 500, this);
   } else {
-    self.close();
+    self.remove();
   }
 
   // modal
@@ -271,7 +271,7 @@ Dialog.prototype.hide = function(ms){
  * @api public
  */
 
-Dialog.prototype.close = function(){
+Dialog.prototype.remove = function(){
   this.el.remove();
   return this;
 };
@@ -367,14 +367,19 @@ exports.Confirmation = Confirmation;
  * Return a new `Confirmation` dialog with the given 
  * `title` and `msg`.
  *
- * @param {String} title
+ * @param {String} title or msg
  * @param {String} msg
  * @return {Dialog}
  * @api public
  */
 
 exports.confirm = function(title, msg){
-  return new Confirmation({ title: title, message: msg });
+  switch (arguments.length) {
+    case 2:
+      return new Confirmation({ title: title, message: msg });
+    case 1:
+      return new Confirmation({ message: title });
+  }
 };
 
 /**
