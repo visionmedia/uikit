@@ -521,6 +521,8 @@ function ColorPicker() {
   this.el = $(this.template);
   this.main = this.el.find('.main').get(0);
   this.spectrum = this.el.find('.spectrum').get(0);
+  $(this.main).bind('selectstart', function(e){ e.preventDefault() });
+  $(this.spectrum).bind('selectstart', function(e){ e.preventDefault() });
   this.hue(rgb(255, 0, 0));
   this.spectrumEvents();
   this.mainEvents();
@@ -693,6 +695,7 @@ ColorPicker.prototype.hueAt = function(y){
  */
 
 ColorPicker.prototype.color = function(color){
+  // TODO: update pos
   if (0 == arguments.length) return this._color;
   this._color = color;
   return this;
@@ -707,6 +710,7 @@ ColorPicker.prototype.color = function(color){
  */
 
 ColorPicker.prototype.hue = function(color){
+  // TODO: update pos
   if (0 == arguments.length) return this._hue;
   this._hue = color;
   return this;
