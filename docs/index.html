@@ -120,6 +120,14 @@
           return false;
         })
 
+        $('#dialog-picker').click(function(){
+          ui.dialog('Select a color', new ui.ColorPicker)
+            .effect('slide')
+            .closable()
+            .show();
+          return false;
+        })
+
         var picker = new ui.ColorPicker;
         picker.el.appendTo('#default-color-picker');
         picker.on('change', function(color){
@@ -378,6 +386,18 @@ picker.el.appendTo('#color-picker-size');
 var picker = new ui.ColorPicker;
 picker.width(80);
 picker.el.appendTo('#color-picker-width');
+        </code>
+      </pre>
+
+      <h3>ColorPicker in a Dialog</h3>
+      <p>Tight uikit integration means that components can interact, providing you with a simple API, simply add the picker as the message. Click to <a href="#" id="dialog-picker">try</a> it.</p>
+
+      <pre>
+        <code>
+ui.dialog('Select a color', new ui.ColorPicker)
+  .effect('slide')
+  .closable()
+  .show();
         </code>
       </pre>
 
