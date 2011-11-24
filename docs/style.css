@@ -1,5 +1,6 @@
 body {
-  margin: 1px;
+  margin: 0;
+  padding: 20px;
   font: 14px/1.6 "Helvetica Neue", Helvetica, arial, sans-serif;
 }
 #logo span {
@@ -31,7 +32,7 @@ body > section {
   margin: 30px;
   width: 400px;
 }
-h1 {
+#logo h1 {
   display: inline-block;
   margin: 0;
   font-weight: bold;
