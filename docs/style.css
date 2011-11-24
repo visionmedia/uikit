@@ -46,6 +46,7 @@ h1 strong {
   font-size: 18px;
 }
 h2 {
+  font-weight: 200;
   font-size: 24px;
 }
 h3 {
@@ -53,7 +54,7 @@ h3 {
   border-bottom: 1px solid #eee;
 }
 a {
-  color: #2BEFFF;
+  color: #2B3235;
   text-decoration: none;
 }
 a:hover {
