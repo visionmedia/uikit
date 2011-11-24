@@ -53,6 +53,9 @@ h2 {
   font-weight: 200;
   font-size: 24px;
 }
+h2 a {
+  text-decoration: none;
+}
 h3 {
   font-size: 14px;
   border-bottom: 1px solid #eee;
