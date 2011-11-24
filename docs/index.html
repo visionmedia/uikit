@@ -157,7 +157,9 @@
         })
 
         $('section section').hide();
-        $('h2 a').click(function(){
+        $('h2 a').click(function(e){
+          e.preventDefault();
+
           $(this)
             .parents('section')
             .find('section')
