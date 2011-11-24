@@ -1,7 +1,5 @@
 
-# uikit
-
-  JavaScript + CSS UI components
+ ![UIKit JavaScript component framework](http://f.cl.ly/items/202v2F463H0O1E0v1D3S/Screenshot.png)
 
 ## License 
 
