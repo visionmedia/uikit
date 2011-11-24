@@ -31,7 +31,7 @@ body {
 body > section {
   margin: 30px;
   width: 350px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #ddd;
 }
 body > section:last-of-type {
   border-bottom: none;
