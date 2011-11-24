@@ -30,7 +30,11 @@ body {
 }
 body > section {
   margin: 30px;
-  width: 400px;
+  width: 350px;
+  border-bottom: 1px solid #eee;
+}
+body > section:last-of-type {
+  border-bottom: none;
 }
 #logo h1 {
   display: inline-block;
