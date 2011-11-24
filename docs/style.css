@@ -1,0 +1,63 @@
+body {
+  margin: 1px;
+  font: 14px/1.6 "Helvetica Neue", Helvetica, arial, sans-serif;
+}
+#logo span {
+  color: #888;
+  font-size: 20px;
+  font-weight: 100;
+  letter-spacing: 1px;
+  margin-left: 20px;
+}
+#card {
+  text-align: center;
+  height: 190px;
+}
+#card .wrapper {
+  padding-top: 10px;
+  width: 220px;
+  height: 190px;
+}
+#card .wrapper .front {
+  line-height: 150px;
+}
+#dialog .card p {
+  text-align: center;
+  line-height: 100px;
+  font-weight: bold;
+  font-size: 22px;
+}
+body > section {
+  margin: 30px;
+  width: 400px;
+}
+h1 {
+  display: inline-block;
+  margin: 0;
+  font-weight: bold;
+  font-size: 40px;
+  background: #2BEFFF;
+  color: white;
+  padding: 30px;
+}
+h1 strong {
+  font-weight: 200;
+  font-size: 18px;
+}
+h2 {
+  font-size: 24px;
+}
+h3 {
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+}
+a {
+  color: #2BEFFF;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+pre code {
+  font: 12px monaco, monospace;
+}
