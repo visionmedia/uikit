@@ -4,6 +4,7 @@ COMPONENTS = emitter \
   overlay \
   confirmation \
   color-picker \
+  notification \
   card
 
 ui:

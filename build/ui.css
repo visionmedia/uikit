@@ -141,6 +141,87 @@
   cursor: crosshair;
 }
 
+#notifications {
+  position: fixed;
+  top: 10px;
+  right: 15px;
+}
+
+#notifications li {
+  margin-bottom: 10px;
+  list-style: none;
+}
+
+.notification {
+  position: relative;
+  max-width: 600px;
+  min-width: 250px;
+  border: 1px solid #eee;
+  border-bottom-color: #cacaca;
+  -webkit-border-radius: 3px;
+  -webkit-box-shadow: 0 1px 4px 0 #ddd;
+  background: white;
+  z-index: 100;
+}
+
+.notification .content {
+  padding: 15px 20px;
+}
+
+.notification h1 {
+  margin: 0 0 5px 0;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.notification p {
+  margin: 0;
+  padding: 0;
+  font-size: .9em;
+}
+
+/* close */
+
+.notification .close {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  text-decoration: none;
+  color: #888;
+  display: none;
+}
+
+/* slide */
+
+.notification.slide {
+  -webkit-transition: opacity 300ms, top 300ms;
+}
+
+.notification.slide.hide {
+  opacity: 0;
+  top: -500px;
+}
+
+/* fade */
+
+.notification.fade {
+  -webkit-transition: opacity 300ms;
+}
+
+.notification.fade.hide {
+  opacity: 0;
+}
+
+/* scale */
+
+.notification.scale {
+  -webkit-transition: -webkit-transform 300ms;
+  -webkit-transform: scale(1);
+}
+
+.notification.scale.hide {
+  -webkit-transform: scale(0);
+}
 /* from: http://desandro.github.com/3d-webkit-transforms */
 
 .card {
