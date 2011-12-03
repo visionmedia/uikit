@@ -350,8 +350,12 @@ Overlay.prototype.show = function(){
  */
 
 Overlay.prototype.hide = function(){
+  var self = this;
   this.emit('hide');
   this.el.addClass('hide');
+  setTimeout(function(){
+    self.el.remove();
+  }, 2000);
   return this;
 };
 
