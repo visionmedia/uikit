@@ -14,7 +14,7 @@
         setTimeout(function(){
           ui.notify('Hello 1').show().hide(3000);
           setTimeout(function(){
-            ui.notify('Hello 2').show().hide(3000);
+            ui.notify('Hello 2').show().closable().hide(3000);
             setTimeout(function(){
               ui.notify('Hello 3').show().hide(3000);
             }, 50);
