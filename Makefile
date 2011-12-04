@@ -12,4 +12,9 @@ ui:
 	@mkdir build
 	@./support/build.js $(COMPONENTS)
 
-.PHONY: ui
+stats:
+	@echo
+	@du -hs build/* | sed 's/^/  /'
+	@echo
+
+.PHONY: ui stats
