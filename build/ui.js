@@ -866,6 +866,14 @@ exports.notify = function(title, msg){
   }
 };
 
+/**
+ * Construct a notification function for `type`.
+ *
+ * @param {String} type
+ * @return {Function}
+ * @api private
+ */
+
 function type(type) {
   return function(title, msg){
     return exports.notify.apply(this, arguments)
@@ -873,6 +881,11 @@ function type(type) {
   }
 }
 
+/**
+ * Notification methods.
+ */
+
+exports.info = exports.notify;
 exports.warn = type('warn');
 exports.error = type('error');
 

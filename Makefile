@@ -12,6 +12,9 @@ ui:
 	@mkdir build
 	@./support/build.js $(COMPONENTS)
 
+watch:
+	watch --interval=1 $(MAKE)
+
 stats:
 	@echo
 	@du -hs build/* | sed 's/^/  /'
