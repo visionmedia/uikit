@@ -866,6 +866,16 @@ exports.notify = function(title, msg){
   }
 };
 
+function type(type) {
+  return function(title, msg){
+    return exports.notify.apply(this, arguments)
+      .type(type);
+  }
+}
+
+exports.warn = type('warn');
+exports.error = type('error');
+
 /**
  * Initialize a new `Notification`.
  *
