@@ -857,10 +857,12 @@ exports.notify = function(title, msg){
   switch (arguments.length) {
     case 2:
       return new Notification({ title: title, message: msg })
-        .show();
+        .show()
+        .hide(4000);
     case 1:
       return new Notification({ message: title })
-        .show();
+        .show()
+        .hide(4000);
   }
 };
 

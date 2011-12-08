@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="style.css">
     <script>
       $(function(){
+        var a = $('<a href="#">Notify</a>');
+        a.appendTo('body').click(function(){
+          ui.notify('foo bar baz').effect('scale');
+          return false;
+        })
+        
         $('#simple-dialog').click(function(){
           new ui.Dialog({ title: 'Title', message: "I'm a simple dialog" })
             .show()
