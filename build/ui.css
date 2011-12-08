@@ -180,8 +180,25 @@
   font-size: .9em;
 }
 
+.notification .close {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  text-decoration: none;
+  color: #888;
+  display: none;
+}
+
 .notification.closable .close {
   display: block;
+}
+
+.notification .close:hover {
+  color: black;
+}
+
+.notification .close:active {
+  margin-top: 1px;
 }
 
 /* close */
