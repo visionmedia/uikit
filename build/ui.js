@@ -959,6 +959,17 @@ Notification.prototype.show = function(){
 };
 
 /**
+ * Make it stick (clear hide timer).
+ *
+ * @return {Notification} for chaining
+ * @api public
+ */
+
+Notification.prototype.stick = function(){
+  return this.hide(0);
+};
+
+/**
  * Hide the dialog with optional delay of `ms`,
  * otherwise the notification is removed immediately.
  *
@@ -973,7 +984,7 @@ Notification.prototype.hide = function(ms){
   // duration
   if ('number' == typeof ms) {
     clearTimeout(this.timer);
-    if (!ms) return;
+    if (!ms) return this;
     this.timer = setTimeout(function(){
       self.hide();
     }, ms);
