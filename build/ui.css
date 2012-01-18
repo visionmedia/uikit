@@ -66,8 +66,8 @@
 
 #dialog .close {
   position: absolute;
-  top: 5px;
-  right: 13px;
+  top: 3px;
+  right: 10px;
   text-decoration: none;
   color: #888;
   font-size: 16px;
