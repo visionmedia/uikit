@@ -45,6 +45,11 @@ body > section:last-of-type {
   color: white;
   padding: 30px;
 }
+#logo + p {
+  font-weight: 200;
+  font-size: 18px;
+  width: 50%;
+}
 h1 strong {
   font-weight: 200;
   font-size: 18px;
