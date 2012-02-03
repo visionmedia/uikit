@@ -23,7 +23,8 @@ function Emitter() {
  *
  * @param {String} event
  * @param {Function} fn
- * @return {Emitter} for chaining
+ * @return {Emitter}
+ * @api public
  */
 
 Emitter.prototype.on = function(event, fn){
@@ -33,11 +34,59 @@ Emitter.prototype.on = function(event, fn){
 };
 
 /**
+ * Adds an `event` listener that will be invoked a single
+ * time then automatically removed.
+ *
+ * @param {String} event
+ * @param {Function} fn
+ * @return {Emitter}
+ * @api public
+ */
+
+Emitter.prototype.once = function(event, fn){
+  var self = this;
+
+  function on() {
+    self.off(event, on);
+    fn.apply(this, arguments);
+  }
+
+  this.on(event, on);
+  return this;
+};
+
+/**
+ * Remove the given callback for `event` or all
+ * registered callbacks.
+ *
+ * @param {String} event
+ * @param {Function} fn
+ * @return {Emitter}
+ * @api public
+ */
+
+Emitter.prototype.off = function(event, fn){
+  var callbacks = this.callbacks[event];
+  if (!callbacks) return this;
+
+  // remove all handlers
+  if (1 == arguments.length) {
+    delete this.callbacks[event];
+    return this;
+  }
+
+  // remove specific handler
+  var i = callbacks.indexOf(fn);
+  callbacks.splice(i, 1);
+  return this;
+};
+
+/**
  * Emit `event` with the given args.
  *
  * @param {String} event
  * @param {Mixed} ...
- * @return {Emitter} for chaining
+ * @return {Emitter} 
  */
 
 Emitter.prototype.emit = function(event){
@@ -277,7 +326,7 @@ Dialog.prototype.remove = function(){
   return this;
 };
 
-})(ui, "<div id=\"dialog\" class=\"hide\">\n  <div class=\"content\">\n    <h1>Title</h1>\n    <a href=\"#\" class=\"close\">✖</a>\n    <p>Message</p>\n  </div>\n</div>");
+})(ui, "<div id=\"dialog\" class=\"hide\">\n  <div class=\"content\">\n    <h1>Title</h1>\n    <a href=\"#\" class=\"close\">×</a>\n    <p>Message</p>\n  </div>\n</div>");
 ;(function(exports, html){
 
 /**
@@ -350,8 +399,12 @@ Overlay.prototype.show = function(){
  */
 
 Overlay.prototype.hide = function(){
+  var self = this;
   this.emit('hide');
   this.el.addClass('hide');
+  setTimeout(function(){
+    self.el.remove();
+  }, 2000);
   return this;
 };
 
@@ -818,6 +871,399 @@ ColorPicker.prototype.renderMain = function(options){
   ctx.restore();
 };
 })(ui, "<div class=\"color-picker\">\n  <canvas class=\"main\"></canvas>\n  <canvas class=\"spectrum\"></canvas>\n</div>");
+;(function(exports, html){
+
+/**
+ * Notification list.
+ */
+
+var list;
+
+/**
+ * Expose `Notification`.
+ */
+
+exports.Notification = Notification;
+
+// list
+
+$(function(){
+  list = $('<ul id="notifications">');
+  list.appendTo('body');
+})
+
+/**
+ * Return a new `Notification` with the given 
+ * (optional) `title` and `msg`.
+ *
+ * @param {String} title or msg
+ * @param {String} msg
+ * @return {Dialog}
+ * @api public
+ */
+
+exports.notify = function(title, msg){
+  switch (arguments.length) {
+    case 2:
+      return new Notification({ title: title, message: msg })
+        .show()
+        .hide(4000);
+    case 1:
+      return new Notification({ message: title })
+        .show()
+        .hide(4000);
+  }
+};
+
+/**
+ * Construct a notification function for `type`.
+ *
+ * @param {String} type
+ * @return {Function}
+ * @api private
+ */
+
+function type(type) {
+  return function(title, msg){
+    return exports.notify.apply(this, arguments)
+      .type(type);
+  }
+}
+
+/**
+ * Notification methods.
+ */
+
+exports.info = exports.notify;
+exports.warn = type('warn');
+exports.error = type('error');
+
+/**
+ * Initialize a new `Notification`.
+ *
+ * Options:
+ *
+ *    - `title` dialog title
+ *    - `message` a message to display
+ *
+ * @param {Object} options
+ * @api public
+ */
+
+function Notification(options) {
+  options = options || {};
+  this.template = html;
+  this.el = $(this.template);
+  this.render(options);
+  if (Notification.effect) this.effect(Notification.effect);
+};
+
+
+/**
+ * Render with the given `options`.
+ *
+ * @param {Object} options
+ * @api public
+ */
+
+Notification.prototype.render = function(options){
+  var el = this.el
+    , title = options.title
+    , msg = options.message
+    , self = this;
+
+  el.find('.close').click(function(){
+    self.hide();
+    return false;
+  });
+
+  el.find('h1').text(title);
+  if (!title) el.find('h1').remove();
+
+  // message
+  if ('string' == typeof msg) {
+    el.find('p').text(msg);
+  } else if (msg) {
+    el.find('p').replaceWith(msg.el || msg);
+  }
+
+  setTimeout(function(){
+    el.removeClass('hide');
+  }, 0);
+};
+
+/**
+ * Enable the dialog close link.
+ *
+ * @return {Notification} for chaining
+ * @api public
+ */
+
+Notification.prototype.closable = function(){
+  this.el.addClass('closable');
+  return this;
+};
+
+/**
+ * Set the effect to `type`.
+ *
+ * @param {String} type
+ * @return {Notification} for chaining
+ * @api public
+ */
+
+Notification.prototype.effect = function(type){
+  this._effect = type;
+  this.el.addClass(type);
+  return this;
+};
+
+/**
+ * Show the notification.
+ *
+ * @return {Notification} for chaining
+ * @api public
+ */
+
+Notification.prototype.show = function(){
+  this.el.appendTo(list);
+  return this;
+};
+
+/**
+ * Set the notification `type`.
+ *
+ * @param {String} type
+ * @return {Notification} for chaining
+ * @api public
+ */
+
+Notification.prototype.type = function(type){
+  this._type = type;
+  this.el.addClass(type);
+  return this;
+};
+
+/**
+ * Make it stick (clear hide timer), and make it closable.
+ *
+ * @return {Notification} for chaining
+ * @api public
+ */
+
+Notification.prototype.sticky = function(){
+  return this.hide(0).closable();
+};
+
+/**
+ * Hide the dialog with optional delay of `ms`,
+ * otherwise the notification is removed immediately.
+ *
+ * @return {Number} ms
+ * @return {Notification} for chaining
+ * @api public
+ */
+
+Notification.prototype.hide = function(ms){
+  var self = this;
+
+  // duration
+  if ('number' == typeof ms) {
+    clearTimeout(this.timer);
+    if (!ms) return this;
+    this.timer = setTimeout(function(){
+      self.hide();
+    }, ms);
+    return this;
+  }
+
+  // hide / remove
+  this.el.addClass('hide');
+  if (this._effect) {
+    setTimeout(function(self){
+      self.remove();
+    }, 500, this);
+  } else {
+    self.remove();
+  }
+
+  return this;
+};
+
+/**
+ * Hide the notification without potential animation.
+ *
+ * @return {Dialog} for chaining
+ * @api public
+ */
+
+Notification.prototype.remove = function(){
+  this.el.remove();
+  return this;
+};
+})(ui, "<li class=\"notification hide\">\n  <div class=\"content\">\n    <h1>Title</h1>\n    <a href=\"#\" class=\"close\">×</a>\n    <p>Message</p>\n  </div>\n</li>");
+;(function(exports, html){
+
+/**
+ * Expose `ContextMenu`.
+ */
+
+exports.ContextMenu = ContextMenu;
+
+/**
+ * Create a new `ContextMenu`.
+ *
+ * @return {ContextMenu}
+ * @api public
+ */
+
+exports.menu = function(){
+  return new ContextMenu;
+};
+
+/**
+ * Initialize a new `ContextMenu` with content
+ * for face `front` and `back`.
+ *
+ * Emits "flip" event.
+ *
+ * @param {Mixed} front
+ * @param {Mixed} back
+ * @api public
+ */
+
+function ContextMenu(front, back) {
+  var self = this;
+  ui.Emitter.call(this);
+  this.items = {};
+  this.el = $(html).appendTo('body');
+  $('html').click(function(){
+    self.hide();
+  });
+};
+
+/**
+ * Inherit from `Emitter.prototype`.
+ */
+
+ContextMenu.prototype = new ui.Emitter;
+
+/**
+ * Add menu item with the given `text` and callback `fn`.
+ *
+ * When the item is clicked `fn()` will be invoked
+ * and the `ContextMenu` is immediately closed. 
+ *
+ * @param {String} text
+ * @param {Function} fn
+ * @return {ContextMenu}
+ * @api public
+ */
+
+ContextMenu.prototype.add = function(text, fn){
+  if (1 == arguments.length) return this.items[text];
+  var self = this
+    , el = $('<li><a href="#">' + text + '</a></li>')
+    .addClass(slug(text))
+    .appendTo(this.el)
+    .click(function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      self.hide();
+      fn();
+    });
+
+  this.items[text] = el;
+  return this;
+};
+
+/**
+ * Remove menu item with the given `text`.
+ *
+ * @param {String} text
+ * @return {ContextMenu}
+ * @api public
+ */
+
+ContextMenu.prototype.remove = function(text){
+  var item = this.items[text];
+  if (!item) throw new Error('no menu item named "' + text + '"');
+  item.remove();
+  delete this.items[text];
+  return this;
+};
+
+/**
+ * Check if this menu has an item with the given `text`.
+ *
+ * @param {String} text
+ * @return {Boolean}
+ * @api public
+ */
+
+ContextMenu.prototype.has = function(text){
+  return !! this.items[text];
+};
+
+/**
+ * Move context menu to `(x, y)`.
+ *
+ * @param {Number} x
+ * @param {Number} y
+ * @return {ContextMenu}
+ * @api public
+ */
+
+ContextMenu.prototype.moveTo = function(x, y){
+  this.el.css({
+    top: y,
+    left: x
+  });
+  return this;
+};
+
+/**
+ * Show the menu.
+ *
+ * @return {ContextMenu}
+ * @api public
+ */
+
+ContextMenu.prototype.show = function(){
+  this.emit('show');
+  this.el.show();
+  return this;
+};
+
+/**
+ * Hide the menu.
+ *
+ * @return {ContextMenu}
+ * @api public
+ */
+
+ContextMenu.prototype.hide = function(){
+  this.emit('hide');
+  this.el.hide();
+  return this;
+};
+
+/**
+ * Generate a slug from `str`.
+ *
+ * @param {String} str
+ * @return {String}
+ * @api private
+ */
+
+function slug(str) {
+  return str
+    .toLowerCase()
+    .replace(/ +/g, '-')
+    .replace(/[^a-z0-9-]/g, '');
+}
+
+})(ui, "<div id=\"context-menu\">\n</div>");
 ;(function(exports, html){
 
 /**
