@@ -5,13 +5,13 @@
 
 ## Components
 
-  - [ui.Emitter](https://github.com/visionmedia/uikit/tree/master/lib/components/emitter) an event emitter used throughout various components
-  - [ui.Card](https://github.com/visionmedia/uikit/tree/master/lib/components/card) a double-sided "card" powered by 3d transforms
-  - [ui.ColorPicker](https://github.com/visionmedia/uikit/tree/master/lib/components/color-picker) an elegant scalable color picker
-  - [ui.Overlay](https://github.com/visionmedia/uikit/tree/master/lib/components/overlay) an overlay used by `ui.Dialog`
-  - [ui.Dialog](https://github.com/visionmedia/uikit/tree/master/lib/components/dialog) a dialog component sporting optional modal and overlay functionality
-  - [ui.Confirmation](https://github.com/visionmedia/uikit/tree/master/lib/components/confirmation) a confirmation dialog building on `ui.Dialog`
-  - [ui.Notification](https://github.com/visionmedia/uikit/tree/master/lib/components/notification) an unobtrusive growl-like notification
+  - [ui.Emitter](https://github.com/visionmedia/uikit/tree/master/lib/components/emitter/emitter.js) an event emitter used throughout various components
+  - [ui.Card](https://github.com/visionmedia/uikit/tree/master/lib/components/card/card.js) a double-sided "card" powered by 3d transforms
+  - [ui.ColorPicker](https://github.com/visionmedia/uikit/tree/master/lib/components/color-picker/color-picker.js) an elegant scalable color picker
+  - [ui.Overlay](https://github.com/visionmedia/uikit/tree/master/lib/components/overlay/overlay.js) an overlay used by `ui.Dialog`
+  - [ui.Dialog](https://github.com/visionmedia/uikit/tree/master/lib/components/dialog/dialog.js) a dialog component sporting optional modal and overlay functionality
+  - [ui.Confirmation](https://github.com/visionmedia/uikit/tree/master/lib/components/confirmation/confirmation.js) a confirmation dialog building on `ui.Dialog`
+  - [ui.Notification](https://github.com/visionmedia/uikit/tree/master/lib/components/notification/notification.js) an unobtrusive growl-like notification
 
 ## Custom builds
 
