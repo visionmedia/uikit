@@ -5,9 +5,10 @@
 
 ## Components
 
-  - `ui.Emitter` an event emitter used throughout various components
-  - `ui.Card` a double-sided "card" powered by 3d transforms
-  - `ui.ColorPicker` an elegant scalable color picker
-  - `ui.Dialog` a dialog component sporting optional modal and overlay functionality
-  - `ui.Confirmation` a confirmation dialog building on `ui.Dialog`
-  - `ui.Notification` an unobtrusive growl-like notification
+  - [ui.Emitter](https://github.com/visionmedia/uikit/tree/master/lib/components/emitter) an event emitter used throughout various components
+  - [ui.Card](https://github.com/visionmedia/uikit/tree/master/lib/components/card) a double-sided "card" powered by 3d transforms
+  - [ui.ColorPicker](https://github.com/visionmedia/uikit/tree/master/lib/components/color-picker) an elegant scalable color picker
+  - [ui.Overlay](https://github.com/visionmedia/uikit/tree/master/lib/components/overlay) an overlay used by `ui.Dialog`
+  - [ui.Dialog](https://github.com/visionmedia/uikit/tree/master/lib/components/dialog) a dialog component sporting optional modal and overlay functionality
+  - [ui.Confirmation](https://github.com/visionmedia/uikit/tree/master/lib/components/confirmation) a confirmation dialog building on `ui.Dialog`
+  - [ui.Notification](https://github.com/visionmedia/uikit/tree/master/lib/components/notification) an unobtrusive growl-like notification
