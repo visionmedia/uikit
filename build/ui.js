@@ -1002,7 +1002,7 @@ Notification.prototype.type = function(type){
  * @api public
  */
 
-Notification.prototype.stick = function(){
+Notification.prototype.sticky = function(){
   return this.hide(0).closable();
 };
 
