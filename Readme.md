@@ -12,3 +12,13 @@
   - [ui.Dialog](https://github.com/visionmedia/uikit/tree/master/lib/components/dialog) a dialog component sporting optional modal and overlay functionality
   - [ui.Confirmation](https://github.com/visionmedia/uikit/tree/master/lib/components/confirmation) a confirmation dialog building on `ui.Dialog`
   - [ui.Notification](https://github.com/visionmedia/uikit/tree/master/lib/components/notification) an unobtrusive growl-like notification
+
+## Custom builds
+
+  By default all components are included in the build:
+
+  ![UIKit build](http://f.cl.ly/items/0Z040x2E2g2v2E1M2l38/Grab.png)
+
+  You may specify the list of components to build, and their markup, styles, and javascript will be added to `./build/ui.{js,css}`:
+  
+  ![UIKit custom build](http://f.cl.ly/items/1B3C3g293y03372I1q1b/Grab.png)
