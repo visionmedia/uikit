@@ -1,0 +1,86 @@
+body {
+  margin: 0;
+  padding: 20px;
+  font: 14px/1.6 "Helvetica Neue", Helvetica, arial, sans-serif;
+}
+#logo span {
+  color: #888;
+  font-size: 20px;
+  font-weight: 100;
+  letter-spacing: 1px;
+  margin-left: 20px;
+}
+#card {
+  text-align: center;
+  height: 190px;
+}
+#card .wrapper {
+  padding-top: 10px;
+  width: 220px;
+  height: 190px;
+}
+#card .wrapper .front {
+  line-height: 150px;
+}
+#dialog .card p {
+  text-align: center;
+  line-height: 100px;
+  font-weight: bold;
+  font-size: 22px;
+}
+body > section {
+  margin: 30px;
+  width: 350px;
+  border-bottom: 1px solid #ddd;
+}
+body > section:last-of-type {
+  border-bottom: none;
+}
+#logo h1 {
+  display: inline-block;
+  margin: 0;
+  font-weight: bold;
+  font-size: 40px;
+  background: #2BEFFF;
+  color: white;
+  padding: 30px;
+}
+#logo + p {
+  font-weight: 200;
+  font-size: 18px;
+  width: 50%;
+}
+h1 strong {
+  font-weight: 200;
+  font-size: 18px;
+}
+h2 {
+  font-weight: 200;
+  font-size: 24px;
+}
+h2 a {
+  text-decoration: none;
+}
+h3 {
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+}
+a {
+  color: #2B3235;
+}
+a:hover {
+  text-decoration: underline;
+}
+pre code {
+  font: 12px monaco, monospace;
+}
+p code {
+  font-family: monaco, monospace;
+  font-size: .9em;
+  color: #5890AD;
+}
+code .comment { color: #ddd }
+code .init { color: #2F6FAD }
+code .string { color: #5890AD }
+code .keyword { color: #8A6343 }
+code .number { color: #2F6FAD }
