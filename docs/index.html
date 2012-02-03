@@ -10,6 +10,23 @@
     <link rel="stylesheet" href="style.css">
     <script>
       $(function(){
+        var menu = ui.menu()
+          .add('Add item', function(){ console.log('add'); })
+          .add('Edit item', function(){ console.log('edit'); })
+          .add('Remove item', function(){ console.log('remove'); })
+          .add('Remove "Add item"', function(){
+            menu
+              .remove('Add item')
+              .remove('Remove "Add item"');
+          })
+
+        oncontextmenu = function(e){
+          e.preventDefault();
+          menu
+            .moveTo(e.pageX, e.pageY)
+            .show();
+        };
+
         $('#simple-dialog').click(function(){
           new ui.Dialog({ title: 'Title', message: "I'm a simple dialog" })
             .show()

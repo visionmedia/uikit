@@ -5,6 +5,7 @@ COMPONENTS = emitter \
   confirmation \
   color-picker \
   notification \
+  context-menu \
   card
 
 ui:
