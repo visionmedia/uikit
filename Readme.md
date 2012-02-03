@@ -5,9 +5,14 @@
 
 ## Components
 
-  - `ui.Emitter` an event emitter used throughout various components
+  - [ui.Emitter](#emitter) an event emitter used throughout various components
   - `ui.Card` a double-sided "card" powered by 3d transforms
   - `ui.ColorPicker` an elegant scalable color picker
   - `ui.Dialog` a dialog component sporting optional modal and overlay functionality
   - `ui.Confirmation` a confirmation dialog building on `ui.Dialog`
   - `ui.Notification` an unobtrusive growl-like notification
+
+<a name="emitter">
+## ui.Emitter
+
+  An event emitter used throughout various components.
