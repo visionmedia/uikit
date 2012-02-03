@@ -15,7 +15,8 @@
 
 ## Custom builds
 
-  By default all components are included in the build:
+  Each release includes a pre-built `./build` directory containing _ui.js_ and _ui.css_,
+  however if you wish you may re-build with `make`, by default including all components:
 
   ![UIKit build](http://f.cl.ly/items/0Z040x2E2g2v2E1M2l38/Grab.png)
 
