@@ -106,88 +106,6 @@ Emitter.prototype.emit = function(event){
 ;(function(exports, html){
 
 /**
- * Expose `Overlay`.
- */
-
-exports.Overlay = Overlay;
-
-/**
- * Return a new `Overlay` with the given `options`.
- *
- * @param {Object} options
- * @return {Overlay}
- * @api public
- */
-
-exports.overlay = function(options){
-  return new Overlay(options);
-};
-
-/**
- * Initialize a new `Overlay`.
- *
- * @param {Object} options
- * @api public
- */
-
-function Overlay(options) {
-  ui.Emitter.call(this);
-  var self = this;
-  options = options || {};
-  this.closable = options.closable;
-  this.el = $(html);
-  this.el.appendTo('body');
-  if (this.closable) {
-    this.el.click(function(){
-      self.hide();
-    });
-  }
-}
-
-/**
- * Inherit from `Emitter.prototype`.
- */
-
-Overlay.prototype = new ui.Emitter;
-
-/**
- * Show the overlay.
- *
- * Emits "show" event.
- *
- * @return {Overlay} for chaining
- * @api public
- */
-
-Overlay.prototype.show = function(){
-  this.emit('show');
-  this.el.removeClass('hide');
-  return this;
-};
-
-/**
- * Hide the overlay.
- *
- * Emits "hide" event.
- *
- * @return {Overlay} for chaining
- * @api public
- */
-
-Overlay.prototype.hide = function(){
-  var self = this;
-  this.emit('hide');
-  this.el.addClass('hide');
-  setTimeout(function(){
-    self.el.remove();
-  }, 2000);
-  return this;
-};
-
-})(ui, "<div id=\"overlay\" class=\"hide\"></div>");
-;(function(exports, html){
-
-/**
  * Active dialog.
  */
 
@@ -409,3 +327,1057 @@ Dialog.prototype.remove = function(){
 };
 
 })(ui, "<div id=\"dialog\" class=\"hide\">\n  <div class=\"content\">\n    <h1>Title</h1>\n    <a href=\"#\" class=\"close\">×</a>\n    <p>Message</p>\n  </div>\n</div>");
+;(function(exports, html){
+
+/**
+ * Expose `Overlay`.
+ */
+
+exports.Overlay = Overlay;
+
+/**
+ * Return a new `Overlay` with the given `options`.
+ *
+ * @param {Object} options
+ * @return {Overlay}
+ * @api public
+ */
+
+exports.overlay = function(options){
+  return new Overlay(options);
+};
+
+/**
+ * Initialize a new `Overlay`.
+ *
+ * @param {Object} options
+ * @api public
+ */
+
+function Overlay(options) {
+  ui.Emitter.call(this);
+  var self = this;
+  options = options || {};
+  this.closable = options.closable;
+  this.el = $(html);
+  this.el.appendTo('body');
+  if (this.closable) {
+    this.el.click(function(){
+      self.hide();
+    });
+  }
+}
+
+/**
+ * Inherit from `Emitter.prototype`.
+ */
+
+Overlay.prototype = new ui.Emitter;
+
+/**
+ * Show the overlay.
+ *
+ * Emits "show" event.
+ *
+ * @return {Overlay} for chaining
+ * @api public
+ */
+
+Overlay.prototype.show = function(){
+  this.emit('show');
+  this.el.removeClass('hide');
+  return this;
+};
+
+/**
+ * Hide the overlay.
+ *
+ * Emits "hide" event.
+ *
+ * @return {Overlay} for chaining
+ * @api public
+ */
+
+Overlay.prototype.hide = function(){
+  var self = this;
+  this.emit('hide');
+  this.el.addClass('hide');
+  setTimeout(function(){
+    self.el.remove();
+  }, 2000);
+  return this;
+};
+
+})(ui, "<div id=\"overlay\" class=\"hide\"></div>");
+;(function(exports, html){
+
+/**
+ * Expose `Confirmation`.
+ */
+
+exports.Confirmation = Confirmation;
+
+/**
+ * Return a new `Confirmation` dialog with the given 
+ * `title` and `msg`.
+ *
+ * @param {String} title or msg
+ * @param {String} msg
+ * @return {Dialog}
+ * @api public
+ */
+
+exports.confirm = function(title, msg){
+  switch (arguments.length) {
+    case 2:
+      return new Confirmation({ title: title, message: msg });
+    case 1:
+      return new Confirmation({ message: title });
+  }
+};
+
+/**
+ * Initialize a new `Confirmation` dialog.
+ *
+ * Options:
+ *
+ *    - `title` dialog title
+ *    - `message` a message to display
+ *
+ * @param {Object} options
+ * @api public
+ */
+
+function Confirmation(options) {
+  ui.Dialog.call(this, options);
+};
+
+/**
+ * Inherit from `Dialog.prototype`.
+ */
+
+Confirmation.prototype = new ui.Dialog;
+
+/**
+ * Change "cancel" button `text`.
+ *
+ * @param {String} text
+ * @return {Confirmation}
+ * @api public
+ */
+
+Confirmation.prototype.cancel = function(text){
+  this.el.find('.cancel').text(text);
+  return this;
+};
+
+/**
+ * Change "ok" button `text`.
+ *
+ * @param {String} text
+ * @return {Confirmation}
+ * @api public
+ */
+
+Confirmation.prototype.ok = function(text){
+  this.el.find('.ok').text(text);
+  return this;
+};
+
+/**
+ * Show the confirmation dialog and invoke `fn(ok)`.
+ *
+ * @param {Function} fn
+ * @return {Confirmation} for chaining
+ * @api public
+ */
+
+Confirmation.prototype.show = function(fn){
+  ui.Dialog.prototype.show.call(this);
+  this.callback = fn || function(){};
+  return this;
+};
+
+/**
+ * Render with the given `options`.
+ *
+ * Emits "cancel" event.
+ * Emits "ok" event.
+ *
+ * @param {Object} options
+ * @api public
+ */
+
+Confirmation.prototype.render = function(options){
+  ui.Dialog.prototype.render.call(this, options);
+  var self = this
+    , actions = $(html);
+
+  this.el.addClass('confirmation');
+  this.el.append(actions);
+
+  this.on('close', function(){
+    self.emit('cancel');
+    self.callback(false);
+  });
+
+  actions.find('.cancel').click(function(){
+    self.emit('cancel');
+    self.callback(false);
+    self.hide();
+  });
+
+  actions.find('.ok').click(function(){
+    self.emit('ok');
+    self.callback(true);
+    self.hide();
+  });
+};
+
+})(ui, "<div class=\"actions\">\n  <button class=\"cancel\">Cancel</button>\n  <button class=\"ok main\">Ok</button>\n</div>");
+;(function(exports, html){
+
+/**
+ * Expose `ColorPicker`.
+ */
+
+exports.ColorPicker = ColorPicker;
+
+/**
+ * RGB util.
+ */
+
+function rgb(r,g,b) {
+  return 'rgb(' + r + ', ' + g + ', ' + b + ')';
+}
+
+/**
+ * RGBA util.
+ */
+
+function rgba(r,g,b,a) {
+  return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + a + ')';
+}
+
+/**
+ * Initialize a new `ColorPicker`.
+ *
+ * @param {Type} name
+ * @return {Type}
+ * @api public
+ */
+
+function ColorPicker() {
+  ui.Emitter.call(this);
+  this._colorPos = {};
+  this.template = html;
+  this.el = $(this.template);
+  this.main = this.el.find('.main').get(0);
+  this.spectrum = this.el.find('.spectrum').get(0);
+  $(this.main).bind('selectstart', function(e){ e.preventDefault() });
+  $(this.spectrum).bind('selectstart', function(e){ e.preventDefault() });
+  this.hue(rgb(255, 0, 0));
+  this.spectrumEvents();
+  this.mainEvents();
+  this.w = 180;
+  this.h = 180;
+  this.render();
+}
+
+/**
+ * Inherit from `Emitter.prototype`.
+ */
+
+ColorPicker.prototype = new ui.Emitter;
+
+/**
+ * Set width / height to `n`.
+ *
+ * @param {Number} n
+ * @return {ColorPicker} for chaining
+ * @api public
+ */
+
+ColorPicker.prototype.size = function(n){
+  return this
+    .width(n)
+    .height(n);
+};
+
+/**
+ * Set width to `n`.
+ *
+ * @param {Number} n
+ * @return {ColorPicker} for chaining
+ * @api public
+ */
+
+ColorPicker.prototype.width = function(n){
+  this.w = n;
+  this.render();
+  return this;
+};
+
+/**
+ * Set height to `n`.
+ *
+ * @param {Number} n
+ * @return {ColorPicker} for chaining
+ * @api public
+ */
+
+ColorPicker.prototype.height = function(n){
+  this.h = n;
+  this.render();
+  return this;
+};
+
+/**
+ * Spectrum related events.
+ *
+ * @api private
+ */
+
+ColorPicker.prototype.spectrumEvents = function(){
+  var self = this
+    , canvas = $(this.spectrum)
+    , down;
+
+  function update(e) {
+    var color = self.hueAt(e.offsetY);
+    self.hue(color.toString());
+    self.emit('change', color);
+    self._huePos = e.offsetY;
+    self.render();
+  }
+
+  canvas.mousedown(function(e){
+    down = true;
+    update(e);
+  });
+
+  canvas.mousemove(function(e){
+    if (down) update(e);
+  });
+
+  canvas.mouseup(function(){
+    down = false;
+  });
+};
+
+/**
+ * Hue / lightness events.
+ *
+ * @api private
+ */
+
+ColorPicker.prototype.mainEvents = function(){
+  var self = this
+    , canvas = $(this.main)
+    , down;
+
+  function update(e) {
+    var color = self.colorAt(e.offsetX, e.offsetY);
+    self.color(color.toString());
+    self.emit('change', color);
+    self._colorPos = e;
+    self.render();
+  }
+
+  canvas.mousedown(function(e){
+    down = true;
+    update(e);
+  });
+
+  canvas.mousemove(function(e){
+    if (down) update(e);
+  });
+
+  canvas.mouseup(function(){
+    down = false;
+  });
+};
+
+/**
+ * Get the RGB color at `(x, y)`.
+ *
+ * @param {Number} x
+ * @param {Number} y
+ * @return {Object}
+ * @api private
+ */
+
+ColorPicker.prototype.colorAt = function(x, y){
+  var data = this.main.getContext('2d').getImageData(x, y, 1, 1).data;
+  return {
+      r: data[0]
+    , g: data[1]
+    , b: data[2]
+    , toString: function(){
+      return rgb(this.r, this.g, this.b);
+    }
+  };
+};
+
+/**
+ * Get the RGB value at `y`. 
+ *
+ * @param {Type} name
+ * @return {Type}
+ * @api private
+ */
+
+ColorPicker.prototype.hueAt = function(y){
+  var data = this.spectrum.getContext('2d').getImageData(0, y, 1, 1).data;
+  return {
+      r: data[0]
+    , g: data[1]
+    , b: data[2]
+    , toString: function(){
+      return rgb(this.r, this.g, this.b);
+    }
+  };
+};
+
+/**
+ * Get or set `color`.
+ *
+ * @param {String} color
+ * @return {String|ColorPicker}
+ * @api public
+ */
+
+ColorPicker.prototype.color = function(color){
+  // TODO: update pos
+  if (0 == arguments.length) return this._color;
+  this._color = color;
+  return this;
+};
+
+/**
+ * Get or set hue `color`.
+ *
+ * @param {String} color
+ * @return {String|ColorPicker}
+ * @api public
+ */
+
+ColorPicker.prototype.hue = function(color){
+  // TODO: update pos
+  if (0 == arguments.length) return this._hue;
+  this._hue = color;
+  return this;
+};
+
+/**
+ * Render with the given `options`.
+ *
+ * @param {Object} options
+ * @api public
+ */
+
+ColorPicker.prototype.render = function(options){
+  options = options || {};
+  this.renderMain(options);
+  this.renderSpectrum(options);
+};
+
+/**
+ * Render spectrum.
+ *
+ * @api private
+ */
+
+ColorPicker.prototype.renderSpectrum = function(options){
+  var el = this.el
+    , canvas = this.spectrum
+    , ctx = canvas.getContext('2d')
+    , pos = this._huePos
+    , w = this.w * .12
+    , h = this.h;
+
+  canvas.width = w;
+  canvas.height = h;
+
+  var grad = ctx.createLinearGradient(0, 0, 0, h);
+  grad.addColorStop(0, rgb(255, 0, 0));
+  grad.addColorStop(.15, rgb(255, 0, 255));
+  grad.addColorStop(.33, rgb(0, 0, 255));
+  grad.addColorStop(.49, rgb(0, 255, 255));
+  grad.addColorStop(.67, rgb(0, 255, 0));
+  grad.addColorStop(.84, rgb(255, 255, 0));
+  grad.addColorStop(1, rgb(255, 0, 0));
+
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, w, h);
+
+  // pos
+  if (!pos) return;
+  ctx.fillStyle = rgba(0,0,0, .3);
+  ctx.fillRect(0, pos, w, 1);
+  ctx.fillStyle = rgba(255,255,255, .3);
+  ctx.fillRect(0, pos + 1, w, 1);
+};
+
+/**
+ * Render hue/luminosity canvas.
+ *
+ * @api private
+ */
+
+ColorPicker.prototype.renderMain = function(options){
+  var el = this.el
+    , canvas = this.main
+    , ctx = canvas.getContext('2d')
+    , w = this.w
+    , h = this.h
+    , x = (this._colorPos.offsetX || w) + .5
+    , y = (this._colorPos.offsetY || 0) + .5;
+
+  canvas.width = w;
+  canvas.height = h;
+
+  var grad = ctx.createLinearGradient(0, 0, w, 0);
+  grad.addColorStop(0, rgb(255, 255, 255));
+  grad.addColorStop(1, this._hue);
+
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, w, h);
+
+  grad = ctx.createLinearGradient(0, 0, 0, h);
+  grad.addColorStop(0, rgba(255, 255, 255, 0));
+  grad.addColorStop(1, rgba(0, 0, 0, 1));
+
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, w, h);
+
+  // pos
+  var rad = 10;
+  ctx.save();
+  ctx.beginPath();
+  ctx.lineWidth = 1;
+
+  // outer dark
+  ctx.strokeStyle = rgba(0,0,0,.5);
+  ctx.arc(x, y, rad / 2, 0, Math.PI * 2, false);
+  ctx.stroke();
+
+  // outer light
+  ctx.strokeStyle = rgba(255,255,255,.5);
+  ctx.arc(x, y, rad / 2 - 1, 0, Math.PI * 2, false);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.restore();
+};
+})(ui, "<div class=\"color-picker\">\n  <canvas class=\"main\"></canvas>\n  <canvas class=\"spectrum\"></canvas>\n</div>");
+;(function(exports, html){
+
+/**
+ * Notification list.
+ */
+
+var list;
+
+/**
+ * Expose `Notification`.
+ */
+
+exports.Notification = Notification;
+
+// list
+
+$(function(){
+  list = $('<ul id="notifications">');
+  list.appendTo('body');
+})
+
+/**
+ * Return a new `Notification` with the given 
+ * (optional) `title` and `msg`.
+ *
+ * @param {String} title or msg
+ * @param {String} msg
+ * @return {Dialog}
+ * @api public
+ */
+
+exports.notify = function(title, msg){
+  switch (arguments.length) {
+    case 2:
+      return new Notification({ title: title, message: msg })
+        .show()
+        .hide(4000);
+    case 1:
+      return new Notification({ message: title })
+        .show()
+        .hide(4000);
+  }
+};
+
+/**
+ * Construct a notification function for `type`.
+ *
+ * @param {String} type
+ * @return {Function}
+ * @api private
+ */
+
+function type(type) {
+  return function(title, msg){
+    return exports.notify.apply(this, arguments)
+      .type(type);
+  }
+}
+
+/**
+ * Notification methods.
+ */
+
+exports.info = exports.notify;
+exports.warn = type('warn');
+exports.error = type('error');
+
+/**
+ * Initialize a new `Notification`.
+ *
+ * Options:
+ *
+ *    - `title` dialog title
+ *    - `message` a message to display
+ *
+ * @param {Object} options
+ * @api public
+ */
+
+function Notification(options) {
+  options = options || {};
+  this.template = html;
+  this.el = $(this.template);
+  this.render(options);
+  if (Notification.effect) this.effect(Notification.effect);
+};
+
+
+/**
+ * Render with the given `options`.
+ *
+ * @param {Object} options
+ * @api public
+ */
+
+Notification.prototype.render = function(options){
+  var el = this.el
+    , title = options.title
+    , msg = options.message
+    , self = this;
+
+  el.find('.close').click(function(){
+    self.hide();
+    return false;
+  });
+
+  el.find('h1').text(title);
+  if (!title) el.find('h1').remove();
+
+  // message
+  if ('string' == typeof msg) {
+    el.find('p').text(msg);
+  } else if (msg) {
+    el.find('p').replaceWith(msg.el || msg);
+  }
+
+  setTimeout(function(){
+    el.removeClass('hide');
+  }, 0);
+};
+
+/**
+ * Enable the dialog close link.
+ *
+ * @return {Notification} for chaining
+ * @api public
+ */
+
+Notification.prototype.closable = function(){
+  this.el.addClass('closable');
+  return this;
+};
+
+/**
+ * Set the effect to `type`.
+ *
+ * @param {String} type
+ * @return {Notification} for chaining
+ * @api public
+ */
+
+Notification.prototype.effect = function(type){
+  this._effect = type;
+  this.el.addClass(type);
+  return this;
+};
+
+/**
+ * Show the notification.
+ *
+ * @return {Notification} for chaining
+ * @api public
+ */
+
+Notification.prototype.show = function(){
+  this.el.appendTo(list);
+  return this;
+};
+
+/**
+ * Set the notification `type`.
+ *
+ * @param {String} type
+ * @return {Notification} for chaining
+ * @api public
+ */
+
+Notification.prototype.type = function(type){
+  this._type = type;
+  this.el.addClass(type);
+  return this;
+};
+
+/**
+ * Make it stick (clear hide timer), and make it closable.
+ *
+ * @return {Notification} for chaining
+ * @api public
+ */
+
+Notification.prototype.sticky = function(){
+  return this.hide(0).closable();
+};
+
+/**
+ * Hide the dialog with optional delay of `ms`,
+ * otherwise the notification is removed immediately.
+ *
+ * @return {Number} ms
+ * @return {Notification} for chaining
+ * @api public
+ */
+
+Notification.prototype.hide = function(ms){
+  var self = this;
+
+  // duration
+  if ('number' == typeof ms) {
+    clearTimeout(this.timer);
+    if (!ms) return this;
+    this.timer = setTimeout(function(){
+      self.hide();
+    }, ms);
+    return this;
+  }
+
+  // hide / remove
+  this.el.addClass('hide');
+  if (this._effect) {
+    setTimeout(function(self){
+      self.remove();
+    }, 500, this);
+  } else {
+    self.remove();
+  }
+
+  return this;
+};
+
+/**
+ * Hide the notification without potential animation.
+ *
+ * @return {Dialog} for chaining
+ * @api public
+ */
+
+Notification.prototype.remove = function(){
+  this.el.remove();
+  return this;
+};
+})(ui, "<li class=\"notification hide\">\n  <div class=\"content\">\n    <h1>Title</h1>\n    <a href=\"#\" class=\"close\">×</a>\n    <p>Message</p>\n  </div>\n</li>");
+;(function(exports, html){
+
+/**
+ * Expose `ContextMenu`.
+ */
+
+exports.ContextMenu = ContextMenu;
+
+/**
+ * Create a new `ContextMenu`.
+ *
+ * @return {ContextMenu}
+ * @api public
+ */
+
+exports.menu = function(){
+  return new ContextMenu;
+};
+
+/**
+ * Initialize a new `ContextMenu` with content
+ * for face `front` and `back`.
+ *
+ * Emits "flip" event.
+ *
+ * @param {Mixed} front
+ * @param {Mixed} back
+ * @api public
+ */
+
+function ContextMenu(front, back) {
+  var self = this;
+  ui.Emitter.call(this);
+  this.items = {};
+  this.el = $(html).appendTo('body');
+  $('html').click(function(){
+    self.hide();
+  });
+};
+
+/**
+ * Inherit from `Emitter.prototype`.
+ */
+
+ContextMenu.prototype = new ui.Emitter;
+
+/**
+ * Add menu item with the given `text` and callback `fn`.
+ *
+ * When the item is clicked `fn()` will be invoked
+ * and the `ContextMenu` is immediately closed. 
+ *
+ * @param {String} text
+ * @param {Function} fn
+ * @return {ContextMenu}
+ * @api public
+ */
+
+ContextMenu.prototype.add = function(text, fn){
+  if (1 == arguments.length) return this.items[text];
+  var self = this
+    , el = $('<li><a href="#">' + text + '</a></li>')
+    .addClass(slug(text))
+    .appendTo(this.el)
+    .click(function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      self.hide();
+      fn();
+    });
+
+  this.items[text] = el;
+  return this;
+};
+
+/**
+ * Remove menu item with the given `text`.
+ *
+ * @param {String} text
+ * @return {ContextMenu}
+ * @api public
+ */
+
+ContextMenu.prototype.remove = function(text){
+  var item = this.items[text];
+  if (!item) throw new Error('no menu item named "' + text + '"');
+  item.remove();
+  delete this.items[text];
+  return this;
+};
+
+/**
+ * Check if this menu has an item with the given `text`.
+ *
+ * @param {String} text
+ * @return {Boolean}
+ * @api public
+ */
+
+ContextMenu.prototype.has = function(text){
+  return !! this.items[text];
+};
+
+/**
+ * Move context menu to `(x, y)`.
+ *
+ * @param {Number} x
+ * @param {Number} y
+ * @return {ContextMenu}
+ * @api public
+ */
+
+ContextMenu.prototype.moveTo = function(x, y){
+  this.el.css({
+    top: y,
+    left: x
+  });
+  return this;
+};
+
+/**
+ * Show the menu.
+ *
+ * @return {ContextMenu}
+ * @api public
+ */
+
+ContextMenu.prototype.show = function(){
+  this.emit('show');
+  this.el.show();
+  return this;
+};
+
+/**
+ * Hide the menu.
+ *
+ * @return {ContextMenu}
+ * @api public
+ */
+
+ContextMenu.prototype.hide = function(){
+  this.emit('hide');
+  this.el.hide();
+  return this;
+};
+
+/**
+ * Generate a slug from `str`.
+ *
+ * @param {String} str
+ * @return {String}
+ * @api private
+ */
+
+function slug(str) {
+  return str
+    .toLowerCase()
+    .replace(/ +/g, '-')
+    .replace(/[^a-z0-9-]/g, '');
+}
+
+})(ui, "<div id=\"context-menu\">\n</div>");
+;(function(exports, html){
+
+/**
+ * Expose `Card`.
+ */
+
+exports.Card = Card;
+
+/**
+ * Create a new `Card`.
+ *
+ * @param {Mixed} front
+ * @param {Mixed} back
+ * @return {Card}
+ * @api public
+ */
+
+exports.card = function(front, back){
+  return new Card(front, back);
+};
+
+/**
+ * Initialize a new `Card` with content
+ * for face `front` and `back`.
+ *
+ * Emits "flip" event.
+ *
+ * @param {Mixed} front
+ * @param {Mixed} back
+ * @api public
+ */
+
+function Card(front, back) {
+  ui.Emitter.call(this);
+  this._front = front || $('<p>front</p>');
+  this._back = back  || $('<p>back</p>');
+  this.template = html;
+  this.render();
+};
+
+/**
+ * Inherit from `Emitter.prototype`.
+ */
+
+Card.prototype = new ui.Emitter;
+
+/**
+ * Set front face `val`.
+ *
+ * @param {Mixed} val
+ * @return {Card}
+ * @api public
+ */
+
+Card.prototype.front = function(val){
+  this._front = val;
+  this.render();
+  return this;
+};
+
+/**
+ * Set back face `val`.
+ *
+ * @param {Mixed} val
+ * @return {Card}
+ * @api public
+ */
+
+Card.prototype.back = function(val){
+  this._back = val;
+  this.render();
+  return this;
+};
+
+/**
+ * Flip the card.
+ *
+ * @return {Card} for chaining
+ * @api public
+ */
+
+Card.prototype.flip = function(){
+  this.emit('flip');
+  this.el.toggleClass('flipped');
+  return this;
+};
+
+/**
+ * Set the effect to `type`.
+ *
+ * @param {String} type
+ * @return {Dialog} for chaining
+ * @api public
+ */
+
+Card.prototype.effect = function(type){
+  this.el.addClass(type);
+  return this;
+};
+
+/**
+ * Render with the given `options`.
+ *
+ * @param {Object} options
+ * @api public
+ */
+
+Card.prototype.render = function(options){
+  var self = this
+    , el = this.el = $(this.template);
+  el.find('.front').empty().append(this._front.el || $(this._front));
+  el.find('.back').empty().append(this._back.el || $(this._back));
+  el.click(function(){
+    self.flip();
+  });
+};
+})(ui, "<div class=\"card\">\n  <div class=\"wrapper\">\n    <div class=\"face front\">1</div>\n    <div class=\"face back\">2</div>\n  </div>\n</div>");

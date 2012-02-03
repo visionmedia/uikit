@@ -1,19 +1,4 @@
-#overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  opacity: 1;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,.75);
-  -webkit-transition: opacity 300ms;
-  z-index: 500;
-}
-
-#overlay.hide {
-  pointer-events: none;
-  opacity: 0;
-}#dialog {
+#dialog {
   position: fixed;
   left: 50%;
   top: 150px;
@@ -132,4 +117,213 @@
 
 #dialog.scale.hide {
   -webkit-transform: scale(0);
+}#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.75);
+  -webkit-transition: opacity 300ms;
+  z-index: 500;
+}
+
+#overlay.hide {
+  pointer-events: none;
+  opacity: 0;
+}.confirmation .actions {
+  border-top: 1px solid #eee;
+  padding: 5px;
+  text-align: right;
+  background: #fafafa;
+  -webkit-box-shadow: inset 0 1px 0 white;
+}.color-picker canvas {
+  border: 1px solid #888;
+  cursor: crosshair;
+}
+
+#notifications {
+  position: fixed;
+  top: 10px;
+  right: 15px;
+}
+
+#notifications li {
+  margin-bottom: 5px;
+  list-style: none;
+}
+
+.notification {
+  position: relative;
+  max-width: 600px;
+  min-width: 250px;
+  border: 1px solid #eee;
+  border-bottom-color: #cacaca;
+  -webkit-border-radius: 3px;
+  -webkit-box-shadow: 0 1px 4px 0 #ddd;
+  background: white;
+  z-index: 100;
+}
+
+.notification .content {
+  padding: 15px 20px;
+}
+
+.notification h1 {
+  margin: 0 0 5px 0;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.notification p {
+  margin: 0;
+  padding: 0;
+  font-size: .9em;
+}
+
+.notification .close {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  text-decoration: none;
+  color: #888;
+  display: none;
+}
+
+.notification.closable .close {
+  display: block;
+}
+
+.notification .close:hover {
+  color: black;
+}
+
+.notification .close:active {
+  margin-top: 1px;
+}
+
+/* close */
+
+.notification .close {
+  position: absolute;
+  top: 3px;
+  right: 10px;
+  text-decoration: none;
+  color: #888;
+  font-size: 16px;
+  font-weight: bold;
+  display: none;
+}
+
+/* slide */
+
+.notification.slide {
+  -webkit-transition: opacity 300ms, top 300ms;
+}
+
+.notification.slide.hide {
+  opacity: 0;
+  top: -500px;
+}
+
+/* fade */
+
+.notification.fade {
+  -webkit-transition: opacity 300ms;
+}
+
+.notification.fade.hide {
+  opacity: 0;
+}
+
+/* scale */
+
+.notification.scale {
+  -webkit-transition: -webkit-transform 300ms;
+  -webkit-transform: scale(1);
+}
+
+.notification.scale.hide {
+  -webkit-transform: scale(0);
+}#context-menu {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  margin: 0;
+  padding: 0;
+  background: white;
+  -webkit-border-radius: 5px;
+  font-size: 12px;
+  border: 1px solid rgba(0,0,0,0.2);
+  -webkit-box-shadow: 0 10px 30px 0 rgba(0,0,0,0.1), 0 2px 6px 0 rgba(0,0,0,0.2);
+}
+
+#context-menu li {
+  list-style: none;
+}
+
+#context-menu li a {
+  display: block;
+  padding: 5px 30px 5px 12px;
+  text-decoration: none;
+  border-top: 1px solid #eee;
+  color: #2e2e2e;
+}
+
+#context-menu li:first-child a {
+  border-top: none;
+}
+
+#context-menu li a:hover {
+  background: #f1faff;
+}
+
+/* from: http://desandro.github.com/3d-webkit-transforms */
+
+.card {
+  width: 200px;
+  height: 260px;
+  position: relative;
+  -webkit-perspective: 800;
+}
+
+.card .wrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  -webkit-transform-style: preserve-3d;
+  -webkit-transition: -webkit-transform 500ms ease-in-out;
+  border: 1px solid #eee;
+  border-bottom-color: #cacaca;
+  -webkit-border-radius: 3px;
+  -webkit-box-shadow: inset 0 -1px 0 0 white, 0 1px 4px 0 #ddd;
+}
+
+.card .face {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+}
+
+.card .back {
+  -webkit-transform: rotateY(180deg);
+}
+
+.card.flipped .wrapper {
+  -webkit-transform: rotateY(180deg);
+}
+
+/* sideflip effect */
+
+.card.sideflip .wrapper {
+  -webkit-transform-origin: right center;
+}
+
+.card.sideflip.flipped .wrapper {
+  -webkit-transform: translateX(-100%) rotateY(180deg);
 }
