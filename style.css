@@ -1,7 +1,9 @@
 body {
   margin: 0;
-  padding: 20px;
   font: 14px/1.6 "Helvetica Neue", Helvetica, arial, sans-serif;
+}
+#wrapper {
+  padding: 100px;
 }
 #logo span {
   color: #888;
@@ -28,12 +30,12 @@ body {
   font-weight: bold;
   font-size: 22px;
 }
-body > section {
-  margin: 30px;
+#wrapper > section {
+  margin: 30px 0;
   width: 350px;
   border-bottom: 1px solid #ddd;
 }
-body > section:last-of-type {
+#wrapper > section:last-of-type {
   border-bottom: none;
 }
 #logo h1 {
@@ -48,7 +50,7 @@ body > section:last-of-type {
 #logo + p {
   font-weight: 200;
   font-size: 18px;
-  width: 50%;
+  width: 60%;
 }
 h1 strong {
   font-weight: 200;
