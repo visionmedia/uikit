@@ -74,6 +74,11 @@ a:hover {
 pre code {
   font: 12px monaco, monospace;
 }
+p code {
+  font-family: monaco, monospace;
+  font-size: .9em;
+  color: #5890AD;
+}
 code .comment { color: #ddd }
 code .init { color: #2F6FAD }
 code .string { color: #5890AD }
