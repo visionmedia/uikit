@@ -515,12 +515,12 @@ emitter.emit('event', foo, bar, baz);</code></pre>
       </section>
 
       <section>
-        <h2 id="context-menu-section"><a href="#">ContextMenu</a></h2>
-        <p>Simple context menu component.</p>
+        <h2 id="menu-section"><a href="#">Menu</a></h2>
+        <p>Simple menu component.</p>
 
         <section>
           <h3>Example</h3>
-          <p>A <code>ContextMenu</code> is comprised of textual menu items and arbitrary callback functions. To add an item invoke <code>ContextMenu#add()</code>, and to remove pass the same text to <code>ContextMenu#remove()</code>. Give it a try! right click on this page.</p>
+          <p>A <code>Menu</code> is comprised of textual menu items and optional arbitrary callback functions. To add an item invoke <code>Menu#add()</code>, and to remove pass the same text to <code>Menu#remove()</code>. Give it a try! right click on this page.</p>
 
           <pre><code>var menu = ui.menu()
 .add('Add item', function(){ console.log('add'); })
