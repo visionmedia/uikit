@@ -219,6 +219,22 @@
       <p>UIKit is a small collection of flexible, decoupled jQuery JavaScript components for the modern web. With an emphasis on structure-only styling making it it simple to apply application specific styling.</p>
 
       <section>
+        <h2 id="emitter-section"><a href="#">Emitter</a></h2>
+        <p>The event Emitter is used by many of the components to emit events like "hide" and "show" among others, but it's public API! so you're free to use it in your projects.</p>
+
+        <section>
+          <h3>API</h3>
+          <p>Currently the Emitter API is defined as following:</p>
+        <pre><code>var emitter = new ui.Emitter;
+emitter.on('event', callback);
+emitter.once('event', callback);
+emitter.off('event', callback);
+emitter.off('event');
+emitter.emit('event', foo, bar, baz);</code></pre>
+        </section>
+      </section>
+
+      <section>
         <h2 id="dialog-section"><a href="#">Dialog</a></h2>
         <p>The Dialog component is the basis of more specific components
         such the Confirmation Dialog.</p>
