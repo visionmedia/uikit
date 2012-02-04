@@ -644,7 +644,7 @@ ColorPicker.prototype.spectrumEvents = function(){
     , down;
 
   function update(e) {
-    var color = self.hueAt(e.offsetY);
+    var color = self.hueAt(e.offsetY - 4);
     self.hue(color.toString());
     self.emit('change', color);
     self._huePos = e.offsetY;
@@ -1381,3 +1381,15 @@ Card.prototype.render = function(options){
   });
 };
 })(ui, "<div class=\"card\">\n  <div class=\"wrapper\">\n    <div class=\"face front\">1</div>\n    <div class=\"face back\">2</div>\n  </div>\n</div>");
+;(function(exports){
+var Test;
+Test = (function() {
+  var name;
+  function Test() {}
+  name = "hysios";
+  Test.prototype.foo = function() {
+    return console.log(this.name);
+  };
+  return Test;
+})();
+})(ui);

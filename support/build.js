@@ -6,7 +6,8 @@
  */
 
 var fs = require('fs')
-  , path = require('path');
+  , path = require('path')
+  , coffee = require('coffee-script');
 
 // lib dir
 
@@ -44,6 +45,10 @@ process.on('exit', function(){
 function build(name, fn) {
   // javascript
   var js = path.join(lib, name, name + '.js');
+  if (!path.existsSync(js))
+    js = path.join(lib, name, name + '.coffee');
+
+    
   read(js, function(js){
 
     // with template
@@ -104,6 +109,13 @@ function append(file, str, fn) {
 function read(file, fn) {
   fs.readFile(file, 'utf8', function(err, str){
     if (err) throw err;
+    if (/.coffee$/.test(file))
+      str = coffee.compile(str, { bare: true});
+
     fn(str);
   });
+}
+
+function read_js_or_coffee(file, fn){
+  
 }

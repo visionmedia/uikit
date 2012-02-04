@@ -4,7 +4,9 @@
   , "description": "JavaScript + CSS UI components"
   , "keywords": []
   , "author": "TJ Holowaychuk <tj@vision-media.ca>"
-  , "dependencies": {}
+  , "dependencies": {
+  	"coffee-script": "~> 0.0.1"
+  }
   , "main": "index"
   , "engines": { "node": "0.4.x" }
 }

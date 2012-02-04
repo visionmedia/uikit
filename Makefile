@@ -6,7 +6,8 @@ COMPONENTS = emitter \
   color-picker \
   notification \
   context-menu \
-  card
+  card \
+  test
 
 ui:
 	@rm -fr build
