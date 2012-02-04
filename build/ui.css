@@ -220,7 +220,7 @@
 .notification.scale.hide {
   -webkit-transform: scale(0);
   -moz-transform: scale(0);
-}#context-menu {
+}.menu {
   display: none;
   position: absolute;
   top: 0;
@@ -232,11 +232,11 @@
   border: 1px solid rgba(0,0,0,0.2);
 }
 
-#context-menu li {
+.menu li {
   list-style: none;
 }
 
-#context-menu li a {
+.menu li a {
   display: block;
   padding: 5px 30px 5px 12px;
   text-decoration: none;
@@ -244,11 +244,11 @@
   color: #2e2e2e;
 }
 
-#context-menu li:first-child a {
+.menu li:first-child a {
   border-top: none;
 }
 
-#context-menu li a:hover {
+.menu li a:hover {
   background: #f1faff;
 }
 

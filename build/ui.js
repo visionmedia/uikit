@@ -1105,62 +1105,61 @@ Notification.prototype.remove = function(){
 ;(function(exports, html){
 
 /**
- * Expose `ContextMenu`.
+ * Expose `Menu`.
  */
 
-exports.ContextMenu = ContextMenu;
+exports.Menu = Menu;
 
 /**
- * Create a new `ContextMenu`.
+ * Create a new `Menu`.
  *
- * @return {ContextMenu}
+ * @return {Menu}
  * @api public
  */
 
 exports.menu = function(){
-  return new ContextMenu;
+  return new Menu;
 };
 
 /**
- * Initialize a new `ContextMenu` with content
- * for face `front` and `back`.
+ * Initialize a new `Menu`.
  *
- * Emits "flip" event.
+ * Emits:
  *
- * @param {Mixed} front
- * @param {Mixed} back
+ *   - "show" when shown
+ *   - "hide" when hidden
+ *   - "remove" with the item name when an item is removed
+ *
  * @api public
  */
 
-function ContextMenu(front, back) {
+function Menu() {
   var self = this;
   ui.Emitter.call(this);
   this.items = {};
   this.el = $(html).appendTo('body');
-  $('html').click(function(){
-    self.hide();
-  });
+  $('html').click(function(){ self.hide(); });
 };
 
 /**
  * Inherit from `Emitter.prototype`.
  */
 
-ContextMenu.prototype = new ui.Emitter;
+Menu.prototype = new ui.Emitter;
 
 /**
  * Add menu item with the given `text` and callback `fn`.
  *
  * When the item is clicked `fn()` will be invoked
- * and the `ContextMenu` is immediately closed. 
+ * and the `Menu` is immediately closed. 
  *
  * @param {String} text
  * @param {Function} fn
- * @return {ContextMenu}
+ * @return {Menu}
  * @api public
  */
 
-ContextMenu.prototype.add = function(text, fn){
+Menu.prototype.add = function(text, fn){
   if (1 == arguments.length) return this.items[text];
   var self = this
     , el = $('<li><a href="#">' + text + '</a></li>')
@@ -1181,13 +1180,14 @@ ContextMenu.prototype.add = function(text, fn){
  * Remove menu item with the given `text`.
  *
  * @param {String} text
- * @return {ContextMenu}
+ * @return {Menu}
  * @api public
  */
 
-ContextMenu.prototype.remove = function(text){
+Menu.prototype.remove = function(text){
   var item = this.items[text];
   if (!item) throw new Error('no menu item named "' + text + '"');
+  this.emit('remove', text);
   item.remove();
   delete this.items[text];
   return this;
@@ -1201,7 +1201,7 @@ ContextMenu.prototype.remove = function(text){
  * @api public
  */
 
-ContextMenu.prototype.has = function(text){
+Menu.prototype.has = function(text){
   return !! this.items[text];
 };
 
@@ -1210,11 +1210,11 @@ ContextMenu.prototype.has = function(text){
  *
  * @param {Number} x
  * @param {Number} y
- * @return {ContextMenu}
+ * @return {Menu}
  * @api public
  */
 
-ContextMenu.prototype.moveTo = function(x, y){
+Menu.prototype.moveTo = function(x, y){
   this.el.css({
     top: y,
     left: x
@@ -1225,11 +1225,11 @@ ContextMenu.prototype.moveTo = function(x, y){
 /**
  * Show the menu.
  *
- * @return {ContextMenu}
+ * @return {Menu}
  * @api public
  */
 
-ContextMenu.prototype.show = function(){
+Menu.prototype.show = function(){
   this.emit('show');
   this.el.show();
   return this;
@@ -1238,11 +1238,11 @@ ContextMenu.prototype.show = function(){
 /**
  * Hide the menu.
  *
- * @return {ContextMenu}
+ * @return {Menu}
  * @api public
  */
 
-ContextMenu.prototype.hide = function(){
+Menu.prototype.hide = function(){
   this.emit('hide');
   this.el.hide();
   return this;
@@ -1263,7 +1263,7 @@ function slug(str) {
     .replace(/[^a-z0-9-]/g, '');
 }
 
-})(ui, "<div id=\"context-menu\">\n</div>");
+})(ui, "<div class=\"menu\">\n</div>");
 ;(function(exports, html){
 
 /**
