@@ -1148,10 +1148,12 @@ function Menu() {
 Menu.prototype = new ui.Emitter;
 
 /**
- * Add menu item with the given `text` and callback `fn`.
+ * Add menu item with the given `text` and optional callback `fn`.
  *
  * When the item is clicked `fn()` will be invoked
- * and the `Menu` is immediately closed. 
+ * and the `Menu` is immediately closed. When clicked
+ * an event of the name `text` is emitted regardless of
+ * the callback function being present.
  *
  * @param {String} text
  * @param {Function} fn
@@ -1160,7 +1162,6 @@ Menu.prototype = new ui.Emitter;
  */
 
 Menu.prototype.add = function(text, fn){
-  if (1 == arguments.length) return this.items[text];
   var self = this
     , el = $('<li><a href="#">' + text + '</a></li>')
     .addClass(slug(text))
@@ -1169,7 +1170,8 @@ Menu.prototype.add = function(text, fn){
       e.preventDefault();
       e.stopPropagation();
       self.hide();
-      fn();
+      self.emit(text);
+      fn && fn();
     });
 
   this.items[text] = el;
