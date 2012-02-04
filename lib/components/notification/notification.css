@@ -15,9 +15,6 @@
   max-width: 600px;
   min-width: 250px;
   border: 1px solid #eee;
-  border-bottom-color: #cacaca;
-  border-radius: 3px;
-  box-shadow: 0 1px 4px 0 #ddd;
   background: white;
   z-index: 100;
 }

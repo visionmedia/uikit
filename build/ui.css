@@ -5,9 +5,6 @@
   max-width: 600px;
   min-width: 250px;
   border: 1px solid #eee;
-  border-bottom-color: #cacaca;
-  -webkit-border-radius: 3px;
-  -webkit-box-shadow: 0 1px 4px 0 #ddd;
   background: white;
   z-index: 1000;
 }
@@ -26,36 +23,6 @@
   margin: 0;
   padding: 0;
   font-size: .9em;
-}
-
-#dialog .actions button {
-  padding: 5px;
-  background: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
-
-#dialog .actions button:hover {
-  text-decoration: underline;
-}
-
-#dialog .actions button.main {
-  padding: 5px 15px;
-  background: -webkit-linear-gradient(top, #fff 20%, #eee);
-  border: 1px solid #eee;
-  border-bottom-color: #cacaca;
-  -webkit-border-radius: 3px;
-  outline: none;
-}
-
-#dialog .actions button.main:hover {
-  text-decoration: none;
-  background: -webkit-linear-gradient(top, #fff 50%, #eee);
-}
-
-#dialog .actions button.main:active {
-  background: -webkit-linear-gradient(bottom, #fff 20%, #eee);
 }
 
 #dialog.modal {
@@ -159,9 +126,6 @@
   max-width: 600px;
   min-width: 250px;
   border: 1px solid #eee;
-  border-bottom-color: #cacaca;
-  -webkit-border-radius: 3px;
-  -webkit-box-shadow: 0 1px 4px 0 #ddd;
   background: white;
   z-index: 100;
 }
@@ -255,10 +219,7 @@
   margin: 0;
   padding: 0;
   background: white;
-  -webkit-border-radius: 5px;
-  font-size: 12px;
   border: 1px solid rgba(0,0,0,0.2);
-  -webkit-box-shadow: 0 10px 30px 0 rgba(0,0,0,0.1), 0 2px 6px 0 rgba(0,0,0,0.2);
 }
 
 #context-menu li {

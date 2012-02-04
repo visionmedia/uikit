@@ -5,9 +5,6 @@
   max-width: 600px;
   min-width: 250px;
   border: 1px solid #eee;
-  border-bottom-color: #cacaca;
-  border-radius: 3px;
-  box-shadow: 0 1px 4px 0 #ddd;
   background: white;
   z-index: 1000;
 }
@@ -26,36 +23,6 @@
   margin: 0;
   padding: 0;
   font-size: .9em;
-}
-
-#dialog .actions button {
-  padding: 5px;
-  background: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
-
-#dialog .actions button:hover {
-  text-decoration: underline;
-}
-
-#dialog .actions button.main {
-  padding: 5px 15px;
-  background: linear-gradient(top, #fff 20%, #eee);
-  border: 1px solid #eee;
-  border-bottom-color: #cacaca;
-  border-radius: 3px;
-  outline: none;
-}
-
-#dialog .actions button.main:hover {
-  text-decoration: none;
-  background: linear-gradient(top, #fff 50%, #eee);
-}
-
-#dialog .actions button.main:active {
-  background: linear-gradient(bottom, #fff 20%, #eee);
 }
 
 #dialog.modal {

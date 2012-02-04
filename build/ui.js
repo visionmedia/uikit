@@ -644,7 +644,7 @@ ColorPicker.prototype.spectrumEvents = function(){
     , down;
 
   function update(e) {
-    var color = self.hueAt(e.offsetY);
+    var color = self.hueAt(e.offsetY - 4);
     self.hue(color.toString());
     self.emit('change', color);
     self._huePos = e.offsetY;

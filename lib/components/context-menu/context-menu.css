@@ -7,10 +7,7 @@
   margin: 0;
   padding: 0;
   background: white;
-  border-radius: 5px;
-  font-size: 12px;
   border: 1px solid rgba(0,0,0,0.2);
-  box-shadow: 0 10px 30px 0 rgba(0,0,0,0.1), 0 2px 6px 0 rgba(0,0,0,0.2);
 }
 
 #context-menu li {
