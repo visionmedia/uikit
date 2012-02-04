@@ -57,7 +57,8 @@
 /* slide */
 
 #dialog.slide {
-  transition: opacity 300ms, top 300ms;
+  -webkit-transition: opacity 300ms, top 300ms;
+  -moz-transition: opacity 300ms, top 300ms;
 }
 
 #dialog.slide.hide {
@@ -68,7 +69,8 @@
 /* fade */
 
 #dialog.fade {
-  transition: opacity 300ms;
+  -webkit-transition: opacity 300ms;
+  -moz-transition: opacity 300ms;
 }
 
 #dialog.fade.hide {
@@ -78,10 +80,13 @@
 /* scale */
 
 #dialog.scale {
-  transition: transform 300ms;
-  transform: scale(1);
+  -webkit-transition: -webkit-transform 300ms;
+  -moz-transition: -moz-transform 300ms;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
 }
 
 #dialog.scale.hide {
-  transform: scale(0);
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
 }

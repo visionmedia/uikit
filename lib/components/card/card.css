@@ -12,12 +12,15 @@
   width: 100%;
   height: 100%;
   position: absolute;
-  transform-style: preserve-3d;
-  transition: transform 500ms ease-in-out;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -webkit-transition: transform 500ms ease-in-out;
+  -moz-transition: transform 500ms ease-in-out;
   border: 1px solid #eee;
   border-bottom-color: #cacaca;
   border-radius: 3px;
-  box-shadow: inset 0 -1px 0 0 white, 0 1px 4px 0 #ddd;
+  -webkit-box-shadow: inset 0 -1px 0 0 white, 0 1px 4px 0 #ddd;
+  -moz-box-shadow: inset 0 -1px 0 0 white, 0 1px 4px 0 #ddd;
 }
 
 .card .face {
@@ -25,23 +28,28 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
 }
 
 .card .back {
-  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
 }
 
 .card.flipped .wrapper {
-  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
 }
 
 /* sideflip effect */
 
 .card.sideflip .wrapper {
-  transform-origin: right center;
+  -webkit-transform-origin: right center;
+  -moz-transform-origin: right center;
 }
 
 .card.sideflip.flipped .wrapper {
-  transform: translateX(-100%) rotateY(180deg);
+  -webkit-transform: translateX(-100%) rotateY(180deg);
+  -moz-transform: translateX(-100%) rotateY(180deg);
 }
