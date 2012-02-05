@@ -292,8 +292,8 @@
   position: absolute;
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
-  -webkit-transition: transform 500ms ease-in-out;
-  -moz-transition: transform 500ms ease-in-out;
+  -webkit-transition: -webkit-transform 500ms ease-in-out;
+  -moz-transition: -moz-transform 500ms ease-in-out;
   border: 1px solid #eee;
   border-bottom-color: #cacaca;
   border-radius: 3px;
