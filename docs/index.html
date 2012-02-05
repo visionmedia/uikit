@@ -548,6 +548,54 @@ oncontextmenu = function(e){
           </pre>
         </section>
       </section>
+
+    <section>
+        <h2 id="split-button-section"><a href="#">SplitButton</a></h2>
+        <p>The split button component </p>
+
+        <section>
+          <h3>Example</h3>
+          <p>The <code>SplitButton</code> component emits three events, "click" when the button itself is clicked, "show" and "hide" for when the contents display is toggled. This component is abstract, it is not bound to a <code>Menu</code> or <code>ColorPicker</code> etc, one should inherit from this component to display content.</p>
+
+          <script>
+            $(function(){
+              var button = new ui.SplitButton('Action');
+
+              button.on('click', function(){
+                ui.notify('Button clicked');
+              });
+
+              button.on('show', function(){
+                ui.notify('Show dropdown');
+              });
+
+              button.on('hide', function(){
+                ui.notify('Hide dropdown');
+              });
+
+              button.el.appendTo('.example-split-button');
+            })
+          </script>
+          <p class="example-split-button"></p>
+
+          <pre><code>var button = new ui.SplitButton('Action');
+
+button.on('click', function(){
+  ui.notify('Button clicked');
+});
+
+button.on('show', function(){
+  ui.notify('Show dropdown');
+});
+
+button.on('hide', function(){
+  ui.notify('Hide dropdown');
+});
+
+button.el.appendTo('.example-split-button');</code>
+          </pre>
+        </section>
+      </section>
     </div>
   </body>
 </html>
