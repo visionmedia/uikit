@@ -144,6 +144,11 @@ exports.dialog = function(title, msg){
  *    - `title` dialog title
  *    - `message` a message to display
  *
+ * Emits:
+ *
+ *    - `show` when visible
+ *    - `hide` when hidden
+ *
  * @param {Object} options
  * @api public
  */
@@ -444,6 +449,13 @@ exports.confirm = function(title, msg){
  *    - `title` dialog title
  *    - `message` a message to display
  *
+ * Emits:
+ *
+ *    - `cancel` the user pressed cancel or closed the dialog
+ *    - `ok` the user clicked ok
+ *    - `show` when visible
+ *    - `hide` when hidden
+ *
  * @param {Object} options
  * @api public
  */
@@ -562,8 +574,10 @@ function rgba(r,g,b,a) {
 /**
  * Initialize a new `ColorPicker`.
  *
- * @param {Type} name
- * @return {Type}
+ * Emits:
+ *
+ *    - `change` with the given color object
+ *
  * @api public
  */
 
@@ -1129,6 +1143,7 @@ exports.menu = function(){
  *   - "show" when shown
  *   - "hide" when hidden
  *   - "remove" with the item name when an item is removed
+ *   - * menu item events are emitted when clicked
  *
  * @api public
  */
