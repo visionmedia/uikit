@@ -144,6 +144,11 @@ exports.dialog = function(title, msg){
  *    - `title` dialog title
  *    - `message` a message to display
  *
+ * Emits:
+ *
+ *    - `show` when visible
+ *    - `hide` when hidden
+ *
  * @param {Object} options
  * @api public
  */
@@ -444,6 +449,13 @@ exports.confirm = function(title, msg){
  *    - `title` dialog title
  *    - `message` a message to display
  *
+ * Emits:
+ *
+ *    - `cancel` the user pressed cancel or closed the dialog
+ *    - `ok` the user clicked ok
+ *    - `show` when visible
+ *    - `hide` when hidden
+ *
  * @param {Object} options
  * @api public
  */
@@ -562,16 +574,17 @@ function rgba(r,g,b,a) {
 /**
  * Initialize a new `ColorPicker`.
  *
- * @param {Type} name
- * @return {Type}
+ * Emits:
+ *
+ *    - `change` with the given color object
+ *
  * @api public
  */
 
 function ColorPicker() {
   ui.Emitter.call(this);
   this._colorPos = {};
-  this.template = html;
-  this.el = $(this.template);
+  this.el = $(html);
   this.main = this.el.find('.main').get(0);
   this.spectrum = this.el.find('.spectrum').get(0);
   $(this.main).bind('selectstart', function(e){ e.preventDefault() });
@@ -644,7 +657,7 @@ ColorPicker.prototype.spectrumEvents = function(){
     , down;
 
   function update(e) {
-    var color = self.hueAt(e.offsetY);
+    var color = self.hueAt(e.offsetY - 4);
     self.hue(color.toString());
     self.emit('change', color);
     self._huePos = e.offsetY;
@@ -1105,63 +1118,173 @@ Notification.prototype.remove = function(){
 ;(function(exports, html){
 
 /**
- * Expose `ContextMenu`.
+ * Expose `SplitButton`.
  */
 
-exports.ContextMenu = ContextMenu;
+exports.SplitButton = SplitButton;
 
 /**
- * Create a new `ContextMenu`.
+ * Initialize a new `SplitButton`
+ * with an optional `label`.
  *
- * @return {ContextMenu}
+ * @param {String} label
+ * @api public
+ */
+
+function SplitButton(label) {
+  ui.Emitter.call(this);
+  this.el = $(html);
+  this.events();
+  this.render({ label: label });
+  this.state = 'hidden';
+}
+
+/**
+ * Inherit from `Emitter.prototype`.
+ */
+
+SplitButton.prototype = new ui.Emitter;
+
+/**
+ * Register event handlers.
+ *
+ * @api private
+ */
+
+SplitButton.prototype.events = function(){
+  var self = this
+    , el = this.el;
+
+  el.find('.button').click(function(e){
+    e.preventDefault();
+    self.emit('click', e);
+  });
+
+  el.find('.toggle').click(function(e){
+    e.preventDefault();
+    self.toggle();
+  });
+};
+
+/**
+ * Toggle the drop-down contents.
+ *
+ * @return {SplitButton}
+ * @api public
+ */
+
+SplitButton.prototype.toggle = function(){
+  return 'hidden' == this.state
+    ? this.show()
+    : this.hide();
+};
+
+/**
+ * Show the drop-down contents.
+ *
+ * @return {SplitButton}
+ * @api public
+ */
+
+SplitButton.prototype.show = function(){
+  this.state = 'visible';
+  this.emit('show');
+  return this;
+};
+
+/**
+ * Hide the drop-down contents.
+ *
+ * @return {SplitButton}
+ * @api public
+ */
+
+SplitButton.prototype.hide = function(){
+  this.state = 'hidden';
+  this.emit('hide');
+  return this;
+};
+
+/**
+ * Render the split-button with the given `options`.
+ *
+ * @param {Object} options
+ * @return {SplitButton}
+ * @api private
+ */
+
+SplitButton.prototype.render = function(options){
+  var options = options || {}
+    , button = this.el.find('.button')
+    , label = options.label;
+
+  if ('string' == label) button.text(label);
+  else button.text('').append(label);
+  return this;
+};
+
+})(ui, "<div class=\"split-button\">\n  <a class=\"button\" href=\"#\">Action</a>\n  <a class=\"toggle\" href=\"#\"><span></span></a>\n</div>");
+;(function(exports, html){
+
+/**
+ * Expose `Menu`.
+ */
+
+exports.Menu = Menu;
+
+/**
+ * Create a new `Menu`.
+ *
+ * @return {Menu}
  * @api public
  */
 
 exports.menu = function(){
-  return new ContextMenu;
+  return new Menu;
 };
 
 /**
- * Initialize a new `ContextMenu` with content
- * for face `front` and `back`.
+ * Initialize a new `Menu`.
  *
- * Emits "flip" event.
+ * Emits:
  *
- * @param {Mixed} front
- * @param {Mixed} back
+ *   - "show" when shown
+ *   - "hide" when hidden
+ *   - "remove" with the item name when an item is removed
+ *   - * menu item events are emitted when clicked
+ *
  * @api public
  */
 
-function ContextMenu(front, back) {
+function Menu() {
   var self = this;
   ui.Emitter.call(this);
   this.items = {};
-  this.el = $(html).appendTo('body');
-  $('html').click(function(){
-    self.hide();
-  });
+  this.el = $(html).hide().appendTo('body');
+  $('html').click(function(){ self.hide(); });
 };
 
 /**
  * Inherit from `Emitter.prototype`.
  */
 
-ContextMenu.prototype = new ui.Emitter;
+Menu.prototype = new ui.Emitter;
 
 /**
- * Add menu item with the given `text` and callback `fn`.
+ * Add menu item with the given `text` and optional callback `fn`.
  *
  * When the item is clicked `fn()` will be invoked
- * and the `ContextMenu` is immediately closed. 
+ * and the `Menu` is immediately closed. When clicked
+ * an event of the name `text` is emitted regardless of
+ * the callback function being present.
  *
  * @param {String} text
  * @param {Function} fn
- * @return {ContextMenu}
+ * @return {Menu}
  * @api public
  */
 
-ContextMenu.prototype.add = function(text, fn){
-  if (1 == arguments.length) return this.items[text];
+Menu.prototype.add = function(text, fn){
   var self = this
     , el = $('<li><a href="#">' + text + '</a></li>')
     .addClass(slug(text))
@@ -1170,7 +1293,8 @@ ContextMenu.prototype.add = function(text, fn){
       e.preventDefault();
       e.stopPropagation();
       self.hide();
-      fn();
+      self.emit(text);
+      fn && fn();
     });
 
   this.items[text] = el;
@@ -1181,13 +1305,14 @@ ContextMenu.prototype.add = function(text, fn){
  * Remove menu item with the given `text`.
  *
  * @param {String} text
- * @return {ContextMenu}
+ * @return {Menu}
  * @api public
  */
 
-ContextMenu.prototype.remove = function(text){
+Menu.prototype.remove = function(text){
   var item = this.items[text];
   if (!item) throw new Error('no menu item named "' + text + '"');
+  this.emit('remove', text);
   item.remove();
   delete this.items[text];
   return this;
@@ -1201,7 +1326,7 @@ ContextMenu.prototype.remove = function(text){
  * @api public
  */
 
-ContextMenu.prototype.has = function(text){
+Menu.prototype.has = function(text){
   return !! this.items[text];
 };
 
@@ -1210,11 +1335,11 @@ ContextMenu.prototype.has = function(text){
  *
  * @param {Number} x
  * @param {Number} y
- * @return {ContextMenu}
+ * @return {Menu}
  * @api public
  */
 
-ContextMenu.prototype.moveTo = function(x, y){
+Menu.prototype.moveTo = function(x, y){
   this.el.css({
     top: y,
     left: x
@@ -1225,11 +1350,11 @@ ContextMenu.prototype.moveTo = function(x, y){
 /**
  * Show the menu.
  *
- * @return {ContextMenu}
+ * @return {Menu}
  * @api public
  */
 
-ContextMenu.prototype.show = function(){
+Menu.prototype.show = function(){
   this.emit('show');
   this.el.show();
   return this;
@@ -1238,11 +1363,11 @@ ContextMenu.prototype.show = function(){
 /**
  * Hide the menu.
  *
- * @return {ContextMenu}
+ * @return {Menu}
  * @api public
  */
 
-ContextMenu.prototype.hide = function(){
+Menu.prototype.hide = function(){
   this.emit('hide');
   this.el.hide();
   return this;
@@ -1263,7 +1388,7 @@ function slug(str) {
     .replace(/[^a-z0-9-]/g, '');
 }
 
-})(ui, "<div id=\"context-menu\">\n</div>");
+})(ui, "<div class=\"menu\">\n</div>");
 ;(function(exports, html){
 
 /**
