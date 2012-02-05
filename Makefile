@@ -5,6 +5,7 @@ COMPONENTS = emitter \
   confirmation \
   color-picker \
   notification \
+  split-button \
   menu \
   card
 

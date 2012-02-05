@@ -85,6 +85,29 @@ body {
   -webkit-box-shadow: 0 1px 4px 0 #ddd;
   -moz-box-shadow: 0 1px 4px 0 #ddd;
 }
+.split-button {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  margin: 5px;
+  font-size: 12px;
+}
+.split-button a {
+  background: -webkit-linear-gradient(top, #fff 20%, #eee);
+  background: -moz-linear-gradient(top, #fff 20%, #eee);
+}
+.split-button a:hover {
+  background: -webkit-linear-gradient(top, #fff 40%, #efefef);
+  background: -moz-linear-gradient(top, #fff 40%, #efefef);
+  text-decoration: none;
+}
+.split-button a:active {
+  background: -webkit-linear-gradient(bottom, #fff 40%, #efefef);
+  background: -moz-linear-gradient(bottom, #fff 40%, #efefef);
+  text-decoration: none;
+}
+.split-button a {
+  box-shadow: inset 1px 0 rgba(255,255,255,.75), 0 1px #ddd;
+}
 #wrapper > section {
   margin: 30px 0;
   width: 350px;

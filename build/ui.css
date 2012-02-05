@@ -220,8 +220,33 @@
 .notification.scale.hide {
   -webkit-transform: scale(0);
   -moz-transform: scale(0);
+}.split-button {
+  display: inline-block;
+  border: 1px solid #eee;
+}
+
+.split-button a {
+  display: inline-block;
+  float: left;
+  height: 20px;
+  line-height: 20px;
+  padding: 5px 10px;
+  text-decoration: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+
+.split-button .toggle {
+  border-left: 1px solid #eee;
+}
+
+.split-button .toggle span {
+  display: block;
+  margin-top: 8px;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #888;
 }.menu {
-  display: none;
   position: absolute;
   top: 0;
   left: 0;
