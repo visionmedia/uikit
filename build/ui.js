@@ -665,6 +665,7 @@ ColorPicker.prototype.spectrumEvents = function(){
   }
 
   canvas.mousedown(function(e){
+    e.preventDefault();
     down = true;
     update(e);
   });
