@@ -965,6 +965,7 @@ exports.error = type('error');
  */
 
 function Notification(options) {
+  ui.Emitter.call(this);
   options = options || {};
   this.template = html;
   this.el = $(this.template);
@@ -972,6 +973,11 @@ function Notification(options) {
   if (Notification.effect) this.effect(Notification.effect);
 };
 
+/**
+ * Inherit from `Emitter.prototype`.
+ */
+
+Notification.prototype = new ui.Emitter;
 
 /**
  * Render with the given `options`.
@@ -989,6 +995,11 @@ Notification.prototype.render = function(options){
   el.find('.close').click(function(){
     self.hide();
     return false;
+  });
+
+  el.click(function(e){
+    e.preventDefault();
+    self.emit('click', e);
   });
 
   el.find('h1').text(title);
@@ -1113,24 +1124,6 @@ Notification.prototype.hide = function(ms){
 
 Notification.prototype.remove = function(){
   this.el.remove();
-  return this;
-};
-
-/**
- * Enable a click callback.
- *
- * @return {Notification} for chaining
- * @api public
- */
-
-Notification.prototype.click = function(fn){
-  var self = this;
-  this.el.click(function(e){
-    e.preventDefault();
-    e.stopPropagation();
-    self.hide();
-    fn && fn();
-  });
   return this;
 };
 })(ui, "<li class=\"notification hide\">\n  <div class=\"content\">\n    <h1>Title</h1>\n    <a href=\"#\" class=\"close\">×</a>\n    <p>Message</p>\n  </div>\n</li>");
