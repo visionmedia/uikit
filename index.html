@@ -4,9 +4,9 @@
     <title>UIKit - Modern UI components for a modern web</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <script src="jquery.js"></script>
-    <script src="build/ui.js"></script>
+    <script src="../build/ui.js"></script>
     <script src="highlight.js"></script>
-    <link rel="stylesheet" href="build/ui.css">
+    <link rel="stylesheet" href="../build/ui.css">
     <link rel="stylesheet" href="style.css">
     <script>
       $(function(){
@@ -344,6 +344,33 @@ emitter.emit('event', foo, bar, baz);</code></pre>
               <li><a href="#" class="effect-slide">slide</a></li>
               <li><a href="#" class="effect-fade">fade</a></li>
               <li><a href="#" class="effect-scale">scale</a></li>
+            </ul>
+
+            <h3>Rich content</h3>
+            <p>Dialogs are of course not limited to the textual content mentioned so far, jQuery objects and other UIKit components may also be passed.</p>
+
+            <script>
+            $(function(){
+              $('#dialog-jquery').click(function(e){
+                e.preventDefault();
+                ui.dialog('jQuery object', $('Just a <strong>string</strong> of <em>HTML</em>.'))
+                  .closable()
+                  .show();
+              });
+
+              $('#dialog-colorpicker').click(function(e){
+                e.preventDefault();
+                var picker = new ui.ColorPicker;
+                ui.dialog('UIKit component', picker)
+                  .closable()
+                  .show();
+              });
+            });
+            </script>
+
+            <ul>
+              <li><a href="#" id="dialog-jquery">jQuery object</a></li>
+              <li><a href="#" id="dialog-colorpicker">ColorPicker</a></li>
             </ul>
         </section>
       </section>
