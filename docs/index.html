@@ -347,17 +347,10 @@ emitter.emit('event', foo, bar, baz);</code></pre>
             </ul>
 
             <h3>Rich content</h3>
-            <p>Dialogs are of course not limited to the textual content mentioned so far, HTML, jQuery objects, or other UIKit components may also be passed.</p>
+            <p>Dialogs are of course not limited to the textual content mentioned so far, jQuery objects and other UIKit components may also be passed.</p>
 
             <script>
             $(function(){
-              $('#dialog-html').click(function(e){
-                e.preventDefault();
-                ui.dialog('HTML', 'Just a <strong>string</strong> of <em>HTML</em>.')
-                  .closable()
-                  .show();
-              });
-
               $('#dialog-jquery').click(function(e){
                 e.preventDefault();
                 ui.dialog('jQuery object', $('Just a <strong>string</strong> of <em>HTML</em>.'))
@@ -376,7 +369,6 @@ emitter.emit('event', foo, bar, baz);</code></pre>
             </script>
 
             <ul>
-              <li><a href="#" id="dialog-html">HTML</a></li>
               <li><a href="#" id="dialog-jquery">jQuery object</a></li>
               <li><a href="#" id="dialog-colorpicker">ColorPicker</a></li>
             </ul>
