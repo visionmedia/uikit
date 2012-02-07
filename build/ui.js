@@ -665,6 +665,7 @@ ColorPicker.prototype.spectrumEvents = function(){
   }
 
   canvas.mousedown(function(e){
+    e.preventDefault();
     down = true;
     update(e);
   });
@@ -964,6 +965,7 @@ exports.error = type('error');
  */
 
 function Notification(options) {
+  ui.Emitter.call(this);
   options = options || {};
   this.template = html;
   this.el = $(this.template);
@@ -971,6 +973,11 @@ function Notification(options) {
   if (Notification.effect) this.effect(Notification.effect);
 };
 
+/**
+ * Inherit from `Emitter.prototype`.
+ */
+
+Notification.prototype = new ui.Emitter;
 
 /**
  * Render with the given `options`.
@@ -988,6 +995,11 @@ Notification.prototype.render = function(options){
   el.find('.close').click(function(){
     self.hide();
     return false;
+  });
+
+  el.click(function(e){
+    e.preventDefault();
+    self.emit('click', e);
   });
 
   el.find('h1').text(title);

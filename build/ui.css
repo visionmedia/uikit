@@ -112,7 +112,9 @@
   box-shadow: inset 0 1px 0 white;
 }.color-picker canvas {
   border: 1px solid #888;
-  cursor: crosshair;
+}
+.color-picker canvas:active {
+  cursor: none;
 }
 
 #notifications {
@@ -292,8 +294,8 @@
   position: absolute;
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
-  -webkit-transition: transform 500ms ease-in-out;
-  -moz-transition: transform 500ms ease-in-out;
+  -webkit-transition: -webkit-transform 500ms ease-in-out;
+  -moz-transition: -moz-transform 500ms ease-in-out;
   border: 1px solid #eee;
   border-bottom-color: #cacaca;
   border-radius: 3px;
