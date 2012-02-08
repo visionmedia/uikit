@@ -139,7 +139,7 @@ h2 {
   font-size: 24px;
 }
 h2 a {
-  text-decoration: none;
+  text-decoration: underline;
 }
 h3 {
   font-size: 14px;
