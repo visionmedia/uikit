@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>UIKit - Modern UI components for a modern web</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="jquery.js"></script>
+    <script src=".build/ui.js"></script>
+    <script src="highlight.js"></script>
+    <link rel="stylesheet" href="build/ui.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+      $(function(){
+        var menu = ui.menu()
+          .add('Add item')
+          .add('Edit item', function(){ console.log('edit'); })
+          .add('Remove item', function(){ console.log('remove'); })
+          .add('Remove "Add item"', function(){
+            menu
+              .remove('Add item')
+              .remove('Remove "Add item"');
+          });
+
+        menu.on('Add item', function(){
+          console.log('added an item');
+        });
+
+        oncontextmenu = function(e){
+          e.preventDefault();
+          menu
+            .moveTo(e.pageX, e.pageY)
+            .show();
+        };
+
+        $('#simple-dialog').click(function(){
+          new ui.Dialog({ title: 'Title', message: "I'm a simple dialog" })
+            .show()
+            .hide(2000);
+          return false;
+        });
+
+        $('#closable-dialog').click(function(){
+          new ui.Dialog({ title: 'Title', message: "I'm a dialog that wont auto-close" })
+            .show()
+            .closable();
+          return false;
+        });
+
+        $('#ui-dialog-1').click(function(){
+          ui.dialog('Just another dialog')
+            .closable()
+            .show();
+          return false;
+        });
+        
+        $('#ui-dialog-2').click(function(){
+          ui.dialog('Title', 'Just another dialog')
+            .closable()
+            .show();
+          return false;
+        });
+
+        $('#dialog-effect-slide').click(function(){
+          ui.dialog('Hello!')
+            .effect('slide')
+            .show()
+            .hide(1500);
+          return false;
+        })
+        
+        $('.effect-slide').click(function(){
+          ui.dialog('Hello!')
+            .effect('slide')
+            .show()
+            .hide(1500);
+          return false;
+        })
+        
+        $('.effect-scale').click(function(){
+          ui.dialog('Hello!')
+            .effect('scale')
+            .show()
+            .hide(1500);
+          return false;
+        })
+        
+        $('.effect-fade').click(function(){
+          ui.dialog('Hello!')
+            .effect('fade')
+            .show()
+            .hide(1500);
+          return false;
+        })
+        
+        $('#dialog-hide').click(function(){
+          var dialog = ui.dialog("I'll close in 2 seconds").show();
+          setTimeout(function(){
+            dialog.hide();
+          }, 2000);
+          return false;
+        })
+
+        $('#simple-confirmation').click(function(){
+          new ui.Confirmation({ title: 'Remove user', message: 'are you sure?' })
+            .show(function(ok){
+              if (ok) ui.dialog('user removed!').show().hide(1500);
+            });
+          return false;
+        })
+
+        $('#ui-confirm').click(function(){
+          ui.confirm('Remove user', 'are you sure?')
+            .ok('Remove')
+            .cancel('No dont!')
+            .show(function(ok){
+              if (ok) ui.dialog('user removed!').show().hide(1500);
+            });
+          return false;
+        });
+
+        $('#ui-confirm-2').click(function(){
+          ui.confirm('are you sure?')
+            .closable()
+            .show(function(ok){
+              if (ok) ui.dialog('done!').show().hide(1500);
+              else ui.dialog('never-mind').show().hide(1500);
+            });
+          return false;
+        });
+
+        $('#dialog-overlay').click(function(){
+          ui.dialog('Overlay time')
+            .closable()
+            .overlay()
+            .show();
+          return false;
+        })
+
+        $('#modal-overlay').click(function(){
+          ui.dialog('Overlay time')
+            .closable()
+            .modal()
+            .show();
+          return false;
+        })
+
+        $('#dialog-picker').click(function(){
+          ui.dialog('Select a color', new ui.ColorPicker)
+            .effect('slide')
+            .closable()
+            .show();
+          return false;
+        })
+
+        var picker = new ui.ColorPicker;
+        picker.el.appendTo('#default-color-picker');
+        picker.on('change', function(color){
+          $('.r').text(color.r)
+          $('.g').text(color.g)
+          $('.b').text(color.b)
+          $('.rgb').text(color.toString()).css('background', color)
+        });
+
+        var picker = new ui.ColorPicker;
+        picker.size(100);
+        picker.el.appendTo('#color-picker-size');
+
+        var picker = new ui.ColorPicker;
+        picker.width(80);
+        picker.el.appendTo('#color-picker-width');
+
+        var picker = new ui.ColorPicker;
+        var card = ui.card('<p>Click to show a color picker</p>', picker);
+        card.el.appendTo('#card');
+
+        $('#flip').click(function(){
+          card.flip();
+          return false;
+        })
+
+        $('#wrapper section section').hide();
+        $('h2 a').click(function(e){
+          e.preventDefault();
+
+          $(this)
+            .parents('section')
+            .find('section')
+            .slideToggle();
+        });
+
+        $('#notify').click(function(e){
+          e.preventDefault();
+          ui.notify('Email', 'you have 3 new messages')
+            .effect('slide');
+
+          setTimeout(function(){
+            ui.warn('Warning', 'something happened')
+              .effect('slide');
+
+            setTimeout(function(){
+              ui.error('Error', 'something failed')
+                .closable()
+                .hide(8000)
+                .effect('slide');
+
+              setTimeout(function(){
+                ui.notify('Stick notification')
+                  .sticky()
+                  .effect('slide');
+              }, 200);
+            }, 200);
+          }, 200);
+        });
+
+      });
+    </script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="logo">
+        <h1>UI<strong>kit</strong></h1>
+        <span>Modern UI components for the modern web</span>
+      </div>
+
+      <p>UIKit is a small collection of flexible, decoupled jQuery JavaScript components for the modern web. With an emphasis on structure-only styling it's easy to style UIKit to match your application, no preprocessor variables, just raw CSS structure! As a result most of the styling you see in this document is for demonstration only.</p>
+
+      <section>
+        <h2 id="emitter-section"><a href="#">Emitter</a></h2>
+        <p>The event Emitter is used by many of the components to emit events like "hide" and "show" among others, but it's public API! so you're free to use it in your projects.</p>
+
+        <section>
+          <h3>API</h3>
+          <p>Currently the Emitter API is defined as following:</p>
+        <pre><code>var emitter = new ui.Emitter;
+emitter.on('event', callback);
+emitter.once('event', callback);
+emitter.off('event', callback);
+emitter.off('event');
+emitter.emit('event', foo, bar, baz);</code></pre>
+        </section>
+      </section>
+
+      <section>
+        <h2 id="dialog-section"><a href="#">Dialog</a></h2>
+        <p>The Dialog component is the basis of more specific components
+        such the Confirmation Dialog.</p>
+
+        <section>
+           <h3>Example</h3>
+            <p>Click <a href="#" id="simple-dialog">here</a> to
+            open a simple dialog that closes after 2 seconds.</p>
+            <pre>
+              <code>
+      new ui.Dialog({ title: 'Title', message: "I'm a simple dialog" })
+        .show()
+        .hide(2000);
+              </code>
+            </pre>
+
+            <h3>.closable()</h3>
+            <p>By default dialogs do not have a close button, but it's
+              easy to add one! Click <a href="#" id="closable-dialog">here</a> to try it.</p>
+            <pre>
+              <code>
+      new ui.Dialog({ title: 'Title', message: "I'm a dialog that wont auto-close" })
+        .closable()
+        .show();
+              </code>
+            </pre>
+
+            <h3>ui.dialog(msg)</h3>
+            <p><code>ui.dialog(msg)</code> is a nice shortcut, try it <a href="#" id="ui-dialog-1">here</a>.</p>
+            <pre>
+              <code>
+      ui.dialog('Just another dialog')
+        .closable()
+        .show();
+              </code>
+            </pre>
+
+            <h3>ui.dialog(title, msg)</h3>
+            <p>How about a title this time? <a href="#" id="ui-dialog-2">try it</a>.</p>
+            <pre>
+              <code>
+      ui.dialog('Title', 'Just another dialog')
+        .closable()
+        .show();
+              </code>
+            </pre>
+
+            <h3>.hide([ms])</h3>
+            <p>Dialogs will remain open until you .close() them, optionally providing a delay in milliseconds. <a href="#" id="dialog-hide">Try it</a>.</p>
+            <pre>
+              <code>
+      var dialog = ui.dialog("I'll close in 2 seconds").show();
+      setTimeout(function(){
+        dialog.hide();
+      }, 2000);
+              </code>
+            </pre>
+
+            <h3>.overlay()</h3>
+            <p>This method adds an overlay, which may be clicked (by default) to close the dialog. <a href="#" id="dialog-overlay">Test it out</a>.</p>
+            <pre>
+              <code>
+      ui.dialog('Overlay time')
+        .closable()
+        .overlay()
+        .show();
+              </code>
+            </pre>
+
+            <h3>.modal()</h3>
+            <p>This method adds an overlay which is not clickable, the user must interact with the dialog. <a href="#" id="modal-overlay">Test it out</a>.</p>
+            <pre>
+              <code>
+      ui.dialog('Overlay time')
+        .closable()
+        .modal()
+        .show();
+              </code>
+            </pre>
+
+            <h3>.effect(name)</h3>
+            <p>Effects are simply applied via CSS classes, no JavaScript animations, so they're nice and fast! Try out the <a href="#" id="dialog-effect-slide">slide</a> effect.</p>
+            <pre>
+              <code>
+      ui.dialog('Hello!')
+        .effect('slide')
+        .show()
+        .hide(1500);
+              </code>
+            </pre>
+
+            <p>Try a few more, and remember, they're just classes! create your own.</p>
+            <ul>
+              <li><a href="#" class="effect-slide">slide</a></li>
+              <li><a href="#" class="effect-fade">fade</a></li>
+              <li><a href="#" class="effect-scale">scale</a></li>
+            </ul>
+
+            <h3>Auto-closing</h3>
+            <p>Dialog is aware of the "active" dialog, and when shown will hide the other. Test it out! click one of the links below and then quickly click another.</p>
+            <ul>
+              <li><a href="#" class="effect-slide">slide</a></li>
+              <li><a href="#" class="effect-fade">fade</a></li>
+              <li><a href="#" class="effect-scale">scale</a></li>
+            </ul>
+
+            <h3>Rich content</h3>
+            <p>Dialogs are of course not limited to the textual content mentioned so far, jQuery objects and other UIKit components may also be passed.</p>
+
+            <script>
+            $(function(){
+              $('#dialog-jquery').click(function(e){
+                e.preventDefault();
+                ui.dialog('jQuery object', $('Just a <strong>string</strong> of <em>HTML</em>.'))
+                  .closable()
+                  .show();
+              });
+
+              $('#dialog-colorpicker').click(function(e){
+                e.preventDefault();
+                var picker = new ui.ColorPicker;
+                ui.dialog('UIKit component', picker)
+                  .closable()
+                  .show();
+              });
+            });
+            </script>
+
+            <ul>
+              <li><a href="#" id="dialog-jquery">jQuery object</a></li>
+              <li><a href="#" id="dialog-colorpicker">ColorPicker</a></li>
+            </ul>
+        </section>
+      </section>
+
+
+      <section>
+        <h2 id="confirmation-section"><a href="#">Confirmation</a></h2>
+        <p>The Confirmation extends Dialog to provide a confirmation dialog.</p>
+
+        <section>
+           <h3>Example</h3>
+            <p>Click <a href="#" id="simple-confirmation">here</a> to
+            confirm removal of a user.</p>
+            <pre>
+              <code>
+      new ui.Confirmation({ title: 'Remove user', message: 'are you sure?' })
+        .show(function(ok){
+          if (ok) ui.dialog('user removed!').show().hide(1500);
+        });
+              </code>
+            </pre>
+
+            <h3>ui.confirm(title, msg)</h3>
+            <p>Much like ui.dialog() there's a shortcut, try it <a href="#" id="ui-confirm">here</a>. We can tweak the button text with .ok() and .cancel().</p>
+            <pre>
+              <code>
+      ui.confirm('Remove user', 'are you sure?')
+        .ok('Remove')
+        .cancel('No dont!')
+        .show(function(ok){
+          if (ok) ui.dialog('user removed!').show().hide(1500);
+        });
+              </code>
+            </pre>
+
+            <h3>ui.confirm(msg)</h3>
+            <p>You may omit the title as well, try it <a href="#" id="ui-confirm-2">here</a>. Clicking cancel or close will invoke the callback with false.</p>
+            <pre>
+              <code>
+      ui.confirm('are you sure?')
+        .closable()
+        .show(function(ok){
+          if (ok) ui.dialog('done!').show().hide(1500);
+          else ui.dialog('never-mind').show().hide(1500);
+        });
+              </code>
+            </pre>
+        </section>
+      </section>
+
+      <section>
+        <h2 id="colorpicker-section"><a href="#">ColorPicker</a></h2>
+        <p>A simple, small, elegant color picker component.</p>
+
+        <section>
+          <h3>Example</h3>
+          <p>With default dimensions of 180x180. On change rgb(<em class="r">0</em>,<em class="g">0</em>,<em class="b">0</em>) will update channels individually, or <em class="rgb">rgb(0,0,0)</em> with toString().</p>
+
+          <div id="default-color-picker"></div>
+
+          <pre>
+            <code>
+    var picker = new ui.ColorPicker;
+    picker.el.appendTo('#default-color-picker');
+    picker.on('change', function(color){
+      $('.r').text(color.r)
+      $('.g').text(color.g)
+      $('.b').text(color.b)
+      $('.rgb').text(color.toString()).css('background', color)
+    });
+            </code>
+          </pre>
+
+          <h3>.size(n)</h3>
+          <p>Adjust both width and height.</p>
+
+          <div id="color-picker-size"></div>
+
+          <pre>
+            <code>
+    var picker = new ui.ColorPicker;
+    picker.size(100);
+    picker.el.appendTo('#color-picker-size');
+            </code>
+          </pre>
+
+          <h3>.width(n) / .height(n)</h3>
+          <p>Either the width or height may be adjusted individually.</p>
+
+          <div id="color-picker-width"></div>
+
+          <pre>
+            <code>
+    var picker = new ui.ColorPicker;
+    picker.width(80);
+    picker.el.appendTo('#color-picker-width');
+            </code>
+          </pre>
+
+          <h3>ColorPicker in a Dialog</h3>
+          <p>Tight uikit integration means that components can interact, providing you with a simple API, simply add the picker as the message. Click to <a href="#" id="dialog-picker">try</a> it.</p>
+
+          <pre>
+            <code>
+    ui.dialog('Select a color', new ui.ColorPicker)
+      .effect('slide')
+      .closable()
+      .show();
+            </code>
+          </pre>
+        </section>
+
+      </section>
+
+      <section>
+        <h2 id="card-section"><a href="#">Card</a></h2>
+        <p>A simple double-sided card component.</p>
+
+        <section>
+          <h3>Example</h3>
+          <p>The following example displays a ColorPicker on the back face
+            and a simple paragraph on the front. Any component or jQuery()-able value may be used. You may also programmatically <a href="#" id="flip"> flip</a> the card.</p>
+
+          <div id="card"></div>
+
+          <pre>
+            <code>
+    var picker = new ui.ColorPicker;
+    var card = ui.card('&lt;p&gt;Click to show a color picker&lt;/p&gt;', picker);
+    card.el.appendTo('#card');
+
+    $('#flip').click(function(){
+      card.flip();
+    })
+            </code>
+          </pre>
+        </section>
+      </section>
+
+
+      <section>
+        <h2 id="notification-section"><a href="#">Notification</a></h2>
+        <p>Unobtrusive growl-style notifications.</p>
+
+        <section>
+          <h3>Example</h3>
+          <p>Notifications come in three flavours, <code>ui.notify()</code> for general "info" messages, <code>ui.warn()</code> for warnings, and <code>ui.error()</code> for errors. These are identical except for the additional CSS class added to the list element. The notifications API is much like Dialog, titles are optional, and you can do things like <code>.hide()</code> the notification after a given duration defaulting to 4 seconds, they are <code>.closable()</code>, and may also be <code>.sticky()</code>. Click <a href="#" id="notify">here</a> to give it a try!</p>
+
+          <pre><code>$('#notify').click(function(e){
+    e.preventDefault();
+    ui.notify('Email', 'you have 3 new messages')
+      .effect('slide');
+
+    setTimeout(function(){
+      ui.warn('Warning', 'something happened')
+        .effect('slide');
+
+      setTimeout(function(){
+        ui.error('Error', 'something failed')
+          .closable()
+          .hide(8000)
+          .effect('slide');
+
+        setTimeout(function(){
+          ui.notify('Stick notification')
+            .sticky()
+            .effect('slide');
+        }, 200);
+      }, 200);
+    }, 200);
+  });</code>
+          </pre>
+        </section>
+      </section>
+
+      <section>
+        <h2 id="menu-section"><a href="#">Menu</a></h2>
+        <p>Simple menu component.</p>
+
+        <section>
+          <h3>Example</h3>
+          <p>A <code>Menu</code> is comprised of textual menu items and optional arbitrary callback functions. To add an item invoke <code>Menu#add()</code>, and to remove pass the same text to <code>Menu#remove()</code>. Give it a try! right click on this page.</p>
+
+          <pre><code>var menu = ui.menu()
+.add('Add item')
+.add('Edit item', function(){ console.log('edit'); })
+.add('Remove item', function(){ console.log('remove'); })
+.add('Remove "Add item"', function(){
+  menu
+    .remove('Add item')
+    .remove('Remove "Add item"');
+});
+
+menu.on('Add item', function(){
+  console.log('item added');
+});
+
+oncontextmenu = function(e){
+  e.preventDefault();
+  menu.moveTo(e.pageX, e.pageY).show();
+};</code>
+          </pre>
+        </section>
+      </section>
+
+    <section>
+        <h2 id="split-button-section"><a href="#">SplitButton</a></h2>
+        <p>The split button component </p>
+
+        <section>
+          <h3>Example</h3>
+          <p>The <code>SplitButton</code> component emits three events, "click" when the button itself is clicked, "show" and "hide" for when the contents display is toggled. This component is abstract, it is not bound to a <code>Menu</code> or <code>ColorPicker</code> etc, one should inherit from this component to display content.</p>
+
+          <script>
+            $(function(){
+              var button = new ui.SplitButton('Action');
+
+              button.on('click', function(){
+                ui.notify('Button clicked');
+              });
+
+              button.on('show', function(){
+                ui.notify('Show dropdown');
+              });
+
+              button.on('hide', function(){
+                ui.notify('Hide dropdown');
+              });
+
+              button.el.appendTo('.example-split-button');
+            })
+          </script>
+          <p class="example-split-button"></p>
+
+          <pre><code>var button = new ui.SplitButton('Action');
+
+button.on('click', function(){
+  ui.notify('Button clicked');
+});
+
+button.on('show', function(){
+  ui.notify('Show dropdown');
+});
+
+button.on('hide', function(){
+  ui.notify('Hide dropdown');
+});
+
+button.el.appendTo('.example-split-button');</code>
+          </pre>
+        </section>
+      </section>
+    </div>
+  </body>
+</html>
