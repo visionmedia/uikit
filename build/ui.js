@@ -261,6 +261,21 @@ Dialog.prototype.overlay = function(){
 };
 
 /**
+ * Close the dialog when the escape key is pressed.
+ *
+ * @api private
+ */
+
+Dialog.prototype.escapable = function(){
+  var self = this;
+  $(document).bind('keydown.dialog', function(e){
+    if (27 != e.which) return;
+    $(this).unbind('keydown.dialog');
+    self.hide();
+  });
+};
+
+/**
  * Show the dialog.
  *
  * Emits "show" event.
@@ -270,11 +285,18 @@ Dialog.prototype.overlay = function(){
  */
 
 Dialog.prototype.show = function(){
+  var overlay = this._overlay;
+
   this.emit('show');
-  if (this._overlay) {
-    this._overlay.show();
+
+  if (overlay) {
+    overlay.show();
     this.el.addClass('modal');
   }
+
+  // escape
+  if (!overlay || overlay.closable) this.escapable();
+
   this.el.appendTo('body');
   this.el.css({ marginLeft: -(this.el.width() / 2) + 'px' });
   return this;
@@ -534,13 +556,15 @@ Confirmation.prototype.render = function(options){
     self.callback(false);
   });
 
-  actions.find('.cancel').click(function(){
+  actions.find('.cancel').click(function(e){
+    e.preventDefault();
     self.emit('cancel');
     self.callback(false);
     self.hide();
   });
 
-  actions.find('.ok').click(function(){
+  actions.find('.ok').click(function(e){
+    e.preventDefault();
     self.emit('ok');
     self.callback(true);
     self.hide();
