@@ -1226,6 +1226,7 @@ SplitButton.prototype.toggle = function(){
 SplitButton.prototype.show = function(){
   this.state = 'visible';
   this.emit('show');
+  this.el.addClass('show');
   return this;
 };
 
@@ -1239,6 +1240,7 @@ SplitButton.prototype.show = function(){
 SplitButton.prototype.hide = function(){
   this.state = 'hidden';
   this.emit('hide');
+  this.el.removeClass('show');
   return this;
 };
 
