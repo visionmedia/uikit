@@ -508,6 +508,14 @@ emitter.emit('event', foo, bar, baz);</code></pre>
     })
             </code>
           </pre>
+	  <p>You can also include an object as a third argument to prevent the card component from flipping when clicked. If this argument is not specified, the default behavior is to flip when clicked.</p>
+
+	  <pre>
+	    <code>
+    var card = ui.card('&lt;p&gt;I will not flip when clicked&lt;/p&gt;', '&lt;p&gt;You must have clicked another element&lt;/p&gt;', {self_flip: false});
+    card.el.appendTo('#card');
+            </code>
+	  </pre>
         </section>
       </section>
 
