@@ -3,6 +3,7 @@ COMPONENTS = emitter \
   dialog \
   overlay \
   confirmation \
+  alert \
   color-picker \
   notification \
   split-button \
