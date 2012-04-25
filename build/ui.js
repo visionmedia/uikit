@@ -1,7 +1,6 @@
 var ui = {};
 
 ;(function(exports){
-
 /**
  * Expose `Emitter`.
  */
@@ -95,7 +94,7 @@ Emitter.prototype.emit = function(event){
 
   if (callbacks) {
     for (var i = 0, len = callbacks.length; i < len; ++i) {
-      callbacks[i].apply(this, args)
+      callbacks[i].apply(this, args);
     }
   }
 
@@ -285,17 +284,12 @@ Dialog.prototype.escapable = function(){
  */
 
 Dialog.prototype.show = function(){
-<<<<<<< HEAD
   var overlay = this._overlay;
 
   this.emit('show');
 
   if (overlay) {
     overlay.show();
-=======
-  if (this._overlay) {
-    this._overlay.show();
->>>>>>> 10fed691dac10ff5328606ca0d420b76e6d3ed94
     this.el.addClass('modal');
   }
 
@@ -605,6 +599,7 @@ function rgba(r,g,b,a) {
 /**
  * Mouse position util.
  */
+
 function localPos(e) {
   var offset = $(e.target).offset();
   return {
