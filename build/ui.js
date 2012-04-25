@@ -285,12 +285,17 @@ Dialog.prototype.escapable = function(){
  */
 
 Dialog.prototype.show = function(){
+<<<<<<< HEAD
   var overlay = this._overlay;
 
   this.emit('show');
 
   if (overlay) {
     overlay.show();
+=======
+  if (this._overlay) {
+    this._overlay.show();
+>>>>>>> 10fed691dac10ff5328606ca0d420b76e6d3ed94
     this.el.addClass('modal');
   }
 
@@ -299,6 +304,7 @@ Dialog.prototype.show = function(){
 
   this.el.appendTo('body');
   this.el.css({ marginLeft: -(this.el.width() / 2) + 'px' });
+  this.emit('show');
   return this;
 };
 
@@ -315,7 +321,6 @@ Dialog.prototype.show = function(){
 
 Dialog.prototype.hide = function(ms){
   var self = this;
-  this.emit('hide');
 
   // duration
   if (ms) {
@@ -349,6 +354,7 @@ Dialog.prototype.hide = function(ms){
  */
 
 Dialog.prototype.remove = function(){
+  this.emit('hide');
   this.el.remove();
   return this;
 };
