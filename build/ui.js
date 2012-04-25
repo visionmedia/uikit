@@ -270,13 +270,13 @@ Dialog.prototype.overlay = function(){
  */
 
 Dialog.prototype.show = function(){
-  this.emit('show');
   if (this._overlay) {
     this._overlay.show();
     this.el.addClass('modal');
   }
   this.el.appendTo('body');
   this.el.css({ marginLeft: -(this.el.width() / 2) + 'px' });
+  this.emit('show');
   return this;
 };
 
@@ -293,7 +293,6 @@ Dialog.prototype.show = function(){
 
 Dialog.prototype.hide = function(ms){
   var self = this;
-  this.emit('hide');
 
   // duration
   if (ms) {
@@ -327,6 +326,7 @@ Dialog.prototype.hide = function(ms){
  */
 
 Dialog.prototype.remove = function(){
+  this.emit('hide');
   this.el.remove();
   return this;
 };
