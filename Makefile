@@ -22,4 +22,8 @@ stats:
 	@du -hs build/* | sed 's/^/  /'
 	@echo
 
-.PHONY: ui stats
+test:
+	@./node_modules/.bin/mocha \
+		--require should
+
+.PHONY: ui stats test
