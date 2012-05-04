@@ -158,7 +158,7 @@ function Dialog(options) {
   this.template = html;
   this.el = $(this.template);
   this.render(options);
-  if (active) active.hide();
+  if (active && !active.hiding) active.hide();
   if (Dialog.effect) this.effect(Dialog.effect);
   active = this;
 };
@@ -315,6 +315,9 @@ Dialog.prototype.show = function(){
 
 Dialog.prototype.hide = function(ms){
   var self = this;
+
+  // prevent thrashing
+  this.hiding = true;
 
   // duration
   if (ms) {
