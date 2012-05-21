@@ -1,4 +1,9 @@
 
+0.1.0 / 2012-05-21 
+==================
+
+  * Added arrow-key navigation to Menu component
+
 0.0.4 / 2012-05-04 
 ==================
 
