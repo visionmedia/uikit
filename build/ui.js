@@ -1297,7 +1297,7 @@ exports.Menu = Menu;
  */
 
 exports.menu = function(){
-  return new Menu;
+  return new Menu();
 };
 
 /**
@@ -1314,11 +1314,13 @@ exports.menu = function(){
  */
 
 function Menu() {
-  var self = this;
   ui.Emitter.call(this);
   this.items = {};
   this.el = $(html).hide().appendTo('body');
+  this.el.hover(this.deselect.bind(this));
   $('html').click(function(){ self.hide(); });
+  this.on('show', this.bindKeyboardEvents.bind(this));
+  this.on('hide', this.unbindKeyboardEvents.bind(this));
 };
 
 /**
@@ -1326,6 +1328,80 @@ function Menu() {
  */
 
 Menu.prototype = new ui.Emitter;
+
+/**
+ * Deselect selected menu items.
+ *
+ * @api private
+ */
+
+Menu.prototype.deselect = function(){
+  this.el.find('.selected').removeClass('selected');
+};
+
+/**
+ * Bind keyboard events.
+ *
+ * @api private
+ */
+
+Menu.prototype.bindKeyboardEvents = function(){
+  $(document).bind('keydown.menu', this.onkeydown.bind(this));
+  return this;
+};
+
+/**
+ * Unbind keyboard events.
+ *
+ * @api private
+ */
+
+Menu.prototype.unbindKeyboardEvents = function(){
+  $(document).unbind('keydown.menu');
+  return this;
+};
+
+/**
+ * Handle keydown events.
+ *
+ * @api private
+ */
+
+Menu.prototype.onkeydown = function(e){
+  switch (e.keyCode) {
+    // up
+    case 38:
+      e.preventDefault();
+      this.move('prev');
+      break;
+    // down
+    case 40:
+      e.preventDefault();
+      this.move('next');
+      break;
+  }
+};
+
+/**
+ * Focus on the next menu item in `direction`.
+ * 
+ * @param {String} direction "prev" or "next"
+ * @api public
+ */
+
+Menu.prototype.move = function(direction){
+  var prev = this.el.find('.selected').eq(0);
+
+  var next = prev.length
+    ? prev[direction]()
+    : this.el.find('li:first-child');
+
+  if (next.length) {
+    prev.removeClass('selected');
+    next.addClass('selected');
+    next.find('a').focus();
+  }
+};
 
 /**
  * Add menu item with the given `text` and optional callback `fn`.

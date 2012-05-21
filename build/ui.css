@@ -269,13 +269,15 @@
   text-decoration: none;
   border-top: 1px solid #eee;
   color: #2e2e2e;
+  outline: none;
 }
 
 .menu li:first-child a {
   border-top: none;
 }
 
-.menu li a:hover {
+.menu li a:hover,
+.menu li.selected a {
   background: #f1faff;
 }
 
