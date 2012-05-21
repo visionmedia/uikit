@@ -1318,7 +1318,7 @@ function Menu() {
   this.items = {};
   this.el = $(html).hide().appendTo('body');
   this.el.hover(this.deselect.bind(this));
-  $('html').click(function(){ self.hide(); });
+  $('html').click(this.hide.bind(this));
   this.on('show', this.bindKeyboardEvents.bind(this));
   this.on('hide', this.unbindKeyboardEvents.bind(this));
 };
