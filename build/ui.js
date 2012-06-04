@@ -117,7 +117,7 @@ var active;
 exports.Dialog = Dialog;
 
 /**
- * Return a new `Dialog` with the given 
+ * Return a new `Dialog` with the given
  * (optional) `title` and `msg`.
  *
  * @param {String} title or msg
@@ -529,10 +529,11 @@ Confirmation.prototype.ok = function(text){
  * @api public
  */
 
-Confirmation.prototype.show = function(fn){
+Confirmation.prototype.show = function(fn, async){
   ui.Dialog.prototype.show.call(this);
   this.el.find('.ok').focus();
   this.callback = fn || function(){};
+  this.async = async || false;
   return this;
 };
 
@@ -569,8 +570,13 @@ Confirmation.prototype.render = function(options){
   actions.find('.ok').click(function(e){
     e.preventDefault();
     self.emit('ok');
-    if (self.callback(true) !== false) {
-      self.hide();
+    if(self.async){
+      self.callback(true, function(){
+        self.hide();
+      });
+    }
+    else{
+      self.callback(true) !== false && self.hide();
     }
   });
 };
