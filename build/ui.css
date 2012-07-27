@@ -129,12 +129,17 @@
 }
 
 .notification {
+  display: block;
   position: relative;
   max-width: 600px;
   min-width: 250px;
   border: 1px solid #eee;
   background: white;
   z-index: 100;
+}
+
+.notification.hide {
+  display: block;
 }
 
 .notification .content {

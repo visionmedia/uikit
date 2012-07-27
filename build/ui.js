@@ -103,7 +103,6 @@ Emitter.prototype.emit = function(event){
 
 })(ui);
 ;(function(exports, html){
-
 /**
  * Active dialog.
  */
@@ -250,12 +249,18 @@ Dialog.prototype.modal = function(){
 
 Dialog.prototype.overlay = function(){
   var self = this;
-  this._overlay = ui
-    .overlay({ closable: true })
-    .on('hide', function(){
-      self.closedOverlay = true;
-      self.hide();
-    });
+  var overlay = ui.overlay({ closable: true });
+
+  overlay.on('hide', function(){
+    self.closedOverlay = true;
+    self.hide();
+  });
+
+  overlay.on('close', function(){
+    self.emit('close');
+  });
+
+  this._overlay = overlay;
   return this;
 };
 
@@ -270,6 +275,7 @@ Dialog.prototype.escapable = function(){
   $(document).bind('keydown.dialog', function(e){
     if (27 != e.which) return;
     $(this).unbind('keydown.dialog');
+    self.emit('escape');
     self.hide();
   });
 };
@@ -330,9 +336,9 @@ Dialog.prototype.hide = function(ms){
   // hide / remove
   this.el.addClass('hide');
   if (this._effect) {
-    setTimeout(function(self){
+    setTimeout(function(){
       self.remove();
-    }, 500, this);
+    }, 500);
   } else {
     self.remove();
   }
@@ -353,12 +359,12 @@ Dialog.prototype.hide = function(ms){
 Dialog.prototype.remove = function(){
   this.emit('hide');
   this.el.remove();
+  $(document).unbind('keydown.dialog');
   return this;
 };
 
-})(ui, "<div id=\"dialog\" class=\"hide\">\n  <div class=\"content\">\n    <h1>Title</h1>\n    <a href=\"#\" class=\"close\">×</a>\n    <p>Message</p>\n  </div>\n</div>");
+})(ui, "<div id=\"dialog\" class=\"hide\">\r\n  <div class=\"content\">\r\n    <h1>Title</h1>\r\n    <a href=\"#\" class=\"close\">×</a>\r\n    <p>Message</p>\r\n  </div>\r\n</div>");
 ;(function(exports, html){
-
 /**
  * Expose `Overlay`.
  */
@@ -393,6 +399,7 @@ function Overlay(options) {
   this.el.appendTo('body');
   if (this.closable) {
     this.el.click(function(){
+      self.emit('close');
       self.hide();
     });
   }
@@ -440,7 +447,6 @@ Overlay.prototype.hide = function(){
 
 })(ui, "<div id=\"overlay\" class=\"hide\"></div>");
 ;(function(exports, html){
-
 /**
  * Expose `Confirmation`.
  */
@@ -559,6 +565,11 @@ Confirmation.prototype.render = function(options){
     self.callback(false);
   });
 
+  this.on('escape', function(){
+    self.emit('cancel');
+    self.callback(false);
+  });
+
   actions.find('.cancel').click(function(e){
     e.preventDefault();
     self.emit('cancel');
@@ -574,7 +585,7 @@ Confirmation.prototype.render = function(options){
   });
 };
 
-})(ui, "<div class=\"actions\">\n  <button class=\"cancel\">Cancel</button>\n  <button class=\"ok main\">Ok</button>\n</div>");
+})(ui, "<div class=\"actions\">\r\n  <button class=\"cancel\">Cancel</button>\r\n  <button class=\"ok main\">Ok</button>\r\n</div>");
 ;(function(exports, html){
 
 /**
@@ -927,7 +938,7 @@ ColorPicker.prototype.renderMain = function(options){
   ctx.beginPath();
   ctx.restore();
 };
-})(ui, "<div class=\"color-picker\">\n  <canvas class=\"main\"></canvas>\n  <canvas class=\"spectrum\"></canvas>\n</div>");
+})(ui, "<div class=\"color-picker\">\r\n  <canvas class=\"main\"></canvas>\r\n  <canvas class=\"spectrum\"></canvas>\r\n</div>");
 ;(function(exports, html){
 
 /**
@@ -1148,9 +1159,9 @@ Notification.prototype.hide = function(ms){
   // hide / remove
   this.el.addClass('hide');
   if (this._effect) {
-    setTimeout(function(self){
+    setTimeout(function(){
       self.remove();
-    }, 500, this);
+    }, 500);
   } else {
     self.remove();
   }
@@ -1169,7 +1180,7 @@ Notification.prototype.remove = function(){
   this.el.remove();
   return this;
 };
-})(ui, "<li class=\"notification hide\">\n  <div class=\"content\">\n    <h1>Title</h1>\n    <a href=\"#\" class=\"close\">×</a>\n    <p>Message</p>\n  </div>\n</li>");
+})(ui, "<li class=\"notification hide\">\r\n  <div class=\"content\">\r\n    <h1>Title</h1>\r\n    <a href=\"#\" class=\"close\">×</a>\r\n    <p>Message</p>\r\n  </div>\r\n</li>");
 ;(function(exports, html){
 
 /**
@@ -1280,7 +1291,7 @@ SplitButton.prototype.render = function(options){
   return this;
 };
 
-})(ui, "<div class=\"split-button\">\n  <a class=\"button\" href=\"#\">Action</a>\n  <a class=\"toggle\" href=\"#\"><span></span></a>\n</div>");
+})(ui, "<div class=\"split-button\">\r\n  <a class=\"button\" href=\"#\">Action</a>\r\n  <a class=\"toggle\" href=\"#\"><span></span></a>\r\n</div>");
 ;(function(exports, html){
 
 /**
@@ -1297,7 +1308,7 @@ exports.Menu = Menu;
  */
 
 exports.menu = function(){
-  return new Menu();
+  return new Menu;
 };
 
 /**
@@ -1521,7 +1532,7 @@ function slug(str) {
     .replace(/[^a-z0-9-]/g, '');
 }
 
-})(ui, "<div class=\"menu\">\n</div>");
+})(ui, "<div class=\"menu\">\r\n</div>");
 ;(function(exports, html){
 
 /**
@@ -1638,4 +1649,4 @@ Card.prototype.render = function(options){
     self.flip();
   });
 };
-})(ui, "<div class=\"card\">\n  <div class=\"wrapper\">\n    <div class=\"face front\">1</div>\n    <div class=\"face back\">2</div>\n  </div>\n</div>");
+})(ui, "<div class=\"card\">\r\n  <div class=\"wrapper\">\r\n    <div class=\"face front\">1</div>\r\n    <div class=\"face back\">2</div>\r\n  </div>\r\n</div>");
