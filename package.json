@@ -7,5 +7,9 @@
   "devDependencies": {
     "mocha": "*",
     "should": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/visionmedia/uikit.git"
   }
 }
