@@ -117,7 +117,7 @@ var active;
 exports.Dialog = Dialog;
 
 /**
- * Return a new `Dialog` with the given 
+ * Return a new `Dialog` with the given
  * (optional) `title` and `msg`.
  *
  * @param {String} title or msg
@@ -330,9 +330,9 @@ Dialog.prototype.hide = function(ms){
   // hide / remove
   this.el.addClass('hide');
   if (this._effect) {
-    setTimeout(function(self){
+    setTimeout(function(){
       self.remove();
-    }, 500, this);
+    }, 500);
   } else {
     self.remove();
   }
@@ -448,7 +448,7 @@ Overlay.prototype.hide = function(){
 exports.Confirmation = Confirmation;
 
 /**
- * Return a new `Confirmation` dialog with the given 
+ * Return a new `Confirmation` dialog with the given
  * `title` and `msg`.
  *
  * @param {String} title or msg
@@ -529,10 +529,11 @@ Confirmation.prototype.ok = function(text){
  * @api public
  */
 
-Confirmation.prototype.show = function(fn){
+Confirmation.prototype.show = function(fn, async){
   ui.Dialog.prototype.show.call(this);
   this.el.find('.ok').focus();
   this.callback = fn || function(){};
+  this.async = async || false;
   return this;
 };
 
@@ -562,15 +563,29 @@ Confirmation.prototype.render = function(options){
   actions.find('.cancel').click(function(e){
     e.preventDefault();
     self.emit('cancel');
-    self.callback(false);
+    if(self.async){
+        self.callback(false, function () {
+            self.hide();
+        });
+    }
+    else {
+        (self.callback(false) !== false && self.hide());
+    }
+    self.callback(false)
     self.hide();
   });
 
   actions.find('.ok').click(function(e){
     e.preventDefault();
     self.emit('ok');
-    self.callback(true);
-    self.hide();
+    if(self.async){
+      self.callback(true, function(){
+        self.hide();
+      });
+    }
+    else{
+      (self.callback(true) !== false && self.hide());
+    }
   });
 };
 
@@ -1148,9 +1163,9 @@ Notification.prototype.hide = function(ms){
   // hide / remove
   this.el.addClass('hide');
   if (this._effect) {
-    setTimeout(function(self){
+    setTimeout(function(){
       self.remove();
-    }, 500, this);
+    }, 500);
   } else {
     self.remove();
   }
@@ -1297,7 +1312,7 @@ exports.Menu = Menu;
  */
 
 exports.menu = function(){
-  return new Menu();
+  return new Menu;
 };
 
 /**
